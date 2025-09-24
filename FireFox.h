@@ -1,0 +1,7 @@
+#ifndef FIREFOX_H
+#define FIREFOX_H
+#include "Fire.h"
+class FireFox:public Fire{
+
+};
+#endif

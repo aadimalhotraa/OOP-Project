@@ -15,7 +15,7 @@ class Light : public Character {
         void takeDamage(int amount) override;
         void attackTarget(Character& target) override;
         //light types methods
-
+        
         // destructor
         ~Light() override;
 };
