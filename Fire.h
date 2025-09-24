@@ -17,11 +17,9 @@ public:
     void takeDamage(int amount) override;
     void attackTarget(Character &target) override;
     // fire types methods
-    void blazekick(Character &target);     // special move that does extra damage
-    void fireSpin(Character &target);      // special move that does damage over time
-    void flameBurst(Character &target);    // special move that does area damage
-    void emberStorm(Character &target);    // special move that does damage and lowers enemy attack
-    void infernalSlash(Character &target); // special move that does high damage but lowers user's defence
+    virtual void blazekick(Character &target);     // special move that does extra damage
+    virtual void fireSpin(Character &target);      // special move that does damage over time
+   
     // Destructor
     ~Fire() override;
 };

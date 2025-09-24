@@ -14,12 +14,10 @@ class Water : public Character {
         void takeDamage(int amount) override;
         void attackTarget(Character& target) override;
         //water types methods
-        void aquaJet(Character &target);
-        void hydeoCannon(Character &target);
-        void waterSlide(Character &target);
-        void puddle(Character &target);
-        void tidalWave(Character &target);
-        void aquaWhip(Character &target);
+        virtual void aquaJet(Character &target);
+        virtual void hydeoCannon(Character &target);
+       
+       
 
         // destructor
         ~Water() override;

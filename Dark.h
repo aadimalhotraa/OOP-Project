@@ -13,7 +13,10 @@ class Dark : public Character {
         // overiden virtual functions
         void takeDamage(int amount) override;
         void attackTarget(Character& target) override;
+
         //dark types methods
+        virtual double suckerPunch();
+        virtual double confusionAttack();
 
         // destructor
         ~Dark() override;

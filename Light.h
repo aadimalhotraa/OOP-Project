@@ -14,8 +14,10 @@ class Light : public Character {
         // overiden virtual functions
         void takeDamage(int amount) override;
         void attackTarget(Character& target) override;
-        //light types methods
-        
+        //light abilities
+        virtual double lightningStrike();
+        virtual double electricWings();
+
         // destructor
         ~Light() override;
 };
