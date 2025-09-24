@@ -11,6 +11,7 @@ Character::Character(){
     speed = 15;
     level = 1;
 }
+
 Character::Character(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
     this-> name = name;
     this-> health = health;

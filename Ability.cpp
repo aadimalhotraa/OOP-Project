@@ -1,5 +1,6 @@
 #include "Ability.h"
 #include "Character.h"
+#include "Attribute.h"
 
 Ability::Ability(std::string abilityName, Attribute type, double damage, double hitChance, std::string description){
     this->abilityName = abilityName;
