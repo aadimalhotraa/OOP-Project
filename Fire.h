@@ -12,16 +12,15 @@ public:
     // constructors
     Fire();
     Fire(std::string name, double health, double attack, double defence, double critChance, int speed, int level);
-
-    // overiden virtual functions
-    void takeDamage(int amount) override;
-    void attackTarget(Character &target) override;
     // fire types methods
     virtual void blazekick(Character &target);     // special move that does extra damage
     virtual void fireSpin(Character &target);      // special move that does damage over time
-   
+
+    //attacks the target
+    virtual void attackTarget(Character &target);
+  
     // Destructor
-    ~Fire() override;
+    virtual ~Fire();
 };
 
 #endif

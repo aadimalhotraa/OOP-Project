@@ -8,7 +8,7 @@ class Character{
     protected:
         std::string name;
         double health;
-        double attack;
+        double damage;
         double defence;
         double critChance;
         int speed;
@@ -16,15 +16,15 @@ class Character{
     public:
         // Constructors
         Character();
-        Character(std::string name, double health, double attack, double defence, double critChance, int speed, int level);
+        Character(std::string name, double health, double damage , double defence, double critChance, int speed, int level);
 
         // Getters and setters
         std::string getName();
         void setName(std::string name);         // name
         double getHealth();
         void setHealth(double health);          // health
-        double getAttack();
-        void setAttack(double attack);          // attack
+        double getDamage();
+        void setDamage(double attack);          // attack
         double getDefence();
         void setDefence(double defence);        // defence
         double getCritChance();
