@@ -12,13 +12,13 @@ class Light : public Character {
         Light(std::string name, double health, double attack, double defence, double critChance, int speed, int level);
 
         // overiden virtual functions
-        void takeDamage(int amount) override;
-        void attackTarget(Character& target) override;
+        virtual void takeDamage(int amount) override;
+        virtual void attackTarget(Character& target) override;
         //light abilities
-        virtual double lightningStrike();
-        virtual double electricWings();
+        virtual void lightningStrike(Character& target);
+        virtual void electricWings(Character& target);
 
         // destructor
-        ~Light() override;
+       virtual ~Light();
 };
 #endif

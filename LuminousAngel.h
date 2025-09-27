@@ -3,7 +3,7 @@
 #include "Light.h"
 class LuminousAngel:public Light{
 public:
-virtual double holyShield();
-virtual double electricWings();
-};
+virtual void holyShield(Character &target); 
+virtual void sunRay(Character &target);   
+}; 
 #endif

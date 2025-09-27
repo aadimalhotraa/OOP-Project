@@ -3,8 +3,9 @@
 #include "Dark.h"
 class Demon:public Dark{
     public:
-    virtual double shadowStrike();
-    virtual double voidPulse();
+    //the unique attacks for the demon enemy
+    virtual void shadowStrike(Character &target);
+    virtual void voidPulse(Character &target);
 
 };
 #endif

@@ -3,8 +3,9 @@
 #include "Dark.h"
 class DarkKnight:public Dark{
     public:
-    virtual double nightClaw ();
-    virtual double sneakAttack ();
+    //the unique attacks for the dark knight enemy
+    virtual void nightClaw (Character &target);
+    virtual void sneakAttack (Character &target);
 
 };
 #endif

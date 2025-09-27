@@ -20,6 +20,6 @@ class Water : public Character {
        
 
         // destructor
-        ~Water() override;
+        virtual ~Water();
 };
 #endif
