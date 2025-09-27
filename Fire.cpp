@@ -20,3 +20,13 @@ void Fire::fireSpin(Character &target){
     target.setHealth(calc);
     }
 }
+//attacks the target
+void Fire::attackTarget(Character &target){
+    double calc=target.getHealth()-this->damage;
+    target.setHealth(calc);
+}
+//take damage
+void Fire::takeDamage(int amount){
+    double calc=this->health-amount;
+    this->health=calc;
+};
