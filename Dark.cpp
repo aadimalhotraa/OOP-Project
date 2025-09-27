@@ -1,7 +1,7 @@
+#include "Dark.h"
 #include "Character.h"
-#include "Water.h"
 
-Water::Water(){
+Dark::Dark(){
     name = "unknow name";
     health = 100;
     damage = 100;
@@ -10,7 +10,7 @@ Water::Water(){
     speed = 0;
     level = 0;
 }
-Water::Water(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
+Dark::Dark(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
     this->name = name;
     this->health = health;      
     this->damage = attack;
@@ -19,22 +19,23 @@ Water::Water(std::string name, double health, double attack, double defence, dou
     this->speed = speed;
     this->level = level;
 };
-void Water::aquaJet(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.15);
+
+void Dark::suckerPunch(Character &target){
+    double calc = target.getHealth() - (this->damage * 0.19);
     target.setHealth(calc);
 };
 
-void Water::hydeoCannon(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.25);
+void Dark::confusionAttack(Character &target){
+    double calc = target.getHealth() - (this->damage * 0.15);
     target.setHealth(calc);
 };
 //attacks the target
-void Water::attackTarget(Character &target){
+void Dark::attackTarget(Character &target){
     double calc=target.getHealth()-this->damage;
     target.setHealth(calc);
 }
 //take damage
-void Water::takeDamage(int amount){
-    double calc=this->health-amount;
+void Dark::takeDamage(int amount){
+    double calc=this->health-amount;            
     this->health=calc;
 };

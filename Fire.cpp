@@ -8,6 +8,15 @@ Fire::Fire(){
     speed = 0;
     level = 0;
 }
+Fire::Fire(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
+    this->name = name;
+    this->health = health;      
+    this->damage = attack;
+    this->defence = defence;
+    this->critChance = critChance;
+    this->speed = speed;
+    this->level = level;
+};
 void Fire::blazekick(Character &target){
     //reduces the damage the opponent can inflict
     double calc=(0.75* target.getDamage());
