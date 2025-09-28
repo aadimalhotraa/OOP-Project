@@ -12,14 +12,31 @@ FireFox::FireFox() : Fire() {
 };
 
 
-void FireFox::flameBurst(Character &target) {
+bool FireFox::flameBurst(Character &target) {
     // Area damage attack
-    double calc = target.getHealth() - (this->damage * 0.8);
-    target.setHealth(calc);
+    int randomNum = rand() % 11; 
+
+    if(randomNum<7){ //70% hit chance of the attack
+        double calc = target.getHealth() - (this->damage * 0.8);
+        target.setHealth(calc);
+        return true;
+    }
+
+    else{
+        return false;
+    }
 };
 
-void FireFox::fireBall(Character &target) {
-    // Ranged attack
-    double calc = target.getHealth() - (this->damage * 0.4);
-    target.setHealth(calc);
+bool FireFox::fireBall(Character &target) {
+    int randomNum = rand() % 11; 
+
+    if(randomNum<8){ //80% hit chance of the attack
+        double calc = target.getHealth() - (this->damage * 1.5);
+        target.setHealth(calc);
+        return true;
+    }
+
+    else{
+        return false;
+    }
 };

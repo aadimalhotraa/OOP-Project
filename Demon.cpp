@@ -15,7 +15,15 @@ void Demon::shadowStrike(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.4);
     target.setHealth(calc);
 };
-void Demon::voidPulse(Character &target) {
-    double calc = target.getHealth() - (this->damage * 0.8);
-    target.setHealth(calc);
+bool Demon::voidPulse(Character &target) {
+    int randomNum = rand() % 11; 
+
+    if(randomNum<7){ //70% hit chance of the attack
+        double calc = target.getHealth() - (this->damage * 0.8);
+        target.setHealth(calc);
+        return true;
+    }
+    else{
+        return false;
+    }
 };

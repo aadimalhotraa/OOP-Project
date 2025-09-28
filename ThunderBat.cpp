@@ -9,9 +9,17 @@ ThunderBat::ThunderBat() : Light() {
     speed = 110;
     level = 1;
 };  
-void ThunderBat::radiantBeam(Character &target) {
-    double calc = target.getHealth() - (this->damage * 0.5);
-    target.setHealth(calc);
+bool ThunderBat::radiantBeam(Character &target) {
+    int randomNum = rand() % 11; 
+
+    if(randomNum<8){ //80% hit chance of the attack
+        double calc = target.getHealth() - (this->damage * 0.5);
+        target.setHealth(calc);
+        return true;
+    }
+    else{
+        return false;
+    }
 };
 
 //purify heals 50 percent of max health

@@ -10,9 +10,17 @@ DarkKnight::DarkKnight() : Dark() {
     speed = 40;
     level = 1;
 };
-void DarkKnight::nightClaw(Character &target) {
-    double calc = target.getHealth() - (this->damage * 0.3);
-    target.setHealth(calc);
+bool DarkKnight::nightClaw(Character &target) {
+    int randomNum = rand() % 11; 
+
+    if(randomNum<8){ //80% hit chance of the attack
+        double calc = target.getHealth() - (this->damage * 0.3);
+        target.setHealth(calc);
+        return true;
+    }
+    else{
+        return false;
+    }
 };
 void DarkKnight::sneakAttack(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.4);

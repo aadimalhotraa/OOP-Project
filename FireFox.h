@@ -3,8 +3,8 @@
 #include "Fire.h"
 class FireFox:public Fire{
     public:
-    virtual void flameBurst(Character &target);    // special move that does area damage
-    virtual void fireBall(Character &target);
+    virtual bool flameBurst(Character &target);    // special move that does area damage
+    virtual bool fireBall(Character &target);
     
 
 };

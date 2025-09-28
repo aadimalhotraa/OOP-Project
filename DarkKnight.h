@@ -4,7 +4,7 @@
 class DarkKnight:public Dark{
     public:
     //the unique attacks for the dark knight enemy
-    virtual void nightClaw (Character &target);
+    virtual bool nightClaw (Character &target);
     virtual void sneakAttack (Character &target);
 
 };

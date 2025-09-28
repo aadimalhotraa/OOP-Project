@@ -10,13 +10,21 @@ LuminousAngel::LuminousAngel() : Light() {
     level = 1;
 };
 
-void LuminousAngel::holyShield(Character &target) {
-    // increases own defence temporarily
-    double calc = this->defence + 20;
-    this->defence = calc;
+bool LuminousAngel::holyShield(Character &target) {
+    int randomNum = rand() % 11; 
+
+    if(randomNum<8){ //80% hit chance of the attack
+        // increases own defence
+        double calc = 1.10*this->defence;
+        this->defence = calc;
+        return true;
+    }
+    else{
+        return false;
+    }
 };
 
 void LuminousAngel::sunRay(Character &target) {
-    double calc = target.getHealth() - (this->damage * 0.5);
+    double calc = target.getHealth() - this->damage;
     target.setHealth(calc);
 };

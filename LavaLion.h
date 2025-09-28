@@ -3,7 +3,7 @@
 #include "Fire.h"
 class LavaLion:public Fire{
     public:
-    virtual void emberStorm(Character &target);    // special move that does damage and lowers enemy attack
-    virtual void infernalSlash(Character &target); // special move that does high damage but lowers user's defence
+    virtual bool emberStorm(Character &target);    // special move that does damage and lowers enemy attack
+    virtual bool infernalSlash(Character &target); // special move that does high damage but lowers user's defence
 };
 #endif

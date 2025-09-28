@@ -26,8 +26,7 @@ void Dark::suckerPunch(Character &target){
 };
 
 void Dark::confusionAttack(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.15);
-    target.setHealth(calc);
+    target.setCritChance(0);
 };
 //attacks the target
 void Dark::attackTarget(Character &target){

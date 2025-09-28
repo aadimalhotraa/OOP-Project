@@ -3,7 +3,7 @@
 #include "Light.h"
 class ThunderBat:public Light{
     protected:
-    virtual void radiantBeam(Character &target);
+    virtual bool radiantBeam(Character &target);
     virtual void purify(Character &target);
 };
 #endif
