@@ -4,14 +4,13 @@
 
 #include "Character.h"
 #include <string>
-#include <iostream>
 
-class Fire : public Character
-{
-public:
+class Fire : public Character{
+    public:
     // constructors
     Fire();
     Fire(std::string name, double health, double attack, double defence, double critChance, int speed, int level);
+
     // fire types methods
     virtual bool blazekick(Character &target); // special move that does extra damage
     virtual bool fireSpin(Character &target);  // special move that does damage over time
