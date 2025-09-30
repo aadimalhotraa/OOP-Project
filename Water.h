@@ -14,8 +14,8 @@ class Water : public Character {
         void takeDamage(int amount) override;
         void attackTarget(Character& target) override;
         //water types methods
-        virtual void aquaJet(Character &target);
-        virtual void hydeoCannon(Character &target);
+        virtual bool aquaJet(Character &target);
+        virtual bool hydroCannon(Character &target);
        
        
 

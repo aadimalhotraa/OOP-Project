@@ -5,7 +5,7 @@ class PredatoryButterfly:public Grass{
 public:
 PredatoryButterfly(int level);
 //the unique attacks for the predatory butterfly enemy
-void leafBlade(Character &target);
-void spore(Character &target);
+bool leafBlade(Character &target);
+bool spore(Character &target);
 };
 #endif

@@ -19,12 +19,12 @@ Water::Water(std::string name, double health, double attack, double defence, dou
     this->speed = speed;
     this->level = level;
 };
-void Water::aquaJet(Character &target){
+bool Water::aquaJet(Character &target){
     double calc = target.getHealth() - (this->damage * 0.15);
     target.setHealth(calc);
 };
 
-void Water::hydeoCannon(Character &target){
+bool Water::hydroCannon(Character &target){
     double calc = target.getHealth() - (this->damage * 0.25);
     target.setHealth(calc);
 };

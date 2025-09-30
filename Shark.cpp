@@ -28,7 +28,8 @@ bool Shark::tidalWave(Character &target) {
     }
 };
 
-void Shark::aquaWhip(Character &target) {
+bool Shark::aquaWhip(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.9);
     target.setHealth(calc);
+    return true;
 };

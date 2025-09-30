@@ -10,9 +10,10 @@ RockTurtle::RockTurtle(int level) {
     this->speed = 15 + (2 * level);
     this->level = level;
 }
-void RockTurtle::vineWhip(Character &target) {      
+bool RockTurtle::vineWhip(Character &target) {      
     double calc = target.getHealth() - (this->damage * 0.4);
     target.setHealth(calc);
+    return true;
 };
 bool RockTurtle::rootBind(Character &target) {
     

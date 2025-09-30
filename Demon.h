@@ -5,7 +5,7 @@ class Demon:public Dark{
     public:
     Demon(int level);
     //the unique attacks for the demon enemy
-    void shadowStrike(Character &target);
+    bool shadowStrike(Character &target);
     bool voidPulse(Character &target);
 
 };

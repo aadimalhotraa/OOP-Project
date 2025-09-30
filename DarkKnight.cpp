@@ -22,7 +22,8 @@ bool DarkKnight::nightClaw(Character &target) {
         return false;
     }
 };
-void DarkKnight::sneakAttack(Character &target) {
+bool DarkKnight::sneakAttack(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.4);
     target.setHealth(calc);
+    return true;
 };

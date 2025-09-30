@@ -15,8 +15,8 @@ class Grass : public Character {
         virtual void takeDamage(int amount) override;
         virtual void attackTarget(Character& target) override;
         //grass types methods
-        virtual void seedBullet(Character &target);
-        virtual void solarBeam(Character &target);
+        virtual bool seedBullet(Character &target);
+        virtual bool solarBeam(Character &target);
         
         // destructor
         virtual ~Grass();

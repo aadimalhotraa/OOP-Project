@@ -17,17 +17,21 @@ Fire::Fire(std::string name, double health, double attack, double defence, doubl
     this->speed = speed;
     this->level = level;
 };
-void Fire::blazekick(Character &target){
+bool Fire::blazekick(Character &target){
     //reduces the damage the opponent can inflict
     double calc=(0.75* target.getDamage());
     target.setDamage(calc);
+    return true;
 }
-void Fire::fireSpin(Character &target){
+bool Fire::fireSpin(Character &target){
     //Attacks only if the defence is stronger
     if(target.getDefence()< this->defence) {
     double calc=target.getHealth()-20;
     target.setHealth(calc);
+    return true;
     }
+    else
+    return false;
 }
 //attacks the target
 void Fire::attackTarget(Character &target){

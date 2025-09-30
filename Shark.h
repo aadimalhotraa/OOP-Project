@@ -6,7 +6,7 @@ class Shark:public Water{
     //unique attacks for the shark enemy
     Shark(int level);
     bool tidalWave(Character &target);
-    void aquaWhip(Character &target);
+    bool aquaWhip(Character &target);
 
 };
 #endif

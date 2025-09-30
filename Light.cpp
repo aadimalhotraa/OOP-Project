@@ -19,13 +19,15 @@ Light::Light(std::string name, double health, double attack, double defence, dou
     this->speed = speed;
     this->level = level;
 };
-void Light::lightningStrike(Character &target){
+bool Light::lightningStrike(Character &target){
     double calc = target.getHealth() - (this->damage * 0.3);
     target.setHealth(calc);
+    return true;
 };
-void Light::electricWings(Character &target){
+bool Light::electricWings(Character &target){
     double calc = target.getHealth() - (this->damage * 0.15);
     target.setHealth(calc);
+    return true;
 };
 //attacks the target
 void Light::attackTarget(Character &target){

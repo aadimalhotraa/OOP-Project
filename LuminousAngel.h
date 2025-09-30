@@ -5,6 +5,6 @@ class LuminousAngel:public Light{
     public:
         LuminousAngel(int level);
         bool holyShield(Character &target); 
-        void sunRay(Character &target);   
+        bool sunRay(Character &target);   
 }; 
 #endif

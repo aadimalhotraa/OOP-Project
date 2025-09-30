@@ -19,13 +19,15 @@ Grass::Grass(std::string name, double health, double attack, double defence, dou
     this->speed = speed;
     this->level = level;
 };
-void Grass::seedBullet(Character &target){
+bool Grass::seedBullet(Character &target){
     double calc = target.getHealth() - (this->damage * 0.25);
     target.setHealth(calc);
+    return true;
 };
-void Grass::solarBeam(Character &target){
+bool Grass::solarBeam(Character &target){
     double calc = target.getHealth() - (this->damage * 0.20);
     target.setHealth(calc);
+    true;
 };
 
 //attacks the target

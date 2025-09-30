@@ -25,7 +25,8 @@ bool LuminousAngel::holyShield(Character &target) {
     }
 };
 
-void LuminousAngel::sunRay(Character &target) {
+bool LuminousAngel::sunRay(Character &target) {
     double calc = target.getHealth() - this->damage;
     target.setHealth(calc);
+    return true;
 };

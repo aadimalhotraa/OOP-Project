@@ -6,7 +6,7 @@ class DarkKnight:public Dark{
     DarkKnight(int level);
     //the unique attacks for the dark knight enemy
     bool nightClaw (Character &target);
-    void sneakAttack (Character &target);
+    bool sneakAttack (Character &target);
 
 };
 #endif

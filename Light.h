@@ -15,8 +15,8 @@ class Light : public Character {
         virtual void takeDamage(int amount) override;
         virtual void attackTarget(Character& target) override;
         //light abilities
-        virtual void lightningStrike(Character& target);
-        virtual void electricWings(Character& target);
+        virtual bool lightningStrike(Character& target);
+        virtual bool electricWings(Character& target);
 
         // destructor
        virtual ~Light();

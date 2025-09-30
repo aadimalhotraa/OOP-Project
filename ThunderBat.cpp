@@ -26,7 +26,8 @@ bool ThunderBat::radiantBeam(Character &target) {
 };
 
 //purify heals 50 percent of max health
-void ThunderBat::purify(Character &target) {
+bool ThunderBat::purify(Character &target) {
     double calc = target.getHealth() + 50;
     target.setHealth(calc);
+    return true;
 };

@@ -10,9 +10,9 @@ PredatoryButterfly::PredatoryButterfly(int level) {
     this->speed = 20 + (3 * level);
     this->level = level;
 }
-
-void PredatoryButterfly::leafBlade(Character &target) {
+bool PredatoryButterfly::leafBlade(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.3);
     target.setHealth(calc);
+    return true;
 };
 //for spore im not sure what we want to do yet

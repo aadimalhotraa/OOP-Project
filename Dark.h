@@ -15,8 +15,8 @@ class Dark : public Character {
         void attackTarget(Character& target) override;
 
         //dark types methods
-        virtual void suckerPunch(Character& target);
-        virtual void confusionAttack(Character& target);
+        virtual bool suckerPunch(Character& target);
+        virtual bool confusionAttack(Character& target);
 
         // destructor
         virtual ~Dark();

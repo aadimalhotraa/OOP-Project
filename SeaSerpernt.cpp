@@ -11,9 +11,11 @@ SeaSerpent::SeaSerpent(int level) {
     this->level = level;
 }
 
-void SeaSerpent::waterSlide(Character &target) {
+bool SeaSerpent::waterSlide(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.4);
     target.setHealth(calc);
+    return true;
+    
 };
 
 bool SeaSerpent::puddle(Character &target) {

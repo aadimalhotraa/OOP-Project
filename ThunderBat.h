@@ -5,6 +5,6 @@ class ThunderBat:public Light{
     public:
     ThunderBat(int level);
     bool radiantBeam(Character &target);
-    void purify(Character &target);
+    bool purify(Character &target);
 };
 #endif

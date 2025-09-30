@@ -14,9 +14,10 @@ Demon::Demon(int level) {
     this->level = level;
 }
 
-void Demon::shadowStrike(Character &target) {
+bool Demon::shadowStrike(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.4);
     target.setHealth(calc);
+    return true;
 };
 bool Demon::voidPulse(Character &target) {
     int randomNum = rand() % 11; 

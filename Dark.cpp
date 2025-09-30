@@ -20,13 +20,15 @@ Dark::Dark(std::string name, double health, double attack, double defence, doubl
     this->level = level;
 };
 
-void Dark::suckerPunch(Character &target){
+bool Dark::suckerPunch(Character &target){
     double calc = target.getHealth() - (this->damage * 0.19);
     target.setHealth(calc);
+    return true;
 };
 
-void Dark::confusionAttack(Character &target){
+bool Dark::confusionAttack(Character &target){
     target.setCritChance(0);
+    return false;
 };
 //attacks the target
 void Dark::attackTarget(Character &target){
