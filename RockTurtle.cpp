@@ -1,15 +1,15 @@
 #include "RockTurtle.h"
 #include "Grass.h"
 #include <iostream>
-RockTurtle::RockTurtle() : Grass() {
-    name = "Rock Turtle";
-    health = 100;
-    damage = 100;
-    defence = 50;
-    critChance = 0.1;
-    speed = 30;
-    level = 1;
-};
+RockTurtle::RockTurtle(int level) {
+    this->name = "Rock Turtle";
+    this->health = 30 + (6 * level);
+    this->damage = 15 + (2 * level);
+    this->defence = 25 + (5 * level);
+    this->critChance = 1.1;
+    this->speed = 15 + (2 * level);
+    this->level = level;
+}
 void RockTurtle::vineWhip(Character &target) {      
     double calc = target.getHealth() - (this->damage * 0.4);
     target.setHealth(calc);

@@ -3,9 +3,10 @@
 #include "Dark.h"
 class Demon:public Dark{
     public:
+    Demon(int level);
     //the unique attacks for the demon enemy
-    virtual void shadowStrike(Character &target);
-    virtual bool voidPulse(Character &target);
+    void shadowStrike(Character &target);
+    bool voidPulse(Character &target);
 
 };
 #endif

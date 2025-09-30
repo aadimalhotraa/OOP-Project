@@ -1,15 +1,15 @@
 #include "SeaSerpent.h"
 #include "Water.h"
 
-SeaSerpent::SeaSerpent() : Water() {
-    name = "Sea Serpent";
-    health = 100;
-    damage = 130;
-    defence = 25;
-    critChance = 0.15;
-    speed = 60;
-    level = 1;
-};
+SeaSerpent::SeaSerpent(int level) {
+    this->name = "Sea Serpent";
+    this->health = 30 + (6 * level);
+    this->damage = 15 + (2 * level);
+    this->defence = 15 + (2 * level);
+    this->critChance = 1.1;
+    this->speed = 25 + (5 * level);
+    this->level = level;
+}
 
 void SeaSerpent::waterSlide(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.4);

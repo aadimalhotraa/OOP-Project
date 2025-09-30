@@ -1,15 +1,15 @@
 #include "Grass.h"
 #include "PredatoryButterfly.h"
 
-PredatoryButterfly::PredatoryButterfly() : Grass() {
-    name = "Predatory Butterfly";
-    health = 100;
-    damage = 90;
-    defence = 20;
-    critChance = 0.15;
-    speed = 90;
-    level = 1;
-};
+PredatoryButterfly::PredatoryButterfly(int level) {
+    this->name = "Predatory Butterfly";
+    this->health = 20 + (3 * level);
+    this->damage = 15 + (2 * level);
+    this->defence = 25 + (5 * level);
+    this->critChance = 1.1;
+    this->speed = 20 + (3 * level);
+    this->level = level;
+}
 
 void PredatoryButterfly::leafBlade(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.3);

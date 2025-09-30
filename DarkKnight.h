@@ -3,9 +3,10 @@
 #include "Dark.h"
 class DarkKnight:public Dark{
     public:
+    DarkKnight(int level);
     //the unique attacks for the dark knight enemy
-    virtual bool nightClaw (Character &target);
-    virtual void sneakAttack (Character &target);
+    bool nightClaw (Character &target);
+    void sneakAttack (Character &target);
 
 };
 #endif

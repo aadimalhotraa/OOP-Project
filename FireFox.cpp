@@ -1,15 +1,18 @@
 #include "FireFox.h"
 #include "Fire.h"
 
-FireFox::FireFox() : Fire() {
-    name = "Fire Fox";
-    health = 100;
-    damage = 120;
-    defence = 20;
-    critChance = 0.1;
-    speed = 80;
-    level = 1;
-};
+FireFox::FireFox(int level) {
+    this->name = "Fire Fox";
+    this->health = 20 + (3 * level);
+    this->damage = 25 + (5 * level);
+    this->defence = 15 + (5 * level);
+    this->critChance = 1.25 + (0.01 * level);
+    if (this->critChance > 1.4) {
+    this->critChance = 1.4;     //cap of 1.4
+    }
+    this->speed = 15 + (3 * level);
+    this->level = level;
+}
 
 
 bool FireFox::flameBurst(Character &target) {

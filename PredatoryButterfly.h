@@ -3,8 +3,9 @@
 #include "Grass.h"
 class PredatoryButterfly:public Grass{
 public:
+PredatoryButterfly(int level);
 //the unique attacks for the predatory butterfly enemy
-virtual void leafBlade(Character &target);
-virtual void spore(Character &target);
+void leafBlade(Character &target);
+void spore(Character &target);
 };
 #endif

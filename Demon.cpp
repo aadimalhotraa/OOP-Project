@@ -1,15 +1,18 @@
 #include "Dark.h"
 #include "Demon.h"
 
-Demon::Demon() : Dark() {
-    name = "Demon";
-    health = 100;
-    damage = 200;
-    defence = 40;
-    critChance = 0.25;
-    speed = 50;
-    level = 1;
-};
+Demon::Demon(int level) {
+    this->name = "Demon";
+    this->health = 20 + (3 * level);     
+    this->damage = 20 + (3 * level);
+    this->defence = 15 + (5 * level);
+    this->critChance = 1.5 + (0.02 * level);
+    if (this->critChance > 1.8) {
+    this->critChance = 1.8;             // cap of 1.8
+    }        
+    this->speed = 15 + (2 * level);
+    this->level = level;
+}
 
 void Demon::shadowStrike(Character &target) {
     double calc = target.getHealth() - (this->damage * 0.4);

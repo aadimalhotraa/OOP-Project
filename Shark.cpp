@@ -1,16 +1,15 @@
 #include "Shark.h"
 #include "Water.h"
 
-Shark::Shark() : Water() {
-    name = "Shark";
-    health = 110;
-    damage = 140;
-    defence = 15;
-    critChance = 0.1;
-    speed = 75;
-    level = 1;
-};
-
+Shark::Shark(int level){
+    this-> name = "Shark";
+    this-> health = 20 + (3 * level);
+    this-> damage = 20 + (3 * level);
+    this-> defence = 15 + (2 * level);
+    this-> critChance = 1.1;
+    this-> speed = 25 + (5 * level);
+    this-> level = level;
+}
 bool Shark::tidalWave(Character &target) {
     //self healing attack
     int randomNum = rand() % 11; 

@@ -1,14 +1,15 @@
 #include "Light.h"
 #include "LuminousAngel.h"
-LuminousAngel::LuminousAngel() : Light() {
-    name = "Luminous Angel";
-    health = 100;
-    damage = 110;
-    defence = 25;
-    critChance = 0.2;
-    speed = 100;
-    level = 1;
-};
+
+LuminousAngel::LuminousAngel(int level) {
+    this->name = "Luminous Angel";
+    this->health = 40 + (10 * level);
+    this->damage = 20 + (3 * level);
+    this->defence = 15 + (2 * level);
+    this->critChance = 1.1;
+    this->speed = 15 + (2 * level);
+    this->level = level;
+}
 
 bool LuminousAngel::holyShield(Character &target) {
     int randomNum = rand() % 11; 

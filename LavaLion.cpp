@@ -1,16 +1,13 @@
 #include "LavaLion.h"
 #include "Fire.h"
-
-LavaLion::LavaLion() : Fire() {
-    name = "Lava Lion";
-    health = 120;
-    damage = 180;
-    defence = 30;
-    critChance = 0.2;
-    speed = 70;
-    level = 1;
-};
-
+LavaLion::LavaLion(int level) {
+    this->name = "Lava Lion";
+    this->health = 20 + (3 * level);     
+    this->damage = 25 + (5 * level);      
+    this->defence = 20 + (3 * level);     
+    this->speed = 15 + (2 * level);
+    this->level = level;
+}
 bool LavaLion::emberStorm(Character &target) {
     int randomNum = rand() % 11; 
 

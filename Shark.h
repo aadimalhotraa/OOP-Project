@@ -4,8 +4,9 @@
 class Shark:public Water{
     public:
     //unique attacks for the shark enemy
-    virtual bool tidalWave(Character &target);
-    virtual void aquaWhip(Character &target);
+    Shark(int level);
+    bool tidalWave(Character &target);
+    void aquaWhip(Character &target);
 
 };
 #endif

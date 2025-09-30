@@ -1,14 +1,17 @@
 #include "ThunderBat.h"
 #include "Light.h"
-ThunderBat::ThunderBat() : Light() {
-    name = "Thunder Bat";
-    health = 100;
-    damage = 80;
-    defence = 15;
-    critChance = 0.1;
-    speed = 110;
-    level = 1;
-};  
+ThunderBat::ThunderBat(int level) {
+    this->name = "Thunder Bat";
+    this->health = 40 + (19 * level);    
+    this->damage = 15 + (2 * level);
+    this->defence = 15 + (2 * level);
+    this->critChance = 1.25 + (0.01 * level);
+    if (this->critChance > 1.4) {
+    this->critChance = 1.4;             // cap of 1.4
+    }     
+    this->speed = 15 + (2 * level);
+    this->level = level;
+}
 bool ThunderBat::radiantBeam(Character &target) {
     int randomNum = rand() % 11; 
 

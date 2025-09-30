@@ -1,15 +1,15 @@
 #include "Dark.h"
 #include "DarkKnight.h"
 
-DarkKnight::DarkKnight() : Dark() {
-    name = "Dark Knight";
-    health = 150;
-    damage = 180;
-    defence = 30;
-    critChance = 0.2;
-    speed = 40;
-    level = 1;
-};
+DarkKnight::DarkKnight(int level) {
+    this->name = "Dark Knight";
+    this->health = 20 + (3 * level);
+    this->damage = 15 + (2 * level);
+    this->defence = 20 + (3 * level);
+    this->critChance = 1.5;
+    this->speed = 15 + (3 * level);
+    this->level = level;
+}
 bool DarkKnight::nightClaw(Character &target) {
     int randomNum = rand() % 11; 
 
