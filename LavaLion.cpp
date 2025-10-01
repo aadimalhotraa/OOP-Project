@@ -32,3 +32,11 @@ bool LavaLion::infernalSlash(Character &target) {
         return false;
     }
 };
+
+void LavaLion::levelUp(){
+    this->level++;
+    this->health += 3;
+    this->damage += 5;
+    this-> defence += 3;
+    this-> speed += 2;
+}

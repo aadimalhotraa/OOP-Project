@@ -5,12 +5,12 @@ FireFox::FireFox(int level) {
     this->name = "Fire Fox";
     this->health = 20 + (3 * level);
     this->damage = 25 + (5 * level);
-    this->defence = 15 + (5 * level);
+    this->defence = 15 + (2 * level);
     this->critChance = 1.25 + (0.01 * level);
     if (this->critChance > 1.4) {
     this->critChance = 1.4;     //cap of 1.4
     }
-    this->speed = 15 + (3 * level);
+    this->speed = 15 + (2 * level);
     this->level = level;
 }
 
@@ -43,3 +43,14 @@ bool FireFox::fireBall(Character &target) {
         return false;
     }
 };
+
+void FireFox::levelUp(){
+    this->level++;
+    this->health += 3;
+    this->damage += 5;
+    this-> defence += 2;
+    if (this->critChance < 1.4) {
+    this->critChance += 0.01;     //cap of 1.4
+    }
+    this-> speed += 2;
+}

@@ -7,6 +7,6 @@ class FireFox:public Fire{
     bool flameBurst(Character &target);    // special move that does area damage
     bool fireBall(Character &target);
     
-
+    void levelUp() override;
 };
 #endif

@@ -6,5 +6,7 @@ class LavaLion:public Fire{
     LavaLion(int level);
     bool emberStorm(Character &target);    // special move that does damage and lowers enemy attack
     bool infernalSlash(Character &target); // special move that does high damage but lowers user's defence
+
+    void levelUp() override;
 };
 #endif

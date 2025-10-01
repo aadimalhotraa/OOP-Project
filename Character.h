@@ -37,6 +37,7 @@ class Character{
         // Virtual functions
         virtual void takeDamage(int amount) = 0;
         virtual void attackTarget(Character& target) = 0;
+        virtual void levelUp() = 0;
         
         // Vitrual deconstuctor
         virtual ~Character();

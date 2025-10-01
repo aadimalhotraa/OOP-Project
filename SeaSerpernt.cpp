@@ -30,3 +30,11 @@ bool SeaSerpent::puddle(Character &target) {
         return false;
     }
 };
+
+void SeaSerpent::levelUp(){
+    this->level++;
+    this->health += 5;
+    this->damage += 2;
+    this-> defence += 2;
+    this-> speed += 5;
+}

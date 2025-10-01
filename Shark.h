@@ -8,5 +8,6 @@ class Shark:public Water{
     bool tidalWave(Character &target);
     bool aquaWhip(Character &target);
 
+    void levelUp() override;
 };
 #endif

@@ -33,3 +33,11 @@ bool Shark::aquaWhip(Character &target) {
     target.setHealth(calc);
     return true;
 };
+
+void Shark::levelUp(){
+    this->level++;
+    this->health += 3;
+    this->damage += 3;
+    this-> defence += 2;
+    this-> speed += 5;
+}

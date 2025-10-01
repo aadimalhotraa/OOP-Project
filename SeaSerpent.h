@@ -7,6 +7,7 @@ class SeaSerpent:public Water{
     SeaSerpent(int level);
     bool waterSlide(Character &target);
     bool puddle(Character &target);
-
+    
+    void levelUp() override;
 };
 #endif
