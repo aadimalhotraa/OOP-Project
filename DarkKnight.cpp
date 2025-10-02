@@ -6,7 +6,10 @@ DarkKnight::DarkKnight(int level) {
     this->health = 20 + (3 * level);
     this->damage = 15 + (2 * level);
     this->defence = 20 + (3 * level);
-    this->critChance = 1.5;
+    this->critChance = 1.5 + (0.02 * level);
+    if (this->critChance > 1.8) {
+    this->critChance = 1.8;             // cap of 1.8
+    }        
     this->speed = 15 + (3 * level);
     this->level = level;
 }
@@ -27,3 +30,14 @@ bool DarkKnight::sneakAttack(Character &target) {
     target.setHealth(calc);
     return true;
 };
+
+void DarkKnight::levelUp(){
+    this->level++;
+    this->health += 3;
+    this->damage += 2;
+    this->defence += 3;
+    if (this->critChance < 1.8) {
+    this->critChance += 0.02;     //cap of 1.8
+    }
+    this->speed += 2;
+}

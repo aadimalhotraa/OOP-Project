@@ -8,5 +8,6 @@ class DarkKnight:public Dark{
     bool nightClaw (Character &target);
     bool sneakAttack (Character &target);
 
+    void levelUp() override;
 };
 #endif

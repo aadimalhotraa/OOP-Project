@@ -16,3 +16,11 @@ bool PredatoryButterfly::leafBlade(Character &target) {
     return true;
 };
 //for spore im not sure what we want to do yet
+
+void PredatoryButterfly::levelUp(){
+    this->level++;
+    this->health += 3;
+    this->damage += 2;
+    this-> defence += 5;
+    this-> speed += 3;
+}

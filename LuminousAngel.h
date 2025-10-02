@@ -6,5 +6,7 @@ class LuminousAngel:public Light{
         LuminousAngel(int level);
         bool holyShield(Character &target); 
         bool sunRay(Character &target);   
+
+        void levelUp() override;
 }; 
 #endif

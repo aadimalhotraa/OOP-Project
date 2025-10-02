@@ -5,7 +5,7 @@ Demon::Demon(int level) {
     this->name = "Demon";
     this->health = 20 + (3 * level);     
     this->damage = 20 + (3 * level);
-    this->defence = 15 + (5 * level);
+    this->defence = 15 + (2 * level);
     this->critChance = 1.5 + (0.02 * level);
     if (this->critChance > 1.8) {
     this->critChance = 1.8;             // cap of 1.8
@@ -31,3 +31,14 @@ bool Demon::voidPulse(Character &target) {
         return false;
     }
 };
+
+void Demon::levelUp(){
+    this->level++;
+    this->health += 3;
+    this->damage += 3;
+    this->defence += 2;
+    if (this->critChance < 1.8) {
+    this->critChance += 0.02;     //cap of 1.8
+    }
+    this->speed += 2;
+}

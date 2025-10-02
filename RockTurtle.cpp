@@ -28,3 +28,11 @@ bool RockTurtle::rootBind(Character &target) {
         return false;
     }
 }
+
+void RockTurtle::levelUp(){
+    this->level++;
+    this->health += 6;
+    this->damage += 2;
+    this-> defence += 5;
+    this-> speed += 2;
+}

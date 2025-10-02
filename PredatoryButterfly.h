@@ -2,10 +2,12 @@
 #define PREDATORYBUTTERFLY_H
 #include "Grass.h"
 class PredatoryButterfly:public Grass{
-public:
-PredatoryButterfly(int level);
-//the unique attacks for the predatory butterfly enemy
-bool leafBlade(Character &target);
-bool spore(Character &target);
+    public:
+    PredatoryButterfly(int level);
+    //the unique attacks for the predatory butterfly enemy
+    bool leafBlade(Character &target);
+    bool spore(Character &target);
+
+    void levelUp() override;
 };
 #endif

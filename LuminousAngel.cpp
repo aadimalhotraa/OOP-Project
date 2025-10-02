@@ -30,3 +30,11 @@ bool LuminousAngel::sunRay(Character &target) {
     target.setHealth(calc);
     return true;
 };
+
+void LuminousAngel::levelUp(){
+    this->level++;
+    this->health += 10;
+    this->damage += 3;
+    this-> defence += 2;
+    this-> speed += 2;
+}

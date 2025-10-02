@@ -6,5 +6,8 @@ class ThunderBat:public Light{
     ThunderBat(int level);
     bool radiantBeam(Character &target);
     bool purify(Character &target);
+
+    
+    void levelUp() override;
 };
 #endif

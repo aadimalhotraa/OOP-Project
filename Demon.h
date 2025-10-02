@@ -8,5 +8,6 @@ class Demon:public Dark{
     bool shadowStrike(Character &target);
     bool voidPulse(Character &target);
 
+    void levelUp() override;
 };
 #endif

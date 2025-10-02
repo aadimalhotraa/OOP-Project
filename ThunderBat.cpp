@@ -2,7 +2,7 @@
 #include "Light.h"
 ThunderBat::ThunderBat(int level) {
     this->name = "Thunder Bat";
-    this->health = 40 + (19 * level);    
+    this->health = 40 + (10 * level);    
     this->damage = 15 + (2 * level);
     this->defence = 15 + (2 * level);
     this->critChance = 1.25 + (0.01 * level);
@@ -31,3 +31,14 @@ bool ThunderBat::purify(Character &target) {
     target.setHealth(calc);
     return true;
 };
+
+void ThunderBat::levelUp(){
+    this->level++;
+    this->health += 10;
+    this->damage += 2;
+    this-> defence += 2;
+    if (this->critChance < 1.4) {
+    this->critChance += 0.01;     //cap of 1.4
+    }
+    this-> speed += 2;
+}

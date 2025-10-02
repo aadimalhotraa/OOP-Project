@@ -2,12 +2,12 @@
 #define ROCKTURTLE_H
 #include "Grass.h"
 class RockTurtle:public Grass{
-public:
-RockTurtle(int level);
-//the unique attacks for the rock turtle enemy
-bool vineWhip(Character& target);
-bool rootBind(Character& target);
+    public:
+    RockTurtle(int level);
+    //the unique attacks for the rock turtle enemy
+    bool vineWhip(Character& target);
+    bool rootBind(Character& target);
 
-
+    void levelUp() override;
 };
 #endif
