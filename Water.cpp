@@ -22,11 +22,13 @@ Water::Water(std::string name, double health, double attack, double defence, dou
 bool Water::aquaJet(Character &target){
     double calc = target.getHealth() - (this->damage * 0.15);
     target.setHealth(calc);
+    return true;
 };
 
 bool Water::hydroCannon(Character &target){
     double calc = target.getHealth() - (this->damage * 0.25);
     target.setHealth(calc);
+    return true;
 };
 //attacks the target
 void Water::attackTarget(Character &target){
