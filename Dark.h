@@ -19,6 +19,6 @@ class Dark : public Character {
         virtual bool confusionAttack(Character& target);
 
         // destructor
-        virtual ~Dark();
+        virtual ~Dark() = default;
 };
 #endif

@@ -19,6 +19,6 @@ class Grass : public Character {
         virtual bool solarBeam(Character &target);
         
         // destructor
-        virtual ~Grass();
+        virtual ~Grass() = default;
 };
 #endif

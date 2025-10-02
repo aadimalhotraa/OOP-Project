@@ -20,6 +20,6 @@ class Water : public Character {
        
 
         // destructor
-        virtual ~Water();
+        virtual ~Water() = default;
 };
 #endif

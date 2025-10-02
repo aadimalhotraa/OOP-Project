@@ -19,7 +19,7 @@ class Fire : public Character{
     virtual void attackTarget(Character &target) override;
     virtual void takeDamage(int amount) override;
     // Destructor
-    virtual ~Fire();
+    virtual ~Fire() = default;
 };
 
 #endif
