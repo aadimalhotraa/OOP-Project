@@ -40,3 +40,4 @@ void Dark::takeDamage(int amount){
     double calc=this->health-amount;            
     this->health=calc;
 };
+

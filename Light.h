@@ -19,6 +19,6 @@ class Light : public Character {
         virtual bool electricWings(Character& target);
 
         // destructor
-       virtual ~Light();
+       virtual ~Light() = default;
 };
 #endif
