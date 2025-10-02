@@ -17,13 +17,13 @@ public:
     Ability(std::string abilityName, Attribute type, double damage, double hitChance, std::string description);
     
     // Getters
-    std::string& getName();
+    std::string  getName();
     Attribute    getType();
     double       getDamage();
     double       getHitChance();
-    std::string& getDescription();
+    std::string  getDescription();
 
-    virtual bool use(Character& user, Character& target) = 0;
+    virtual void use(Character& user, Character& target) = 0;
     virtual ~Ability();
 
 };

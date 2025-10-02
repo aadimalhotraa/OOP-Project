@@ -1,25 +1,22 @@
-// this is the test code for the fire class
 #ifndef FIRE_H
 #define FIRE_H
 
 #include "Character.h"
-#include <string>
+#include "Attribute.h"
+#include "FireMoves.h"
+#include <vector>
 
-class Fire : public Character{
-    public:
-    // constructors
-    Fire();
-    Fire(std::string name, double health, double attack, double defence, double critChance, int speed, int level);
+class Fire : public Character {
+protected:
+    std::vector<Ability*> abilities;
+public:
+    // constructor
+    Fire(std::string name, int level);
 
-    // fire types methods
-    virtual bool blazekick(Character &target); // special move that does extra damage
-    virtual bool fireSpin(Character &target);  // special move that does damage over time
+    const std::vector<Ability*>& getAbilities() const;
+    void useAbility(int index, Character& target);
 
-    // attacks the target
-    virtual void attackTarget(Character &target) override;
-    virtual void takeDamage(int amount) override;
-    // Destructor
-    virtual ~Fire() = default;
+    ~Fire() override;
 };
 
 #endif

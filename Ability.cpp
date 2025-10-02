@@ -9,9 +9,10 @@ Ability::Ability(std::string abilityName, Attribute type, double damage, double 
     this->hitChance   = hitChance;
     this->description = description;
 }
-std::string& Ability::getName()             { return abilityName; }
+std::string        Ability::getName()       { return abilityName; }
 Attribute          Ability::getType()       { return type; }
 double             Ability::getDamage()     { return damage; }
 double             Ability::getHitChance()  { return hitChance; }
-std::string& Ability::getDescription()      { return description; }
+std::string        Ability::getDescription(){ return description; }
+
 Ability::~Ability(){}

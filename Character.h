@@ -2,17 +2,19 @@
 #define CHARACTER_H
 
 #include <string>
+#include "Attribute.h"
 
 class Character{
 
     protected:
         std::string name;
         double health;
-        double damage;
+        double attack;
         double defence;
         double critChance;
         int speed;
         int level;
+        Attribute type = Attribute::NONE;
     public:
         // Constructors
         Character();
@@ -23,8 +25,8 @@ class Character{
         void setName(std::string name);         // name
         double getHealth();
         void setHealth(double health);          // health
-        double getDamage();
-        void setDamage(double attack);          // attack
+        double getAttack();
+        void setAttack(double attack);          // attack
         double getDefence();
         void setDefence(double defence);        // defence
         double getCritChance();
@@ -33,10 +35,11 @@ class Character{
         void setSpeed(int speed);               // speed
         int getLevel();
         void setLevel(int level);               // level
+        Attribute getType();
+        void setType(Attribute type);           // attribute
 
         // Virtual functions
-        virtual void takeDamage(int amount) = 0;
-        virtual void attackTarget(Character& target) = 0;
+        virtual void takeDamage(int amount);
         virtual void levelUp() = 0;
         
         // Vitrual deconstuctor

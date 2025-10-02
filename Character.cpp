@@ -1,11 +1,11 @@
 #include "Character.h"
-#include <string>
+#include <iostream>
 
 // Constructor
 Character::Character(){
     name = "unknow name";
     health = 0;
-    damage = 0;
+    attack = 0;
     defence = 0;
     critChance = 0;
     speed = 0;
@@ -15,7 +15,7 @@ Character::Character(){
 Character::Character(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
     this-> name = name;
     this-> health = health;
-    this-> damage = attack;
+    this-> attack = attack;
     this-> defence = defence;
     this-> critChance = critChance;
     this-> speed = speed;
@@ -25,19 +25,29 @@ Character::Character(std::string name, double health, double attack, double defe
 // Getters and setters
 std::string Character::getName()    {return name;}
 double  Character::getHealth()      {return health;}
-double  Character::getDamage()      {return damage;}
+double  Character::getAttack()      {return attack;}
 double  Character::getDefence()     {return defence;}
 double  Character::getCritChance()  {return critChance;}
 int     Character::getSpeed()       {return speed;}
 int     Character::getLevel()       {return level;}
+Attribute Character::getType()      { return type;}
 
 void Character::setName(std::string name)       {this-> name = name;}  
 void Character::setHealth(double health)        {this->health = health;}        
-void Character::setDamage(double attack)        {this-> damage = attack;}         
+void Character::setAttack(double attack)        {this-> attack = attack;}         
 void Character::setDefence(double defence)      {this-> defence = defence;}      
 void Character::setCritChance(double critChance){this->critChance = critChance;}
 void Character::setSpeed(int speed)             {this->speed = speed;}            
 void Character::setLevel(int level)             {this->level = level;}              
+void Character::setType(Attribute type)         {this-> type = type; }
 
+
+void Character::takeDamage(int amount) {
+    if (amount < 0) amount = 0;
+    health = std::max(0.0, health - static_cast<double>(amount));
+    if (health <= 0.0) {
+        std::cout << name << " fainted!\n";
+    }
+}
 // Vitrual deconstuctor
 Character::~Character(){}
