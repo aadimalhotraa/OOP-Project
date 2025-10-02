@@ -11,19 +11,19 @@ LuminousAngel::LuminousAngel(int level) {
     this->level = level;
 }
 
-bool LuminousAngel::holyShield(Character &target) {
-    int randomNum = rand() % 11; 
+// bool LuminousAngel::holyShield(Character &target) {
+//     int randomNum = rand() % 11; 
 
-    if(randomNum<8){ //80% hit chance of the attack
-        // increases own defence
-        double calc = 1.10*this->defence;
-        this->defence = calc;
-        return true;
-    }
-    else{
-        return false;
-    }
-};
+//     if(randomNum<8){ //80% hit chance of the attack
+//         // increases own defence
+//         double calc = 1.10*this->defence;
+//         this->defence = calc;
+//         return true;
+//     }
+//     else{
+//         return false;
+//     }
+// };
 
 bool LuminousAngel::sunRay(Character &target) {
     double calc = target.getHealth() - this->damage;

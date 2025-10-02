@@ -27,7 +27,7 @@ bool Grass::seedBullet(Character &target){
 bool Grass::solarBeam(Character &target){
     double calc = target.getHealth() - (this->damage * 0.20);
     target.setHealth(calc);
-    true;
+    return true;
 };
 
 //attacks the target
