@@ -13,43 +13,33 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "raylib [text] example - format text");
 
-    int score = 100020;
-    int hiscore = 200450;
-    int lives = 5;
-
+  
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
 
-        // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+            ClearBackground(LIGHTGRAY);
+            DrawText("Choose the attribute of your character:",65, 60, 35, BLUE);
 
-            DrawText(TextFormat("Score: %08i", score), 200, 80, 20, RED);
 
-            DrawText(TextFormat("HiScore: %08i", hiscore), 200, 120, 20, GREEN);
 
-            DrawText(TextFormat("Lives: %02i", lives), 200, 160, 40, BLUE);
+            DrawText("1. Grass", 80, 140, 26, DARKPURPLE);
+            DrawText("2. Light", 80, 175, 26, DARKPURPLE);
+            DrawText("3. Dark", 80, 210, 26, DARKPURPLE);
+            DrawText("4. Fire", 80, 245, 26, DARKPURPLE);
+            DrawText("5. Water", 80, 280, 26, DARKPURPLE);
 
-            DrawText(TextFormat("Elapsed Time: %02.02f ms", GetFrameTime()*1000), 200, 220, 20, BLACK);
+            
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
-    }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
-
-    return 0;
+    
+   
+}
+return 0;
 }
