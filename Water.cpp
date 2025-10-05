@@ -1,42 +1,32 @@
-#include "Character.h"
 #include "Water.h"
+#include <iostream>
 
-Water::Water(){
-    name = "unknow name";
-    health = 100;
-    damage = 100;
-    defence = 0;
-    critChance = 0;
-    speed = 0;
-    level = 0;
-}
-Water::Water(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
-    this->name = name;
-    this->health = health;      
-    this->damage = attack;
-    this->defence = defence;
-    this->critChance = critChance;
-    this->speed = speed;
+Water::Water(std::string name, int level) {
+    this->name  = name;
     this->level = level;
-};
-bool Water::aquaJet(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.15);
-    target.setHealth(calc);
-    return true;
-};
+    this->setType(Attribute::WATER);
 
-bool Water::hydroCannon(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.25);
-    target.setHealth(calc);
-    return true;
-};
-//attacks the target
-void Water::attackTarget(Character &target){
-    double calc=target.getHealth()-this->damage;
-    target.setHealth(calc);
+    // Install the 4 water moves
+    abilities.push_back(new WaterSlide());      //index 0
+    abilities.push_back(new Puddle());          //index 1
+    abilities.push_back(new TiddleWave());      //index 2
+    abilities.push_back(new AquaWhip());        //index 3
 }
-//take damage
-void Water::takeDamage(int amount){
-    double calc=this->health-amount;
-    this->health=calc;
-};
+
+const std::vector<Ability*>& Water::getAbilities() const {
+    return abilities;
+}
+
+// Access the Ability* at `abilities[index]` and call its `use()` function.
+void Water::useAbility(int index, Character& target) {
+    if (index < 0 || index >= static_cast<int>(abilities.size())) {
+        std::cout << this->getName() << " tried to use an invalid move index.\n";
+        return;
+    }
+    abilities[index]->use(*this, target);
+}
+
+Water::~Water() {
+    for (Ability* a : abilities) delete a;
+    abilities.clear();
+}

@@ -1,43 +1,31 @@
 #include "Dark.h"
-#include "Character.h"
+#include <iostream>
 
-Dark::Dark(){
-    name = "unknow name";
-    health = 100;
-    damage = 100;
-    defence = 0;
-    critChance = 0;
-    speed = 0;
-    level = 0;
-}
-Dark::Dark(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
-    this->name = name;
-    this->health = health;      
-    this->damage = attack;
-    this->defence = defence;
-    this->critChance = critChance;
-    this->speed = speed;
+Dark::Dark(std::string name, int level) {
+    this->name = name; 
     this->level = level;
-};
+    setType(Attribute::DARK);
 
-bool Dark::suckerPunch(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.19);
-    target.setHealth(calc);
-    return true;
-};
-
-bool Dark::confusionAttack(Character &target){
-    target.setCritChance(0);
-    return false;
-};
-//attacks the target
-void Dark::attackTarget(Character &target){
-    double calc=target.getHealth()-this->damage;
-    target.setHealth(calc);
+    abilities.push_back(new ShadowStrike());    // index 0
+    abilities.push_back(new VoidPulse());       // index 1
+    abilities.push_back(new NightClaw());       // index 2
+    abilities.push_back(new SneakAttack());     // index 3
 }
-//take damage
-void Dark::takeDamage(int amount){
-    double calc=this->health-amount;            
-    this->health=calc;
-};
 
+const std::vector<Ability*>& Dark::getAbilities() const {
+    return abilities;
+}
+
+// Access the Ability* at `abilities[index]` and call its `use()` function.
+void Dark::useAbility(int index, Character& target) {
+    if (index < 0 || index >= static_cast<int>(abilities.size())) {
+        std::cout << this->getName() << " tried to use an invalid move index.\n";
+        return;
+    }
+    abilities[index]->use(*this, target);
+}
+
+Dark::~Dark() {
+    for (Ability* a : abilities) delete a;
+    abilities.clear();
+}

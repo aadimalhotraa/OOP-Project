@@ -1,13 +1,13 @@
 #ifndef SEASERPENT_H
 #define SEASERPENT_H
+
 #include "Water.h"
-class SeaSerpent:public Water{
+
+class SeaSerpent : public Water {
     public:
-    //the unique attacks for this water enemy
-    SeaSerpent(int level);
-    bool waterSlide(Character &target);
-    bool puddle(Character &target);
-    
-    void levelUp() override;
+        SeaSerpent(int level);
+
+        void levelUp() override;
 };
+
 #endif

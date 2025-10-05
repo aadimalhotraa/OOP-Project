@@ -1,25 +1,19 @@
-//code for the water type character
 #ifndef WATER_H
 #define WATER_H
 #include "Character.h"
-#include <string>
-#include <iostream>
+#include "Attribute.h"
+#include "WaterMoves.h"
+#include <vector>
 class Water : public Character {
+    protected:
+        std::vector<Ability*> abilities;
     public:
-        // constructors
-        Water();
-        Water(std::string name, double health, double attack, double defence, double critChance, int speed, int level);
+        // constructor
+        Water(std::string name, int level);
 
-        // overiden virtual functions
-        void takeDamage(int amount) override;
-        void attackTarget(Character& target) override;
-        //water types methods
-        virtual bool aquaJet(Character &target);
-        virtual bool hydroCannon(Character &target);
-       
-       
+        const std::vector<Ability*>& getAbilities() const;
+        void useAbility(int index, Character& target);
 
-        // destructor
-        virtual ~Water() = default;
+        ~Water() override;
 };
 #endif

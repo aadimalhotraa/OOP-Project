@@ -1,4 +1,4 @@
-    #include "Fire.h"
+#include "Fire.h"
 #include <iostream>
 
 Fire::Fire(std::string name, int level) {

@@ -1,43 +1,30 @@
-#include "Character.h"
 #include "Grass.h"
+#include <iostream>
 
-Grass::Grass(){
-    name = "unknow name";
-    health = 100;
-    damage = 100;
-    defence = 0;
-    critChance = 0;
-    speed = 0;
-    level = 0;
-}
-Grass::Grass(std::string name, double health, double attack, double defence, double critChance, int speed, int level){
-    this->name = name;
-    this->health = health;      
-    this->damage = attack;
-    this->defence = defence;
-    this->critChance = critChance;
-    this->speed = speed;
+Grass::Grass(std::string name, int level) {
+    this->name  = name;
     this->level = level;
-};
-bool Grass::seedBullet(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.25);
-    target.setHealth(calc);
-    return true;
-};
-bool Grass::solarBeam(Character &target){
-    double calc = target.getHealth() - (this->damage * 0.20);
-    target.setHealth(calc);
-    return true;
-};
+    this->setType(Attribute::GRASS);
 
-//attacks the target
-void Grass::attackTarget(Character &target){
-    double calc=target.getHealth()-this->damage;
-    target.setHealth(calc);         
+    abilities.push_back(new VineWhip());        // index 0
+    abilities.push_back(new RootBind());        // index 1
+    abilities.push_back(new LeafBlade());       // index 2
+    abilities.push_back(new Spore());           // index 3
 }
-//take damage
-void Grass::takeDamage(int amount){     
-    double calc=this->health-amount;
-    this->health=calc;
-};  
+
+const std::vector<Ability*>& Grass::getAbilities() const {
+    return abilities;
+}
+
+void Grass::useAbility(int index, Character& target) {
+    if (index < 0 || index >= static_cast<int>(abilities.size())) {
+        std::cout << getName() << " tried to use an invalid move index.\n";
+        return;
+    }
+    abilities[index]->use(*this, target);
+}
+
+Grass::~Grass() {
+    for (Ability* a : abilities) delete a;
+}
 

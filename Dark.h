@@ -1,24 +1,23 @@
-//dark enemy class
 #ifndef DARK_H
 #define DARK_H
+
+#include <vector>
 #include "Character.h"
-#include <string>
-#include <iostream>
+#include "Attribute.h"
+#include "DarkMoves.h"
+
 class Dark : public Character {
-    public:
-        // constructors
-        Dark();
-        Dark(std::string name, double health, double attack, double defence, double critChance, int speed, int level);
+protected:
+    std::vector<Ability*> abilities;
 
-        // overiden virtual functions
-        void takeDamage(int amount) override;
-        void attackTarget(Character& target) override;
+public:
+    // constructor
+    Dark(std::string name, int level);
 
-        //dark types methods
-        virtual bool suckerPunch(Character& target);
-        virtual bool confusionAttack(Character& target);
+    const std::vector<Ability*>& getAbilities() const;
+    void useAbility(int index, Character& target);
 
-        // destructor
-        virtual ~Dark() = default;
+    ~Dark() override;
 };
+
 #endif

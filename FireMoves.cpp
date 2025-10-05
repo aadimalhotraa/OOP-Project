@@ -7,7 +7,7 @@
 constexpr double CRIT_MULT = 1.5; // all crits deal 1.5x damage
 
 
-bool doesHit(double chance) {
+static bool doesHit(double chance) {
     if((rand() % 101) <= (chance * 100))
     return true;
     else
