@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Attribute.h"
 class Battle{
+    public:
     Character* chooseCharacter(Attribute ch);
     Character* chooseEnemy();
     void executeMove(Character* ch, Character* atk);
