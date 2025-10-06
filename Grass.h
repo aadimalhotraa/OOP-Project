@@ -16,7 +16,7 @@ public:
     const std::vector<Ability*>& getAbilities() const;
     void useAbility(int index, Character& target);
 
-    ~Grass() override;
+    virtual ~Grass();
 };
 
 #endif

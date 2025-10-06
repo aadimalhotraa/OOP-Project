@@ -14,6 +14,6 @@ class Light : public Character {
         const std::vector<Ability*>& getAbilities() const;
         void useAbility(int index, Character& target);
 
-        ~Light() override;
+        virtual ~Light();
 };
 #endif
