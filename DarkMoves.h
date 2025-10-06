@@ -28,5 +28,10 @@ public:
     SneakAttack();
     void use(Character& user, Character& target) override;
 };
+class SuckerPunch : public Ability {
+public:
+    SuckerPunch();
+    void use(Character& user, Character& target) override;
+};
 
 #endif

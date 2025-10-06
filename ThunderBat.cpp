@@ -9,6 +9,8 @@ ThunderBat::ThunderBat(int level): Light("Thunder Bat", level){
     this->critChance = 1.4;             // cap of 1.4
     }     
     this->speed = 15 + (2 * level);
+    abilities.push_back(new Purify()); 
+    abilities.push_back(new ElectricWings()); 
 }
 
 void ThunderBat::levelUp(){

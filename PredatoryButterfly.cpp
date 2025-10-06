@@ -6,6 +6,8 @@ PredatoryButterfly::PredatoryButterfly(int level): Grass("Predatory Butterfly", 
     this->defence = 25 + (5 * level);
     this->critChance = 1.1;
     this->speed = 20 + (3 * level);
+    abilities.push_back(new RootBind());        // index 1
+    abilities.push_back(new LeafBlade());       // index 2
 }
 
 void PredatoryButterfly::levelUp(){

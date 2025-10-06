@@ -8,9 +8,7 @@ Fire::Fire(std::string name, int level) {
 
     // Install the 4 fire moves
     abilities.push_back(new FireBall());        //index 0
-    abilities.push_back(new FlameBurst());      //index 1
-    abilities.push_back(new EmberStorm());      //index 2
-    abilities.push_back(new InfernalSlash());   //index 3
+   
 }
 
 const std::vector<Ability*>& Fire::getAbilities() const {

@@ -8,9 +8,7 @@ Water::Water(std::string name, int level) {
 
     // Install the 4 water moves
     abilities.push_back(new WaterSlide());      //index 0
-    abilities.push_back(new Puddle());          //index 1
-    abilities.push_back(new TiddleWave());      //index 2
-    abilities.push_back(new AquaWhip());        //index 3
+    
 }
 
 const std::vector<Ability*>& Water::getAbilities() const {

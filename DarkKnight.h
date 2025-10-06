@@ -6,7 +6,6 @@
 class DarkKnight : public Dark {
 public:
     DarkKnight(int level);
-    
     void levelUp() override;
 };
 #endif

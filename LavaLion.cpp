@@ -5,6 +5,8 @@ LavaLion::LavaLion(int level): Fire("LavaLion", level){
     this->defence = 20 + (3 * level);
     this->critChance = 0.10;
     this->speed = 15 + (2 * level);
+    abilities.push_back(new InfernalSlash()); 
+    abilities.push_back(new BlazeKick()); 
 }
 void LavaLion::levelUp(){
     this->level++;

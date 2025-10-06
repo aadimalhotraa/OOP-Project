@@ -6,6 +6,8 @@ LuminousAngel::LuminousAngel(int level): Light("Luminous Angel", level){
     this->defence = 15 + (2 * level);
     this->critChance = 1.1;
     this->speed = 15 + (2 * level);
+    abilities.push_back(new SunRay());          // index 1
+    abilities.push_back(new RadiantBeam());     // index 2
 }
 
 void LuminousAngel::levelUp(){

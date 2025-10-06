@@ -29,4 +29,10 @@ public:
     void use(Character& user, Character& target) override;
 };
 
+class HydroCannon : public Ability {
+    public:
+        HydroCannon();
+        void use(Character& user, Character& target) override;
+    };
+
 #endif

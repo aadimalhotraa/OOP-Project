@@ -8,9 +8,7 @@ Light::Light(std::string name, int level) {
 
     // Install the 4 light moves
     abilities.push_back(new HolyShield());      // index 0
-    abilities.push_back(new SunRay());          // index 1
-    abilities.push_back(new RadiantBeam());     // index 2
-    abilities.push_back(new Purify());          // index 3
+    
 }
 
 const std::vector<Ability*>& Light::getAbilities() const {

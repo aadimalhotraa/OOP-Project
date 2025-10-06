@@ -6,6 +6,8 @@ SeaSerpent::SeaSerpent(int level): Water("Sea Serpent", level){
     this->defence = 15 + (2 * level);
     this->critChance = 1.1;
     this->speed = 25 + (5 * level);
+    abilities.push_back(new AquaWhip()); 
+    abilities.push_back(new HydroCannon()); 
 }
 
 void SeaSerpent::levelUp(){

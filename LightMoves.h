@@ -29,4 +29,10 @@ public:
     void use(Character& user, Character& target) override;
 };
 
+class ElectricWings : public Ability {
+    public:
+        ElectricWings();
+        void use(Character& user, Character& target) override;
+    };
+
 #endif

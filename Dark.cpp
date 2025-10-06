@@ -7,9 +7,7 @@ Dark::Dark(std::string name, int level) {
     setType(Attribute::DARK);
 
     abilities.push_back(new ShadowStrike());    // index 0
-    abilities.push_back(new VoidPulse());       // index 1
-    abilities.push_back(new NightClaw());       // index 2
-    abilities.push_back(new SneakAttack());     // index 3
+       
 }
 
 const std::vector<Ability*>& Dark::getAbilities() const {

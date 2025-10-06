@@ -9,6 +9,8 @@ Demon::Demon(int level): Dark("Demon", level){
     this->critChance = 1.8;             // cap of 1.8
     }        
     this->speed = 15 + (2 * level);
+    abilities.push_back(new SneakAttack());  
+    abilities.push_back(new SuckerPunch());  
 }
 
 void Demon::levelUp(){

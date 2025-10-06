@@ -7,9 +7,7 @@ Grass::Grass(std::string name, int level) {
     this->setType(Attribute::GRASS);
 
     abilities.push_back(new VineWhip());        // index 0
-    abilities.push_back(new RootBind());        // index 1
-    abilities.push_back(new LeafBlade());       // index 2
-    abilities.push_back(new Spore());           // index 3
+   
 }
 
 const std::vector<Ability*>& Grass::getAbilities() const {

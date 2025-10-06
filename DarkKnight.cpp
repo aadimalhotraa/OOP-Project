@@ -10,6 +10,8 @@ DarkKnight::DarkKnight(int level): Dark("Demon", level){
     this->critChance = 1.8;             // cap of 1.8
     }
     this->speed = 15 + (2 * level);
+    abilities.push_back(new VoidPulse());       // index 1
+    abilities.push_back(new NightClaw());       //index 2
 }
 
 void DarkKnight::levelUp(){

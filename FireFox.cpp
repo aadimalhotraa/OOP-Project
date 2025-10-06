@@ -9,6 +9,8 @@ FireFox::FireFox(int level): Fire("Fire Fox", level){
     this->critChance = 1.4;     //cap of 0.4
     }
     this->speed = 15 + (2 * level);
+    abilities.push_back(new FlameBurst());      //index 1
+    abilities.push_back(new EmberStorm());      //index 2
 }
 void FireFox::levelUp(){
     this->level++;

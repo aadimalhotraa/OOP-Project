@@ -28,5 +28,10 @@ public:
     InfernalSlash();
     void use(Character& user, Character& target) override;
 };
+class BlazeKick : public Ability {
+    public:
+        BlazeKick();
+        void use(Character& user, Character& target) override;
+    };
 
 #endif

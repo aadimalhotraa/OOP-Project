@@ -6,6 +6,8 @@ Shark::Shark(int level): Water("Shark", level){
     this->defence = 15 + (2 * level);
     this->critChance = 1.1;
     this->speed = 25 + (5 * level);
+    abilities.push_back(new Puddle());          //index 1
+    abilities.push_back(new TiddleWave());      //index 2
 }
 
 void Shark::levelUp(){

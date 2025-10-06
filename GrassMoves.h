@@ -28,5 +28,9 @@ public:
     Spore();
     void use(Character& user, Character& target) override;
 };
-
+class SeedBullet : public Ability {
+    public:
+        SeedBullet();
+        void use(Character& user, Character& target) override;
+    };
 #endif
