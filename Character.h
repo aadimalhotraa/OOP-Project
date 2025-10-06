@@ -3,6 +3,8 @@
 
 #include <string>
 #include "Attribute.h"
+#include "Ability.h"
+#include <vector>
 
 class Character{
 
@@ -41,7 +43,8 @@ class Character{
         // Virtual functions
         virtual void takeDamage(int amount);
         virtual void levelUp() = 0;
-        
+        virtual const std::vector<Ability*>& getAbilities() const = 0;
+        virtual void useAbility(int index, Character& target) = 0;
         // Vitrual deconstuctor
         virtual ~Character();
 };

@@ -16,7 +16,7 @@ protected:
 public:
     Ability(std::string abilityName, Attribute type, double damage, double hitChance, std::string description);
     
-    // Getters
+   
     std::string  getName();
     Attribute    getType();
     double       getDamage();
