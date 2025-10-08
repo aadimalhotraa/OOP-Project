@@ -5,7 +5,11 @@
 
 class Demon : public Dark {
 public:
+    // constructor
     Demon(int level);
+
+    // member functions
     void levelUp() override;
+    void setStats(int level) override;
 };
 #endif

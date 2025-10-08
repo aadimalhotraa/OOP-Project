@@ -5,7 +5,11 @@
 
 class DarkKnight : public Dark {
 public:
+    // consturctor
     DarkKnight(int level);
+
+    // member functions
     void levelUp() override;
+    void setStats(int level) override;
 };
 #endif

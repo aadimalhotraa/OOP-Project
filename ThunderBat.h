@@ -5,9 +5,11 @@
 
 class ThunderBat : public Light {
 public:
+    // constructor
     ThunderBat(int level);
 
+    // member functions
     void levelUp() override;
+    void setStats(int level) override;
 };
-
 #endif

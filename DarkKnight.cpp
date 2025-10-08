@@ -5,13 +5,13 @@ DarkKnight::DarkKnight(int level): Dark("Demon", level){
     this->health = 20 + (3 * level);
     this->attack = 15 + (2 * level);
     this->defence = 20 + (3 * level);
-    this->critChance = 1.5 + (0.02 * level);
-    if (this->critChance > 1.8) {
-    this->critChance = 1.8;             // cap of 1.8
+    this->critChance = 0.5 + (0.02 * level);
+    if (this->critChance > 0.8) {
+    this->critChance = 0.8;             // cap of 0.8
     }
     this->speed = 15 + (2 * level);
     abilities.push_back(new VoidPulse());       // index 1
-    abilities.push_back(new NightClaw());       //index 2
+    abilities.push_back(new NightClaw());       // index 2
 }
 
 void DarkKnight::levelUp(){
@@ -23,4 +23,14 @@ void DarkKnight::levelUp(){
     this->critChance += 0.02;     //cap of 1.8
     }
     this->speed += 2;
+}
+void DarkKnight::setStats(int level){
+    this->health = 20 + (3 * level);
+    this->attack = 15 + (2 * level);
+    this->defence = 20 + (3 * level);
+    this->critChance = 0.5 + (0.02 * level);
+    if (this->critChance > 0.8) {
+    this->critChance = 0.8;             // cap of 1.8
+    }
+    this->speed = 15 + (2 * level);
 }

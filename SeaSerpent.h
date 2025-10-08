@@ -4,10 +4,12 @@
 #include "Water.h"
 
 class SeaSerpent : public Water {
-    public:
-        SeaSerpent(int level);
+public:
+    // constructor
+    SeaSerpent(int level);
 
-        void levelUp() override;
+    // member functions
+    void levelUp() override;
+    void setStats(int level) override;
 };
-
 #endif

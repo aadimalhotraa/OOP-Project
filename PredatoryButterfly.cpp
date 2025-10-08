@@ -17,3 +17,11 @@ void PredatoryButterfly::levelUp(){
     this-> defence += 5;
     this-> speed += 3;
 }
+
+void PredatoryButterfly::setStats(int level){
+    this->health = 20 + (3 * level);
+    this->attack = 15 + (2 * level);
+    this->defence = 25 + (5 * level);
+    this->critChance = 1.1;
+    this->speed = 20 + (3 * level);
+}

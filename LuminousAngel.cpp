@@ -17,3 +17,11 @@ void LuminousAngel::levelUp(){
     this-> defence += 2;
     this-> speed += 2;
 }
+
+void LuminousAngel::setStats(int level){
+    this->health = 40 + (10 * level);
+    this->attack = 20 + (3 * level);
+    this->defence = 15 + (2 * level);
+    this->critChance = 1.1;
+    this->speed = 15 + (2 * level);
+}

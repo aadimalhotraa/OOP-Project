@@ -17,3 +17,11 @@ void Shark::levelUp(){
     this-> defence += 2;
     this-> speed += 5;
 }
+
+void Shark::setStats(int level){
+    this->health = 20 + (3 * level);
+    this->attack = 20 + (3 * level);
+    this->defence = 15 + (2 * level);
+    this->critChance = 1.1;
+    this->speed = 25 + (5 * level);
+}

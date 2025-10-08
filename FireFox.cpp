@@ -5,8 +5,8 @@ FireFox::FireFox(int level): Fire("Fire Fox", level){
     this->attack = 25 + (5 * level);
     this->defence = 15 + (2 * level);
     this->critChance = 0.25 + (0.01 * level);
-    if (this->critChance > 1.4) {
-    this->critChance = 1.4;     //cap of 0.4
+    if (this->critChance > 0.4) {
+    this->critChance = 0.4;     //cap of 0.4
     }
     this->speed = 15 + (2 * level);
     abilities.push_back(new FlameBurst());      //index 1
@@ -21,4 +21,15 @@ void FireFox::levelUp(){
     this->critChance += 0.01;     //cap of 0.4
     }
     this-> speed += 2;
+}
+
+void FireFox::setStats(int level){
+    this->health = 20 + (3 * level);
+    this->attack = 25 + (5 * level);
+    this->defence = 15 + (2 * level);
+    this->critChance = 0.25 + (0.01 * level);
+    if (this->critChance > 0.4) {
+    this->critChance = 0.4;     //cap of 0.4
+    }
+    this->speed = 15 + (2 * level);
 }

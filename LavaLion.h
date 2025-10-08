@@ -5,8 +5,11 @@
 
 class LavaLion : public Fire {
 public:
+    // constructor
     LavaLion(int level);
-    void levelUp() override;
-};
 
+    //meember functions
+    void levelUp() override;
+    void setStats(int level) override;
+};
 #endif

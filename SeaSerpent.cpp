@@ -17,3 +17,11 @@ void SeaSerpent::levelUp(){
     this-> defence += 2;
     this-> speed += 5;
 }
+
+void SeaSerpent::setStats(int level){
+    this->health = 30 + (6 * level);
+    this->attack = 15 + (2 * level);
+    this->defence = 15 + (2 * level);
+    this->critChance = 1.1;
+    this->speed = 25 + (5 * level); 
+}

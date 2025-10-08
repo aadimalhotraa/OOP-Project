@@ -5,9 +5,11 @@
 
 class RockTurtle : public Grass {
 public:
+    // constructor
     RockTurtle(int level);
 
+    // member functions
     void levelUp() override;
+    void setStats(int level) override;
 };
-
 #endif

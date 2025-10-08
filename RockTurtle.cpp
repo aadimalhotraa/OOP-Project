@@ -17,3 +17,11 @@ void RockTurtle::levelUp(){
     this-> defence += 5;
     this-> speed += 2;
 }
+
+void RockTurtle::setStats(int level){
+    this->health = 30 + (6 * level);
+    this->attack = 15 + (2 * level);
+    this->defence = 25 + (5 * level);
+    this->critChance = 1.1;
+    this->speed = 15 + (2 * level);
+}
