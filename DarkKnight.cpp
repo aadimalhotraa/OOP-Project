@@ -1,7 +1,7 @@
 #include "Dark.h"
 #include "DarkKnight.h"
 
-DarkKnight::DarkKnight(int level): Dark("Demon", level){
+DarkKnight::DarkKnight(int level): Dark("Dark Knight", level){
     this->health = 20 + (3 * level);
     this->attack = 15 + (2 * level);
     this->defence = 20 + (3 * level);
