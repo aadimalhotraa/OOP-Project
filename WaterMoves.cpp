@@ -73,7 +73,7 @@ void Puddle::use(Character &user, Character &target)
     if (crit)
         raw *= CRIT_MULT;
 
-    int dmg = (int)std::round(raw);
+   int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
     // puddle reeduces opoents speed by 15%
     double currentSpeed = target.getSpeed();
@@ -108,7 +108,7 @@ void TiddleWave::use(Character &user, Character &target)
     if (crit)
         raw *= CRIT_MULT;
 
-    int dmg = (int)std::round(raw);
+     int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
     // self heals by 25 percent
     double maxHealth = user.getHealth();
@@ -143,7 +143,7 @@ void AquaWhip::use(Character &user, Character &target)
     if (crit)
         raw *= CRIT_MULT;
 
-    int dmg = (int)std::round(raw);
+     int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
     // aqua whip reduces opponents health by 20%
     double healthReduction = target.getHealth() * 0.2;
@@ -171,7 +171,7 @@ void HydroCannon::use(Character &user, Character &target)
     bool crit = doesHit(user.getCritChance());
     if (crit)
         raw *= CRIT_MULT;
-    int dmg = (int)std::round(raw);
+    int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
     // hydrocannon  reduces oppoents health and defence by 10%
     double healthReduction = target.getHealth() * 0.1;
@@ -179,7 +179,7 @@ void HydroCannon::use(Character &user, Character &target)
     double currentDef = target.getDefence();
     double defReduction = currentDef * 0.1;
     target.setDefence(currentDef - defReduction);
-    
+
     std::cout << user.getName() << " blasted " << target.getName()
               << " with " << getName() << " for "
               << dmg << " damage" << (crit ? " (CRIT!)" : "") << "!\n";
