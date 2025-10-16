@@ -1,155 +1,86 @@
-#include <iostream>
+#include "raylib.h"
+#include <memory>
+#include <string>
 #include <cstdlib>
 #include <ctime>
-#include <memory>
-#include <vector>
+#include "Battle.h"
+#include "Character.h"
 
-#include "Shark.h"
-#include "SeaSerpent.h"
-#include "FireFox.h"
-#include "LavaLion.h"
-#include "RockTurtle.h"
-#include "PredatoryButterfly.h"
-#include "Demon.h"
-#include "DarkKnight.h"
-#include "ThunderBat.h"
-#include "LuminousAngel.h"
-
-using std::cout;
-using std::endl;
-
-// ------------------- Utility functions -------------------
-void printStats(Character& c) {
-    cout << c.getName()
-         << " | Lvl: "  << c.getLevel()
-         << " | HP: "   << c.getHealth()
-         << " | ATK: "  << c.getAttack()
-         << " | DEF: "  << c.getDefence()
-         << " | SPD: "  << c.getSpeed()
-         << " | CRIT: " << c.getCritChance()
-         << endl;
-}
-
-static void useRandomMoveFor(Character* who, Character& target) {
-    if (auto* f = dynamic_cast<Fire*>(who)) {
-        int i = std::rand() % static_cast<int>(f->getAbilities().size());
-        f->useAbility(i, target);
-    } else if (auto* w = dynamic_cast<Water*>(who)) {
-        int i = std::rand() % static_cast<int>(w->getAbilities().size());
-        w->useAbility(i, target);
-    } else if (auto* g = dynamic_cast<Grass*>(who)) {
-        int i = std::rand() % static_cast<int>(g->getAbilities().size());
-        g->useAbility(i, target);
-    } else if (auto* d = dynamic_cast<Dark*>(who)) {
-        int i = std::rand() % static_cast<int>(d->getAbilities().size());
-        d->useAbility(i, target);
-    } else if (auto* l = dynamic_cast<Light*>(who)) {
-        int i = std::rand() % static_cast<int>(l->getAbilities().size());
-        l->useAbility(i, target);
-    }
-}
-
-// Random enemy factory
-static std::unique_ptr<Character> makeRandomEnemy(int levelMin=9, int levelMax=12) {
-    int lvl = levelMin + (std::rand() % (levelMax - levelMin + 1));
-    switch (std::rand() % 9) {  // removed VineBeast case
-        case 0: return std::make_unique<SeaSerpent>(lvl);
-        case 1: return std::make_unique<FireFox>(lvl);
-        case 2: return std::make_unique<LavaLion>(lvl);
-        case 3: return std::make_unique<RockTurtle>(lvl);
-        case 4: return std::make_unique<PredatoryButterfly>(lvl);
-        case 5: return std::make_unique<Demon>(lvl);
-        case 6: return std::make_unique<DarkKnight>(lvl);
-        case 7: return std::make_unique<ThunderBat>(lvl);
-        default: return std::make_unique<LuminousAngel>(lvl);
-    }
-}
-
-// Speed-based battle round
-static void oneRound(Character& A, Character& B) {
-    Character* first;
-    Character* second;
-
-    if (A.getSpeed() > B.getSpeed())      { first = &A; second = &B; }
-    else if (B.getSpeed() > A.getSpeed()) { first = &B; second = &A; }
-    else { if (std::rand() % 2) { first = &A; second = &B; } else { first = &B; second = &A; } }
-
-    cout << "--- " << first->getName() << " acts ---\n";
-    useRandomMoveFor(first, *second);
-    if (second->getHealth() <= 0) return;
-
-    cout << "--- " << second->getName() << " acts ---\n";
-    useRandomMoveFor(second, *first);
-}
-
-// One complete battle (returns true if player wins)
-static bool runBattle(Shark& player, Character& enemy) {
-    cout << "⚔️  " << player.getName() << " vs " << enemy.getName() << " ⚔️\n";
-    cout << "Player:\n"; printStats(player);
-    cout << "Enemy:\n";  printStats(enemy);
-    cout << "\n";
-
-    while (player.getHealth() > 0 && enemy.getHealth() > 0) {
-        oneRound(player, enemy);
-        cout << "\nHP now — "
-             << player.getName() << ": " << player.getHealth()
-             << " | " << enemy.getName()  << ": " << enemy.getHealth() << "\n\n";
-    }
-
-    if (player.getHealth() > 0 && enemy.getHealth() <= 0) {
-        cout << enemy.getName() << " fainted!\n🎉 You win!\n\n";
-        return true;
-    } else if (enemy.getHealth() > 0 && player.getHealth() <= 0) {
-        cout << player.getName() << " fainted!\n💀 You lose.\n\n";
-        return false;
-    } else {
-        cout << "It's a draw.\n\n";
-        return false;
-    }
-}
-
-// ------------------- main -------------------
 int main() {
-    std::srand(static_cast<unsigned>(std::time(nullptr)));
+    std::srand((unsigned)std::time(nullptr));
 
-    Shark player(10);
+    Battle battle;
 
-    // ---------- Battle 1 ----------
-    auto enemy1 = makeRandomEnemy();
-    double startHP1 = player.getHealth();
+    // Choose your species once @ Lv1
+    std::unique_ptr<Character> chosen(battle.chooseCharacter());
+    if (!chosen) return 0;
 
-    cout << "🔥 Battle 1 Start! 🔥\n\n";
-    bool won1 = runBattle(player, *enemy1);
+    std::string mySpecies = chosen->getName();
+    int playerLevel = 1;
 
-    if (won1) {
-        cout << "Restoring HP to: " << startHP1 << "\n";
-        player.setHealth(startHP1);
+    bool running = true;
+    while (running) {
+        // Fresh player at current level
+        std::unique_ptr<Character> player(battle.createByName(mySpecies, playerLevel));
+        if (!player) break;
 
-        cout << "\n🏆 BEFORE level up:\n"; printStats(player);
-        cout << "\n✨ Leveling up...\n"; player.levelUp();
-        cout << "\nAFTER level up:\n"; printStats(player);
-        cout << "\n";
+        // Enemy level scales with you
+        int enemyLevel = playerLevel + (std::rand()%4 - 1); // -1..+2
+        if (enemyLevel < 1) enemyLevel = 1;
+        if (enemyLevel > playerLevel + 4) enemyLevel = playerLevel + 4;
+
+        // Pick enemy species != player's (use nameToPng to normalize)
+        std::unique_ptr<Character> enemy;
+        for (int tries=0; tries<50 && !enemy; ++tries) {
+            int idx = std::rand() % 10;
+            std::unique_ptr<Character> cand(battle.createByIndex(idx, enemyLevel));
+            if (cand && Battle::nameToPng(cand->getName()) != Battle::nameToPng(mySpecies))
+                enemy = std::move(cand);
+        }
+        if (!enemy) enemy.reset(battle.createByIndex(0, enemyLevel));
+
+        // Run battle
+        int outcome = battle.runSpriteBattle(
+            player.get(), Battle::nameToPng(player->getName()),
+            enemy.get(),  Battle::nameToPng(enemy->getName())
+        );
+        if (outcome == -1) { running = false; break; }
+
+        // Result screen
+        const int W=800, H=450;
+        InitWindow(W, H, "OOPMON - Result");
+        SetTargetFPS(60);
+
+        bool advance = false;
+        while (!WindowShouldClose()) {
+            if (IsKeyPressed(KEY_ESCAPE)) { running = false; break; }
+            BeginDrawing();
+            ClearBackground(BLACK);
+            if (outcome == 1) {
+                DrawText(TextFormat("You WIN! %s (Lv %d) defeated %s (Lv %d)",
+                                    player->getName().c_str(), playerLevel,
+                                    enemy->getName().c_str(), enemyLevel),
+                         40, 120, 24, GREEN);
+                DrawText("Press C to continue (level up) | Q/ESC to quit", 40, 200, 22, RAYWHITE);
+            } else {
+                DrawText(TextFormat("You LOST. %s (Lv %d) fell to %s (Lv %d)",
+                                    player->getName().c_str(), playerLevel,
+                                    enemy->getName().c_str(), enemyLevel),
+                         40, 120, 24, RED);
+                DrawText("Press C to retry (same level) | Q/ESC to quit", 40, 200, 22, RAYWHITE);
+            }
+            EndDrawing();
+
+            if (IsKeyPressed(KEY_Q)) { running = false; break; }
+            if (IsKeyPressed(KEY_C)) { advance = true; break; }
+        }
+        if (WindowShouldClose()) running = false;
+        CloseWindow();
+
+        if (!running) break;
+        if (outcome == 1 && advance) playerLevel += 1; // level up on win
+        // else: retry same level
     }
 
-    if (!won1) return 0;
-
-    // ---------- Battle 2 ----------
-    auto enemy2 = makeRandomEnemy();
-    double startHP2 = player.getHealth();
-
-    cout << "🔥 Battle 2 Start! 🔥\n\n";
-    bool won2 = runBattle(player, *enemy2);
-
-    if (won2) {
-        cout << "Restoring HP to: " << startHP2 << "\n";
-        player.setHealth(startHP2);
-
-        cout << "\n🏆 BEFORE level up:\n"; printStats(player);
-        cout << "\n✨ Leveling up...\n"; player.levelUp();
-        cout << "\nAFTER level up:\n"; printStats(player);
-        cout << "\n";
-    }
-
-    cout << "🏁 Battles finished!\n";
     return 0;
 }

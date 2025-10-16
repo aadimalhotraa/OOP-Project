@@ -6,9 +6,21 @@ LDFLAGS  ?=
 TARGET   := oopmon
 BUILDDIR := build
 
+# Try to get raylib cflags/libs from pkg-config if available.
+# If not, fall back to standard Linux/WSL link flags.
+RAYLIB_CFLAGS := $(shell pkg-config --cflags raylib 2>/dev/null)
+RAYLIB_LIBS   := $(shell pkg-config --libs   raylib 2>/dev/null)
+ifeq ($(strip $(RAYLIB_LIBS)),)
+  # Fallback (Linux/WSL)
+  RAYLIB_LIBS := -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+endif
+CXXFLAGS += $(RAYLIB_CFLAGS)
+LDFLAGS  += $(RAYLIB_LIBS)
+
 # List ALL your .cpp files here
 SRC := \
   main.cpp \
+  Battle.cpp \
   Character.cpp Attribute.cpp Ability.cpp \
   Fire.cpp FireFox.cpp LavaLion.cpp FireMoves.cpp \
   Water.cpp Shark.cpp SeaSerpent.cpp WaterMoves.cpp \

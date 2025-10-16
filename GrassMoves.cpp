@@ -108,9 +108,7 @@ void Spore::use(Character& user, Character& target) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return;
     }
- //redcues oppotnets defense to 0
-    double currentDef = target.getDefence();
-    double defReduction = currentDef; // reduce to 0
+    //redcues oppotnets defense to 0
     target.setDefence(0);
     std::cout << user.getName() << " released " << getName()
               << "! " << target.getName()
