@@ -7,12 +7,15 @@ TARGET   := oopmon
 BUILDDIR := build
 
 # Try to get raylib cflags/libs from pkg-config if available.
-# If not, fall back to standard Linux/WSL link flags.
+# Fallback for macOS if pkg-config fails.
 RAYLIB_CFLAGS := $(shell pkg-config --cflags raylib 2>/dev/null)
 RAYLIB_LIBS   := $(shell pkg-config --libs   raylib 2>/dev/null)
 ifeq ($(strip $(RAYLIB_LIBS)),)
-  # Fallback (Linux/WSL)
-  RAYLIB_LIBS := -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+  # macOS fallback (Homebrew installation)
+  RAYLIB_CFLAGS := -I/opt/homebrew/include
+  RAYLIB_LIBS   := -L/opt/homebrew/lib -lraylib \
+                   -framework OpenGL -framework Cocoa \
+                   -framework IOKit -framework CoreVideo
 endif
 CXXFLAGS += $(RAYLIB_CFLAGS)
 LDFLAGS  += $(RAYLIB_LIBS)
