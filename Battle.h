@@ -4,6 +4,19 @@
 #include "raylib.h"
 #include <string>
 
+#include "FireFox.h"
+#include "LavaLion.h"
+#include "DarkKnight.h"
+#include "Demon.h"
+#include "LuminousAngel.h"
+#include "PredatoryButterfly.h"
+#include "RockTurtle.h"
+#include "SeaSerpent.h"
+#include "Shark.h"
+#include "ThunderBat.h"
+
+#include "Ability.h"
+
 class Character;
 
 class Battle {

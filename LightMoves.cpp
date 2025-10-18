@@ -25,32 +25,10 @@ void HolyShield::use(Character &user, Character &target)
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return;
     }
-
-    double atk = user.getAttack();
-    double def = target.getDefence();
-    double raw = atk + (getDamage() / 100.0) * atk - def;
-    if (raw < 0)
-        raw = 0;
-
-    raw *= typeMultiplier(getType(), target.getType());
-    bool crit = doesHit(user.getCritChance());
-    if (crit)
-        raw *= CRIT_MULT;
-
-    int dmg = (int)std::round(raw);
-    target.takeDamage(dmg);
-    // holysheild self heals  and increases defense by 10%
-    double maxHealth = user.getHealth();
-    double healAmount = maxHealth * 0.1;
-    user.takeDamage(-healAmount); // healing by negative damage
     // increase defence by 10%
     double currentDef = user.getDefence();
     double defIncrease = currentDef * 0.1;
     user.setDefence(currentDef + defIncrease);
-
-    std::cout << user.getName() << " struck with " << getName()
-              << " for " << dmg << " damage" << (crit ? " (CRIT!)" : "") << "!\n";
-    std::cout << user.getName() << " healed for " << healAmount << " health and increased defence by " << defIncrease << "!\n";
 }
 
 // ---------------- Sun Ray ----------------
@@ -78,9 +56,6 @@ void SunRay::use(Character &user, Character &target)
 
     int dmg = (int)std::round(raw);
     target.takeDamage(dmg);
-
-    std::cout << user.getName() << " fired " << getName()
-              << " for " << dmg << " damage" << (crit ? " (CRIT!)" : "") << "!\n";
 }
 
 // ---------------- Radiant Beam ----------------
@@ -95,22 +70,8 @@ void RadiantBeam::use(Character &user, Character &target)
         return;
     }
 
-    double atk = user.getAttack();
-    double def = target.getDefence();
-    double raw = atk + (getDamage() / 100.0) * atk - def;
-    if (raw < 0)
-        raw = 0;
-
-    raw *= typeMultiplier(getType(), target.getType());
-    bool crit = doesHit(user.getCritChance());
-    if (crit)
-        raw *= CRIT_MULT;
-
-    int dmg = (int)std::round(raw);
-    target.takeDamage(dmg);
-
-    std::cout << user.getName() << " unleashed " << getName()
-              << " for " << dmg << " damage" << (crit ? " (CRIT!)" : "") << "!\n";
+    double currHealth= user.getHealth();
+    user.setHealth(currHealth*1.1);
 }
 
 // ---------------- Purify ----------------
@@ -125,15 +86,9 @@ void Purify::use(Character &user, Character &target)
         return;
     }
 
-    // Currently no damage; could be healing or debuff later
-    // heals target by 30% of their max health
+    // damages target by 30% of their current health
     double maxHealth = target.getHealth();
-    double healAmount = maxHealth * 0.3;
-    target.takeDamage(-healAmount); // healing by negative damage
-    std::cout << user.getName() << " used " << getName()
-              << " on " << target.getName()
-              << "! " << target.getName() << " is surrounded by purifying light!\n";
-    std::cout << target.getName() << " healed for " << healAmount << " health!\n";
+    target.setHealth(maxHealth*0.70);
 }
 // ---------------- ElectricWings ----------------
 ElectricWings::ElectricWings()
@@ -156,11 +111,4 @@ void ElectricWings::use(Character &user, Character &target)
         raw *= CRIT_MULT;
     int dmg = (int)std::round(raw);
     target.takeDamage(dmg);
-    // electric wings slows the opponent speed by 10%
-    int currentSpeed = target.getSpeed();
-    double speedReduction = currentSpeed * 0.1;
-    target.setSpeed(currentSpeed - speedReduction);
-    std::cout << user.getName() << " struck with " << getName()
-              << " for " << dmg << " damage" << (crit ? " (CRIT!)" : "") << "!\n";
-    std::cout << target.getName() << "'s speed is reduced by " << speedReduction << "\n";
 }

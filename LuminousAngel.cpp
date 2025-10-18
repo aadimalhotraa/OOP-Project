@@ -1,7 +1,7 @@
 #include "LuminousAngel.h"
 
 LuminousAngel::LuminousAngel(int level): Light("Luminous Angel", level){
-    this->health = 40 + (10 * level);
+    this->health = 150+(10*level);
     this->attack = 20 + (3 * level);
     this->defence = 15 + (2 * level);
     this->critChance = 1.1;

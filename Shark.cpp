@@ -1,7 +1,7 @@
 #include "Shark.h"
 
 Shark::Shark(int level): Water("Shark", level){
-    this->health = 20 + (3 * level);
+    this->health = 150+(10*level);
     this->attack = 20 + (3 * level);
     this->defence = 15 + (2 * level);
     this->critChance = 1.1;

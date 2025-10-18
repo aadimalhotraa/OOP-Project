@@ -1,7 +1,7 @@
 #include "Demon.h"
 
 Demon::Demon(int level): Dark("Demon", level){
-    this->health = 20 + (3 * level);     
+    this->health = 150+(10*level);     
     this->attack = 20 + (3 * level);
     this->defence = 15 + (2 * level);
     this->critChance = 0.5 + (0.02 * level);

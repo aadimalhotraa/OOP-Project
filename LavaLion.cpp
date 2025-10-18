@@ -1,6 +1,6 @@
 #include "LavaLion.h"
 LavaLion::LavaLion(int level): Fire("Lava Lion", level){
-    this->health = 20 + (3 * level);     
+    this->health = 150+(10*level);    
     this->attack = 25 + (5 * level);      
     this->defence = 20 + (3 * level);
     this->critChance = 0.10;

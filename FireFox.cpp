@@ -1,7 +1,7 @@
 #include "FireFox.h"
 
 FireFox::FireFox(int level): Fire("Fire Fox", level){
-    this->health = 20 + (3 * level);
+    this->health = 150+(10*level);
     this->attack = 25 + (5 * level);
     this->defence = 15 + (2 * level);
     this->critChance = 0.25 + (0.01 * level);

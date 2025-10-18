@@ -7,19 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include "Ability.h"
 
-// ---- concrete monsters only here ----
-#include "FireFox.h"
-#include "LavaLion.h"
-#include "DarkKnight.h"
-#include "Demon.h"
-#include "LuminousAngel.h"
-#include "PredatoryButterfly.h"
-#include "RockTurtle.h"
-#include "SeaSerpent.h"
-#include "Shark.h"
-#include "ThunderBat.h"
 
 Battle::Battle() { std::srand((unsigned)std::time(nullptr)); }
 Battle::~Battle() {}

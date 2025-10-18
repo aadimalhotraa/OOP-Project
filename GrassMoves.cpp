@@ -32,10 +32,6 @@ void VineWhip::use(Character& user, Character& target) {
 
     int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
-
-    std::cout << user.getName() << " lashed " << target.getName()
-              << " with " << getName() << " for " << dmg << " damage"
-              << (crit ? " (CRIT!)" : "") << "!\n";
 }
 
 // ---------------- Root Bind ----------------
@@ -85,18 +81,12 @@ void LeafBlade::use(Character& user, Character& target) {
 
     int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
-    //this attack redcues oppoent health and speed by 15 percent 
+    //this attack redcues opponent health  by 15 percent 
     double maxHealth = target.getHealth();
-    double healthReduction = maxHealth * 0.15;
-    target.takeDamage(healthReduction);
+    target.setHealth(0.85*maxHealth);
+     //this attack redcues opponent speed  by 15 percent 
     double currentSpeed = target.getSpeed();
-    double speedReduction = currentSpeed * 0.15;
-    target.setSpeed(currentSpeed - speedReduction);
-
-    std::cout << user.getName() << " sliced " << target.getName()
-              << " with " << getName() << " for " << dmg << " damage"
-              << (crit ? " (CRIT!)" : "") << "!\n";
-    std::cout << target.getName() << " lost an additional " << healthReduction << " health and speed is reduced by " << speedReduction << "!\n";
+    target.setSpeed(currentSpeed*0.85);
 }
 
 // ---------------- Spore ----------------
@@ -110,9 +100,6 @@ void Spore::use(Character& user, Character& target) {
     }
     //redcues oppotnets defense to 0
     target.setDefence(0);
-    std::cout << user.getName() << " released " << getName()
-              << "! " << target.getName()
-              << " seems weakened! (no direct damage yet)\n";
     
 }
 
@@ -124,20 +111,7 @@ void SeedBullet::use(Character& user, Character& target) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return;
     }       
-    double atk = user.getAttack();
-    double def = target.getDefence();
-    double raw = atk + (getDamage() / 100.0) * atk - def;
-    if (raw < 0) raw = 0;   
-    raw *= typeMultiplier(getType(), target.getType());
-    bool crit = doesHit(user.getCritChance());
-    if (crit) raw *= CRIT_MULT;
-     int dmg = static_cast<int>(std::round(raw));
-    target.takeDamage(dmg);
     // redcues oppoenents health by 30%
-    double healthReduction = target.getHealth() * 0.3;
-    target.takeDamage(healthReduction);
-    std::cout << user.getName() << " fired " << getName()
-              << " at " << target.getName() << " for "
-              << dmg << " damage" << (crit ? " (CRIT!)" : "") << "!\n";
-    std::cout << target.getName() << "'s health is reduced by " << healthReduction << "\n";
+    double currHealth = target.getHealth();
+    target.setHealth(currHealth* 0.70);
 }

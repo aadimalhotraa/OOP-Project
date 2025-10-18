@@ -1,7 +1,7 @@
 #include "PredatoryButterfly.h"
 
 PredatoryButterfly::PredatoryButterfly(int level): Grass("Predatory Butterfly", level){
-    this->health = 20 + (3 * level);
+    this->health = 150+(10*level);
     this->attack = 15 + (2 * level);
     this->defence = 25 + (5 * level);
     this->critChance = 1.1;

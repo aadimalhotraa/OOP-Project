@@ -1,7 +1,7 @@
 #include "ThunderBat.h"
 
 ThunderBat::ThunderBat(int level): Light("Thunder Bat", level){
-    this->health = 40 + (10 * level);    
+    this->health = 150+(10*level);    
     this->attack = 15 + (2 * level);
     this->defence = 15 + (2 * level);
     this->critChance = 0.25 + (0.01 * level);
