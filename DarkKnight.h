@@ -2,7 +2,7 @@
 #define DARKKNIGHT_H
 
 #include "Dark.h"
-
+//derived class for dark knight character which inherits from Dark class
 class DarkKnight : public Dark {
 public:
     // consturctor

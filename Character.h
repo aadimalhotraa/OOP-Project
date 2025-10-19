@@ -5,10 +5,11 @@
 #include "Attribute.h"
 #include "Ability.h"
 #include <vector>
-
+//abstract base class for all characters in the game
 class Character{
-
+//protected members
     protected:
+    //character attributes
         std::string name;
         double health;
         double attack;
@@ -16,7 +17,9 @@ class Character{
         double critChance;
         int speed;
         int level;
+        //elemental attribute
         Attribute type = Attribute::NONE;
+    //public members
     public:
         // Constructors
         Character();
@@ -41,10 +44,15 @@ class Character{
         void setType(Attribute type);           // attribute
 
         // Virtual functions
+        //apply damage to character
         virtual void takeDamage(int amount);
+        //set stats based on level
         virtual void setStats(int level) = 0;
+        //level up character
         virtual void levelUp() = 0;
+        //get abilities of character
         virtual const std::vector<Ability*>& getAbilities() const = 0;
+        //use ability on target character
         virtual void useAbility(int index, Character& target) = 0;
         // Vitrual deconstuctor
         virtual ~Character();
