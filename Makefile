@@ -22,7 +22,6 @@ LDFLAGS  += $(RAYLIB_LIBS)
 
 # List ALL your .cpp files here
 SRC := \
-  main.cpp \
   Battle.cpp \
   Character.cpp Attribute.cpp Ability.cpp \
   Fire.cpp FireFox.cpp LavaLion.cpp FireMoves.cpp \

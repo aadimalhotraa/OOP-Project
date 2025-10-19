@@ -1,92 +1,66 @@
-
 #include "raylib.h"
+#include <iostream>
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
     const int screenHeight = 450;
+    InitWindow(screenWidth, screenHeight, "Automatic Health Bar");
 
-    InitWindow(screenWidth, screenHeight, "raylib [text] example - format text");
+    float maxHealth = 100.0f;
+    float health = maxHealth;
 
-  
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
+    Rectangle healthBar = { 50, 50, 400, 40 };
+    Rectangle healthBar2 = { 50, 50, 400, 40 };
+    
 
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    // Example: predefined health values (simulating damage over time)
+    float healthValues[] = { 100, 80, 60, 50, 30, 10, 0 };
+    int index = 0;
+    float delay = 0.0f; // timer for animation
+
+    SetTargetFPS(60);
+
+    while (!WindowShouldClose())
     {
-
-        BeginDrawing();
-
-            ClearBackground(LIGHTGRAY);
-            DrawText("Fire Fox (you)",65, 60, 35, BLUE);
-
-
-
-            DrawText("Health : 70", 80, 140, 26, DARKPURPLE);
-            DrawText("Attack : 15", 80, 175, 26, DARKPURPLE);
-            DrawText("Defense : 20", 80, 210, 26, DARKPURPLE);
-            DrawText("Level : 1", 80, 245, 26, DARKPURPLE);
-            DrawText("You attack first!", 80, 300, 26, DARKPURPLE);
-           
-
-            
-
-        EndDrawing();
-        if (IsKeyPressed(KEY_Y))
+        // Automatic "animation" every 1 second
+        delay += GetFrameTime();
+        if (delay >= 1.0f && index < sizeof(healthValues)/sizeof(healthValues[0]))
         {
-            CloseWindow();  // Close the Raylib window
-            break;          // Exit the loop immediately
+            health = healthValues[index];
+            index++;
+            delay = 0.0f;
         }
 
-    
-   
-}
+        float fillRatio = health / maxHealth;
 
- //--------------------------------------------------------------------------------------
+        Rectangle filledPart = {
+            healthBar.x,
+            healthBar.y,
+            healthBar.width * fillRatio,
+            healthBar.height
+        };
 
+        Color barColor = GREEN;
+        if (fillRatio < 0.3f) barColor = RED;
+        else if (fillRatio < 0.6f) barColor = ORANGE;
 
- InitWindow(screenWidth, screenHeight, "raylib [text] example - format text");
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
 
+        DrawText("Automatic Health Bar", 200, 150, 20, DARKGRAY);
 
- SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
- //--------------------------------------------------------------------------------------
+        DrawRectangleRec(healthBar, GRAY);
+        DrawRectangleRec(filledPart, barColor);
+        DrawRectangleLinesEx(healthBar, 3, BLACK);
 
- // Main game loop
- while (!WindowShouldClose())    // Detect window close button or ESC key
- {
+        char buffer[32];
+        snprintf(buffer, sizeof(buffer), "Health: %.0f / %.0f", health, maxHealth);
+        DrawText(buffer, 200, 260, 20, DARKGRAY);
 
-     BeginDrawing();
+        EndDrawing();
+    }
 
-
-         ClearBackground(LIGHTGRAY);
-         DrawText("Rock Turtle (Enemy)",65, 60, 35, BLUE);
-
-
-         DrawText("Fire Fox threw a fireball at Rock Turtle!", 80, 150, 26, DARKPURPLE);
-         DrawText("Health : 70", 80, 210, 26, DARKPURPLE);
-         DrawText("Attack : 15", 80, 245, 26, DARKPURPLE);
-         DrawText("Defense : 20", 80, 280, 26, DARKPURPLE);
-         DrawText("Level : 1", 80, 315, 26, DARKPURPLE);
-         
-         
-         if (IsKeyPressed(KEY_RIGHT))
-         {
-             CloseWindow();  // Close the Raylib window
-             break;          // Exit the loop immediately
-         }
-
-         
-
-     EndDrawing();
-
- 
-
-}
-return 0;
+    CloseWindow();
+    return 0;
 }

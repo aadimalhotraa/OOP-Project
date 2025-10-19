@@ -16,9 +16,9 @@ DarkKnight::DarkKnight(int level): Dark("Dark Knight", level){
 
 void DarkKnight::levelUp(){
     this->level++;
-    this->health += 3;
-    this->attack += 2;
-    this->defence += 3;
+    this->health = 150 + (10*level);
+    this->attack = 15 + (2 * level);
+    this->defence = 20 + (3 * level);
     if (this->critChance < 1.8) {
     this->critChance += 0.02;     //cap of 1.8
     }

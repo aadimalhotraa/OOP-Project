@@ -26,9 +26,11 @@ void HolyShield::use(Character &user, Character &target)
         return;
     }
     // increase defence by 10%
-    double currentDef = user.getDefence();
-    double defIncrease = currentDef * 0.1;
-    user.setDefence(currentDef + defIncrease);
+    double newDef = user.getDefence()*1.1;
+    if(newDef >= (15+ (2 * user.getLevel())))
+    return;
+    else
+    user.setDefence(newDef);
 }
 
 // ---------------- Sun Ray ----------------
@@ -69,9 +71,12 @@ void RadiantBeam::use(Character &user, Character &target)
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return;
     }
-
-    double currHealth= user.getHealth();
-    user.setHealth(currHealth*1.1);
+    //increases health by 25%
+    double newHealth = user.getHealth()*1.15;
+    if(newHealth >= (150 + (10 * user.getLevel())))
+        return;
+    else
+    user.setHealth(newHealth);
 }
 
 // ---------------- Purify ----------------

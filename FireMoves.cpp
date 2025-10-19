@@ -59,8 +59,12 @@ void FlameBurst::use(Character &user, Character &target)
 
 
     // flame burst reduces opopnents health by 20%
-    double healthReduction = target.getHealth() * 0.2;
-    target.takeDamage(healthReduction);
+    if(target.getHealth()<10)
+        target.setHealth(0);
+    else{
+        double currHealth = target.getHealth() * 0.2;
+        target.setHealth(currHealth*0.8);
+    }
 }
 
 // ---------------- Ember Storm ----------------
@@ -74,10 +78,9 @@ void EmberStorm::use(Character &user, Character &target)
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return;
     }
-    // reduce oponents defence by 10%^
+    // reduce oponents defence by 10%
     double currentDef = target.getDefence();
-    double defReduction = currentDef * 0.1;
-    target.setDefence(std::max(0.0, currentDef - defReduction));
+    target.setDefence( currentDef*0.90);
 
 }
 
@@ -128,7 +131,6 @@ void BlazeKick::use(Character &user, Character &target)
 
     // blaze kick reduces opopnets damage by 25%
     double currentAtk = target.getAttack();
-    double atkReduction = currentAtk * 0.25;
-    target.setAttack(std::max(0.0, currentAtk - atkReduction));
+    target.setAttack(currentAtk*0.75);
 
 }

@@ -32,11 +32,6 @@ void WaterSlide::use(Character &user, Character &target)
     if (raw < 0)
         raw = 0;
 
-    // reduces oppoent defence by 15%
-    double currentDef = target.getDefence();
-    double defReduction = currentDef * 0.15;
-    target.setDefence(std::max(0.0, currentDef - defReduction));
-
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());
     if (crit)
@@ -57,9 +52,9 @@ void Puddle::use(Character &user, Character &target)
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return;
     }
-    // puddle reeduces opoents speed by 15%
-    double currentSpeed = target.getSpeed();
-    target.setSpeed(currentSpeed*0.85);
+    // puddle reeduces opoents defence by 15%
+    double currentDefence = target.getDefence();
+    target.setSpeed(currentDefence*0.85);
 }
 
 // ---------------- Tiddle Wave ----------------
@@ -75,8 +70,11 @@ void TiddleWave::use(Character &user, Character &target)
     }
 
     // self heals by 25 percent of current health
-    double maxHealth = user.getHealth();
-    user.setHealth(maxHealth*1.25);
+    double newHealth = user.getHealth()*1.25;
+    if(newHealth >= (150 + (10 * user.getLevel())))
+        return;
+    else
+    user.setHealth(newHealth);
 }
 
 // ---------------- Aqua Whip ----------------
@@ -104,9 +102,6 @@ void AquaWhip::use(Character &user, Character &target)
 
      int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
-    // aqua whip reduces opponents health by 20%
-    double healthReduction = target.getHealth() * 0.2;
-    target.takeDamage(healthReduction);
 }
 // ---------------- Hydrocanon ----------------
 HydroCannon::HydroCannon()
@@ -119,8 +114,17 @@ void HydroCannon::use(Character &user, Character &target)
         return;
     }
     // hydrocannon  reduces oppoents health and defence by 10%
+    
     double currHealth = target.getHealth();
+    if(currHealth<10)
+    target.setHealth(0);
+    else
     target.setHealth(currHealth*0.9);
+
+    
     double currentDef = target.getDefence();
+    if(currentDef<2.5)
+    target.setDefence(0);
+    else
     target.setDefence(currentDef*0.9);
 };

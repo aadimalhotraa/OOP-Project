@@ -15,9 +15,9 @@ ThunderBat::ThunderBat(int level): Light("Thunder Bat", level){
 
 void ThunderBat::levelUp(){
     this->level++;
-    this->health += 10;
-    this->attack += 2;
-    this-> defence += 2;
+    this->health = 150+(10*level);    
+    this->attack = 15 + (2 * level);
+    this->defence = 15 + (2 * level);
     if (this->critChance < 0.4) {
     this->critChance += 0.01;     //cap of 0.4
     }

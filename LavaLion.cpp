@@ -10,9 +10,9 @@ LavaLion::LavaLion(int level): Fire("Lava Lion", level){
 }
 void LavaLion::levelUp(){
     this->level++;
-    this->health += 3;
-    this->attack += 5;
-    this-> defence += 3;
+    this->health = 150+(10*level);    
+    this->attack = 25 + (5 * level);      
+    this->defence = 20 + (3 * level);
     this-> speed += 2;
 }
 
