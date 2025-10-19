@@ -2,7 +2,7 @@
 #define THUNDERBAT_H
 
 #include "Light.h"
-
+//derived class for thunder bat character which inherits from Light class
 class ThunderBat : public Light {
 public:
     // constructor

@@ -2,7 +2,7 @@
 #define SEASERPENT_H
 
 #include "Water.h"
-
+//derived class for sea serpent character which inherits from Water class
 class SeaSerpent : public Water {
 public:
     // constructor
