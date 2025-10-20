@@ -5,20 +5,25 @@
 #include <ctime>
 #include "Battle.h"
 #include "Character.h"
-
+// Main function to run the OOPMON game
+// Uses raylib for graphics and input handling
+// Player chooses a character and battles enemies, leveling up on victories
+// and retrying on defeats
 int main() {
+    // Seed random number generator
     std::srand((unsigned)std::time(nullptr));
-
+// Create battle manager
     Battle battle;
 
     // Choose your species once @ Lv1
     std::unique_ptr<Character> chosen(battle.chooseCharacter());
     if (!chosen) return 0;
-
+// Remember species name
     std::string mySpecies = chosen->getName();
     int playerLevel = 1;
-
+// Main game loop
     bool running = true;
+    //while loop to keep the game running
     while (running) {
         // Fresh player at current level
         std::unique_ptr<Character> player(battle.createByName(mySpecies, playerLevel));

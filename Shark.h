@@ -2,7 +2,7 @@
 #define SHARK_H
 
 #include "Water.h"
-
+//derived class for shark character which inherits from Water class
 class Shark : public Water {
 public:
     // constructor

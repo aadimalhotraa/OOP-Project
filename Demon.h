@@ -10,6 +10,7 @@ public:
 
     // member functions
     void levelUp() override;
+    //defined in Demon.cpp
     void setStats(int level) override;
 };
 #endif

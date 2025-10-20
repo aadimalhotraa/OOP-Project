@@ -2,7 +2,7 @@
 #define LAVALION_H
 
 #include "Fire.h"
-
+//derived class for lava lion character which inherits from Fire class
 class LavaLion : public Fire {
 public:
     // constructor

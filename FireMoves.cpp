@@ -3,11 +3,12 @@
 #include "Attribute.h" // for typeMultiplier()
 #include <cmath>
 #include <algorithm>
-
+//critical hit damage multiplier
 constexpr double CRIT_MULT = 1.5; // all crits deal 1.5x damage
-
+//random hit check based on chance
 static bool doesHit(double chance)
 {
+    // generate a random number between 0 and 100 and compare with chance
     if ((rand() % 101) <= (chance * 100))
         return true;
     else
@@ -20,25 +21,28 @@ FireBall::FireBall()
 
 bool FireBall::use(Character &user, Character &target)
 {
+    //check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
+        //print miss message
         std::cout << user.getName() << " missed " << getName() << "!" << std::endl;
         return false;
     }
-
+//calculate damage
     double atk = user.getAttack();
     double def = target.getDefence();
     double raw = atk + (atk * getDamage() / 100.0) - def;
-
+//ensure damage is not negative
     if (raw < 0)
         raw = 0;
-
+//apply type multiplier
     raw *= typeMultiplier(getType(), target.getType());
 
     // fireball does 1.5times damage to players health
     raw *= 1.5;
-
+//check for critical hit
     bool crit = doesHit(user.getCritChance());
+    //if critical hit, apply critical multiplier
     if (crit)
         raw *= CRIT_MULT;
 
@@ -52,6 +56,7 @@ FlameBurst::FlameBurst()
 
 bool FlameBurst::use(Character &user, Character &target)
 {
+    //check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
@@ -75,6 +80,7 @@ EmberStorm::EmberStorm()
 
 bool EmberStorm::use(Character &user, Character &target)
 {
+    // check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
@@ -93,20 +99,21 @@ InfernalSlash::InfernalSlash()
 
 bool InfernalSlash::use(Character &user, Character &target)
 {
+    //check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
-
+//calculate damage
     double atk = user.getAttack();
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
     if (raw < 0)
         raw = 0;
-
+//apply type multiplier
     raw *= typeMultiplier(getType(), target.getType());
-
+//check for critical hit
     bool crit = doesHit(user.getCritChance());
     // increases cirictical damaghe
     if (crit)
@@ -127,6 +134,7 @@ BlazeKick::BlazeKick()
 
 bool BlazeKick::use(Character &user, Character &target)
 {
+    // check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";

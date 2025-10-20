@@ -4,9 +4,11 @@
 #include "Ability.h"
 #include <cstdlib>
 #include <iostream>
-
+//dervied classes for dark attribute abilities
 class ShadowStrike : public Ability {
 public:
+//constructor implementation
+//it wll be the same for all the other ones which are given below 
     ShadowStrike();
     bool use(Character& user, Character& target) override;
 };

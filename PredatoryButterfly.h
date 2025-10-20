@@ -2,7 +2,7 @@
 #define PREDATORYBUTTERFLY_H
 
 #include "Grass.h"
-
+//derived class for predatory butterfly character which inherits from Grass class
 class PredatoryButterfly : public Grass {
 public:
     // constructor
