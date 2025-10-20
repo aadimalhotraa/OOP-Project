@@ -18,12 +18,12 @@ static bool doesHit(double chance)
 HolyShield::HolyShield()
     : Ability("Holy Shield", Attribute::LIGHT, 20, 0.8, "A bash with consecrated light.") {}
 
-void HolyShield::use(Character &user, Character &target)
+bool HolyShield::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     // increase defence by 10%
     double newDef = user.getDefence()*1.1;
@@ -31,18 +31,19 @@ void HolyShield::use(Character &user, Character &target)
     return;
     else
     user.setDefence(newDef);
+    return true;
 }
 
 // ---------------- Sun Ray ----------------
 SunRay::SunRay()
     : Ability("Sun Ray", Attribute::LIGHT, 30, 1.0, "A focused beam of sunlight.") {}
 
-void SunRay::use(Character &user, Character &target)
+bool SunRay::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     double atk = user.getAttack();
@@ -58,52 +59,55 @@ void SunRay::use(Character &user, Character &target)
 
     int dmg = (int)std::round(raw);
     target.takeDamage(dmg);
+    return true;
 }
 
 // ---------------- Radiant Beam ----------------
 RadiantBeam::RadiantBeam()
     : Ability("Radiant Beam", Attribute::LIGHT, 50, 0.8, "A powerful blast of radiant energy.") {}
 
-void RadiantBeam::use(Character &user, Character &target)
+bool RadiantBeam::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     //increases health by 25%
     double newHealth = user.getHealth()*1.15;
     if(newHealth >= (150 + (10 * user.getLevel())))
-        return;
+        return false;
     else
     user.setHealth(newHealth);
+    return true;
 }
 
 // ---------------- Purify ----------------
 Purify::Purify()
     : Ability("Purify", Attribute::LIGHT, 0, 1.0, "A cleansing light that purifies evil.") {}
 
-void Purify::use(Character &user, Character &target)
+bool Purify::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << "'s " << getName() << " failed.\n";
-        return;
+        return false;
     }
 
     // damages target by 30% of their current health
     double maxHealth = target.getHealth();
     target.setHealth(maxHealth*0.70);
+    return true;
 }
 // ---------------- ElectricWings ----------------
 ElectricWings::ElectricWings()
     : Ability("Electric Wings", Attribute::LIGHT, 15, 1.0, "Strikes with electrified wings.") {}
-void ElectricWings::use(Character &user, Character &target)
+bool ElectricWings::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     double atk = user.getAttack();
     double def = target.getDefence();
@@ -116,4 +120,5 @@ void ElectricWings::use(Character &user, Character &target)
         raw *= CRIT_MULT;
     int dmg = (int)std::round(raw);
     target.takeDamage(dmg);
+    return true;
 }

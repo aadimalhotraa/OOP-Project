@@ -15,12 +15,13 @@ const std::vector<Ability*>& Dark::getAbilities() const {
 }
 
 // Access the Ability* at `abilities[index]` and call its `use()` function.
-void Dark::useAbility(int index, Character& target) {
+bool Dark::useAbility(int index, Character& target) {
     if (index < 0 || index >= static_cast<int>(abilities.size())) {
         std::cout << this->getName() << " tried to use an invalid move index.\n";
-        return;
+        return false;
     }
-    abilities[index]->use(*this, target);
+    bool result=abilities[index]->use(*this, target);
+    return result;
 }
 
 Dark::~Dark() {

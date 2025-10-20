@@ -18,12 +18,12 @@ static bool doesHit(double chance)
 FireBall::FireBall()
     : Ability("Fire Ball", Attribute::FIRE, 40, 0.95, "A blazing fireball.") {}
 
-void FireBall::use(Character &user, Character &target)
+bool FireBall::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!" << std::endl;
-        return;
+        return false;
     }
 
     double atk = user.getAttack();
@@ -43,18 +43,19 @@ void FireBall::use(Character &user, Character &target)
         raw *= CRIT_MULT;
 
     target.takeDamage(raw);
+    return true;
 
 }
 // ---------------- Flame Burst ----------------
 FlameBurst::FlameBurst()
     : Ability("Flame Burst", Attribute::FIRE, 80, 0.9, "A powerful explosion of flame.") {}
 
-void FlameBurst::use(Character &user, Character &target)
+bool FlameBurst::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
 
@@ -65,22 +66,24 @@ void FlameBurst::use(Character &user, Character &target)
         double currHealth = target.getHealth() * 0.2;
         target.setHealth(currHealth*0.8);
     }
+    return true;
 }
 
 // ---------------- Ember Storm ----------------
 EmberStorm::EmberStorm()
     : Ability("Ember Storm", Attribute::FIRE, 70, 0.8, "A storm of burning embers.") {}
 
-void EmberStorm::use(Character &user, Character &target)
+bool EmberStorm::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     // reduce oponents defence by 10%
     double currentDef = target.getDefence();
     target.setDefence( currentDef*0.90);
+    return true;
 
 }
 
@@ -88,12 +91,12 @@ void EmberStorm::use(Character &user, Character &target)
 InfernalSlash::InfernalSlash()
     : Ability("Infernal Slash", Attribute::FIRE, 40, 0.95, "A flaming blade attack.") {}
 
-void InfernalSlash::use(Character &user, Character &target)
+bool InfernalSlash::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     double atk = user.getAttack();
@@ -113,6 +116,7 @@ void InfernalSlash::use(Character &user, Character &target)
     }
 
     target.takeDamage(raw);
+    return true;
 
 }
 
@@ -121,16 +125,17 @@ void InfernalSlash::use(Character &user, Character &target)
 BlazeKick::BlazeKick()
     : Ability("Blaze Kick", Attribute::FIRE, 20, 1, "A fiery kick attack.") {}
 
-void BlazeKick::use(Character &user, Character &target)
+bool BlazeKick::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     // blaze kick reduces opopnets damage by 25%
     double currentAtk = target.getAttack();
     target.setAttack(currentAtk*0.75);
+    return true;
 
 }

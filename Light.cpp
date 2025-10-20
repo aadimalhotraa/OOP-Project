@@ -16,12 +16,14 @@ const std::vector<Ability*>& Light::getAbilities() const {
 }
 
 // Access the Ability* at `abilities[index]` and call its `use()` function.
-void Light::useAbility(int index, Character& target) {
+bool Light::useAbility(int index, Character& target) {
     if (index < 0 || index >= static_cast<int>(abilities.size())) {
         std::cout << this->getName() << " tried to use an invalid move index.\n";
         return;
     }
-    abilities[index]->use(*this, target);
+    
+    bool result=abilities[index]->use(*this, target);
+    return result;
 }
 
 Light::~Light() {

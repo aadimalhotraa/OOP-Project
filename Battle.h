@@ -21,7 +21,7 @@ class Battle{
     Character* chooseCharacter(Attribute ch);
     Character* chooseCharacter();
     Character* chooseEnemy(int level);
-    void executeEnemyMove(Character* ch, Character* atk);
+    bool executeEnemyMove(Character* ch, Character* atk);
     void executeOwnMove(Character* ch, Character* atk);
     void createSuccessInterface(Character* ch, Character* atk);
     void createFailureInterface(Character* ch, Character* atk);

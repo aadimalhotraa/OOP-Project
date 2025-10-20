@@ -15,7 +15,7 @@ public:
     Dark(std::string name, int level);
 
     const std::vector<Ability*>& getAbilities() const;
-    void useAbility(int index, Character& target);
+    bool useAbility(int index, Character& target);
 
     virtual ~Dark();
 };

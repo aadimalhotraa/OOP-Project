@@ -45,7 +45,7 @@ class Character{
         virtual void setStats(int level) = 0;
         virtual void levelUp() = 0;
         virtual const std::vector<Ability*>& getAbilities() const = 0;
-        virtual void useAbility(int index, Character& target) = 0;
+        virtual bool useAbility(int index, Character& target) = 0;
         // Vitrual deconstuctor
         virtual ~Character();
 };

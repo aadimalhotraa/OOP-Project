@@ -16,12 +16,13 @@ const std::vector<Ability*>& Fire::getAbilities() const {
 }
 
 // Access the Ability* at `abilities[index]` and call its `use()` function.
-void Fire::useAbility(int index, Character& target) {
+bool Fire::useAbility(int index, Character& target) {
     if (index < 0 || index >= static_cast<int>(abilities.size())) {
         std::cout << this->getName() << " tried to use an invalid move index.\n";
         return;
     }
-    abilities[index]->use(*this, target);
+    bool result=abilities[index]->use(*this, target);
+    return result;
 }
 
 Fire::~Fire() {

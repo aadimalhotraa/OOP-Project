@@ -16,10 +16,10 @@ static bool doesHit(double chance) {
 VineWhip::VineWhip()
     : Ability("Vine Whip", Attribute::GRASS, 40, 1.0, "A quick lash with vines.") {}
 
-void VineWhip::use(Character& user, Character& target) {
+bool VineWhip::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     double atk = user.getAttack();
     double def = target.getDefence();
@@ -32,16 +32,17 @@ void VineWhip::use(Character& user, Character& target) {
 
     int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
+    return true;
 }
 
 // ---------------- Root Bind ----------------
 RootBind::RootBind()
     : Ability("Root Bind", Attribute::GRASS, 70, 0.5, "Strong vines wrap around the foe.") {}
 
-void RootBind::use(Character& user, Character& target) {
+bool RootBind::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     double atk = user.getAttack();
     double def = target.getDefence();
@@ -59,16 +60,17 @@ void RootBind::use(Character& user, Character& target) {
     std::cout << user.getName() << " trapped " << target.getName()
               << " with " << getName() << " for " << dmg << " damage"
               << (crit ? " (CRIT!)" : "") << "!\n";
+    return true;
 }
 
 // ---------------- Leaf Blade ----------------
 LeafBlade::LeafBlade()
     : Ability("Leaf Blade", Attribute::GRASS, 30, 1.0, "A swift slash of leaves.") {}
 
-void LeafBlade::use(Character& user, Character& target) {
+bool LeafBlade::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     double atk = user.getAttack();
     double def = target.getDefence();
@@ -87,31 +89,34 @@ void LeafBlade::use(Character& user, Character& target) {
      //this attack redcues opponent speed  by 15 percent 
     double currentSpeed = target.getSpeed();
     target.setSpeed(currentSpeed*0.85);
+    return true;
 }
 
 // ---------------- Spore ----------------
 Spore::Spore()
     : Ability("Spore", Attribute::GRASS, 0, 0.7, "Releases spores that could weaken the enemy.") {}
 
-void Spore::use(Character& user, Character& target) {
+bool Spore::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     //redcues oppotnets defense to 0
     target.setDefence(0);
+    return true;
     
 }
 
 // ---------------- SeedBullet ----------------
 SeedBullet::SeedBullet()
     : Ability("Seed Bullet", Attribute::GRASS, 20, 1.0, "A fast-moving seed attack.") {}
-void SeedBullet::use(Character& user, Character& target) {
+bool SeedBullet::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }       
     // redcues oppoenents health by 30%
     double currHealth = target.getHealth();
     target.setHealth(currHealth* 0.70);
+    return true;
 }

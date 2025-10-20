@@ -103,13 +103,14 @@ Character* Battle::chooseEnemy(int level){
 void Battle::setEnemy(){
     this->enemy=chooseEnemy(own->getLevel());
 }
-void Battle::executeEnemyMove(Character *ch, Character *atk){
+bool Battle::executeEnemyMove(Character *ch, Character *atk){
     int enemyAbi;
     std::vector<Ability*> enemy;
     enemy=atk->getAbilities();
     enemyAbi=enemy.size();
     int ranEnemy= rand()%enemyAbi;
-    atk->useAbility(ranEnemy, *ch);
+    bool enemyResult=atk->useAbility(ranEnemy, *ch);
+    return enemyResult;
 }
 void Battle::createSuccessInterface(Character* ch, Character* atk){
     const int screenWidth = 800; 
@@ -191,19 +192,57 @@ void Battle::executeBattle(Character* ch, Character* atk){
     int ownAbi;
     own=ch->getAbilities();
     ownAbi=own.size();
+    bool ownResult, enemyResult;
+    std::string ownMessage, enemyMessage;
     while (!WindowShouldClose()) 
     { 
         if (IsKeyPressed(KEY_ONE)){
-            ch->useAbility(0,*atk);
-            executeEnemyMove(ch, atk);
+            ownResult=ch->useAbility(0,*atk);
+            enemyResult=executeEnemyMove(ch, atk);
+            if(ownResult){
+                ownMessage= ch->getName()+" attacked "+atk->getName();
+            }
+            else{
+                 enemyMessage= ch->getName()+" missed";
+            }
+            if(enemyResult){
+                 ownMessage= atk->getName()+" attacked "+ ch->getName();
+            }
+            else{
+                 enemyMessage= atk->getName()+" missed";
+            }
         }
         if (IsKeyPressed(KEY_TWO)){
-            ch->useAbility(1,*atk);
-            executeEnemyMove(ch, atk);
+            ownResult=ch->useAbility(1,*atk);
+            enemyResult=executeEnemyMove(ch, atk);
+            if(ownResult){
+                 ownMessage= ch->getName()+" attacked "+atk->getName();
+            }
+            else{
+                enemyMessage= ch->getName()+" missed";
+            }
+            if(enemyResult){
+                 ownMessage= atk->getName()+" attacked "+ ch->getName();
+            }
+            else{
+                 enemyMessage= atk->getName()+" missed";
+            }
         }
         if (IsKeyPressed(KEY_THREE)){
-            ch->useAbility(2,*atk);
-            executeEnemyMove(ch, atk);
+            ownResult=ch->useAbility(2,*atk);
+            enemyResult=executeEnemyMove(ch, atk);
+            if(ownResult){
+                 ownMessage= ch->getName()+" attacked "+atk->getName();
+            }
+            else{
+                 enemyMessage= ch->getName()+" missed";
+            }
+            if(enemyResult){
+                 ownMessage= atk->getName()+" attacked "+ ch->getName();
+            }
+            else{
+                 enemyMessage= atk->getName()+" missed";
+            }
         }
         float ownDamageRatio = ch->getAttack() / ownDamage;
         float enemyDamageRatio = atk->getAttack() / enemyDamage;
@@ -283,6 +322,9 @@ void Battle::executeBattle(Character* ch, Character* atk){
             std::string abiName=std::to_string(i + 1) + ". " +own[i]->getName();
             DrawText(abiName.c_str(), 50, 320+(30*i), 25, BLUE);  
         }
+        
+        if (!ownMessage.empty())
+        DrawText(ownMessage.c_str(), 50, 400, 25, YELLOW);
         EndDrawing(); 
 
         if(ch->getHealth()<=0){

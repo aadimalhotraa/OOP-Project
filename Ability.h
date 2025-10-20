@@ -23,7 +23,7 @@ public:
     double       getHitChance();
     std::string  getDescription();
 
-    virtual void use(Character& user, Character& target) = 0;
+    virtual bool use(Character& user, Character& target) = 0;
     virtual ~Ability();
 
 };

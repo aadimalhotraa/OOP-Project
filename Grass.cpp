@@ -14,12 +14,13 @@ const std::vector<Ability*>& Grass::getAbilities() const {
     return abilities;
 }
 
-void Grass::useAbility(int index, Character& target) {
+bool Grass::useAbility(int index, Character& target) {
     if (index < 0 || index >= static_cast<int>(abilities.size())) {
         std::cout << getName() << " tried to use an invalid move index.\n";
         return;
     }
-    abilities[index]->use(*this, target);
+    bool result=abilities[index]->use(*this, target);
+    return result;
 }
 
 Grass::~Grass() {

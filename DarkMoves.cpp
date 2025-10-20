@@ -16,10 +16,10 @@ static bool doesHit(double chance) {
 ShadowStrike::ShadowStrike()
     : Ability("Shadow strike", Attribute::DARK, 40, 1.0, "A precise strike from the shadows.") {}
 
-void ShadowStrike::use(Character& user, Character& target) {
+bool ShadowStrike::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     
@@ -27,16 +27,17 @@ void ShadowStrike::use(Character& user, Character& target) {
     double currentDef = target.getDefence();
     double defReduction = currentDef * 0.5;
     target.setDefence(currentDef - defReduction);
+    return true;
 }
 
 // ---------------- Void Pulse ----------------
 VoidPulse::VoidPulse()
     : Ability("Void pulse", Attribute::DARK, 80, 0.7, "A heavy pulse of void energy.") {}
 
-void VoidPulse::use(Character& user, Character& target) {
+bool VoidPulse::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return true;
     }
     double atk = user.getAttack();
     double def = target.getDefence();
@@ -55,16 +56,17 @@ void VoidPulse::use(Character& user, Character& target) {
      //this attack redcues opponent speed  by 15 percent 
     double currentSpeed = target.getSpeed();
     target.setSpeed(currentSpeed*0.85);
+    return true;
 }
 
 // ---------------- Night Claw ----------------
 NightClaw::NightClaw()
     : Ability("Night claw", Attribute::DARK, 30, 0.8, "A swift tearing slash.") {}
 
-void NightClaw::use(Character& user, Character& target) {
+bool NightClaw::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     //redcues oppoentns damage by 10 percent and increases characterss damage by that ammount
@@ -72,34 +74,36 @@ void NightClaw::use(Character& user, Character& target) {
     double atkReduction = currentAtk * 0.1;
     target.setAttack(currentAtk - atkReduction);
     user.setAttack(user.getAttack() + atkReduction);
+    return true;
 }
 
 // ---------------- Sneak Attack ----------------
 SneakAttack::SneakAttack()
     : Ability("Sneak attack", Attribute::DARK, 40, 1.0, "A well-timed ambush.") {}
 
-void SneakAttack::use(Character& user, Character& target) {
+bool SneakAttack::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     //redcues oppoents damage to 0
     target.setAttack(0);
+    return true;
 
 }
 // ---------------- Sucker Punch ----------------
 SuckerPunch::SuckerPunch()
     : Ability("Sucker Punch", Attribute::DARK, 19, 1.0, "A quick and unexpected punch.") {} 
-void SuckerPunch::use(Character& user, Character& target) {
+bool SuckerPunch::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }       
    
     // sucker punch increases users speed by 10%
     user.setSpeed(user.getSpeed() + 10);
-    
+    return true; 
 }
 
 

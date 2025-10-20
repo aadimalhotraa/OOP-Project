@@ -18,12 +18,12 @@ static bool doesHit(double chance)
 WaterSlide::WaterSlide()
     : Ability("Water Slide", Attribute::WATER, 40, 1.0, "A fast sliding water attack.") {}
 
-void WaterSlide::use(Character &user, Character &target)
+bool WaterSlide::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     double atk = user.getAttack();
@@ -39,54 +39,58 @@ void WaterSlide::use(Character &user, Character &target)
 
     int dmg = (int)std::round(raw);
     target.takeDamage(dmg);
+    return true;
 }
 
 // ---------------- Puddle ----------------
 Puddle::Puddle()
     : Ability("Puddle", Attribute::WATER, 30, 0.7, "A sloppy splash of water.") {}
 
-void Puddle::use(Character &user, Character &target)
+bool Puddle::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
     // puddle reeduces opoents defence by 15%
     double currentDefence = target.getDefence();
     target.setSpeed(currentDefence*0.85);
+    return true;
 }
 
 // ---------------- Tiddle Wave ----------------
 TiddleWave::TiddleWave()
     : Ability("Tiddle Wave", Attribute::WATER, 40, 0.6, "A small but strong tidal wave.") {}
 
-void TiddleWave::use(Character &user, Character &target)
+bool TiddleWave::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return false;
     }
 
     // self heals by 25 percent of current health
     double newHealth = user.getHealth()*1.25;
     if(newHealth >= (150 + (10 * user.getLevel())))
-        return;
-    else
+        return false;
+    else{
     user.setHealth(newHealth);
+    return true;
+    }
 }
 
 // ---------------- Aqua Whip ----------------
 AquaWhip::AquaWhip()
     : Ability("Aqua Whip", Attribute::WATER, 90, 1.0, "A furious lash of water.") {}
 
-void AquaWhip::use(Character &user, Character &target)
+bool AquaWhip::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return true;
     }
 
     double atk = user.getAttack();
@@ -102,16 +106,17 @@ void AquaWhip::use(Character &user, Character &target)
 
      int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
+    return true;
 }
 // ---------------- Hydrocanon ----------------
 HydroCannon::HydroCannon()
     : Ability("Hydrocannon", Attribute::WATER, 25, 1.0, "A massive cannon of water.") {}
-void HydroCannon::use(Character &user, Character &target)
+bool HydroCannon::use(Character &user, Character &target)
 {
     if (!doesHit(getHitChance()))
     {
         std::cout << user.getName() << " missed " << getName() << "!\n";
-        return;
+        return true;
     }
     // hydrocannon  reduces oppoents health and defence by 10%
     
@@ -127,4 +132,5 @@ void HydroCannon::use(Character &user, Character &target)
     target.setDefence(0);
     else
     target.setDefence(currentDef*0.9);
+    return true;
 };

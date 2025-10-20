@@ -8,30 +8,30 @@
 class FlameBurst : public Ability {
 public:
     FlameBurst();
-    void use(Character& user, Character& target) override;
+    bool use(Character& user, Character& target) override;
 };
 
 class FireBall : public Ability {
 public:
     FireBall();
-    void use(Character& user, Character& target) override;
+    bool use(Character& user, Character& target) override;
 };
 
 class EmberStorm : public Ability {
 public:
     EmberStorm();
-    void use(Character& user, Character& target) override;
+    bool use(Character& user, Character& target) override;
 };
 
 class InfernalSlash : public Ability {
 public:
     InfernalSlash();
-    void use(Character& user, Character& target) override;
+    bool use(Character& user, Character& target) override;
 };
 class BlazeKick : public Ability {
     public:
         BlazeKick();
-        void use(Character& user, Character& target) override;
+        bool use(Character& user, Character& target) override;
     };
 
 #endif
