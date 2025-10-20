@@ -190,7 +190,7 @@ void Battle::executeBattle(Character* ch, Character* atk){
     SetTargetFPS(60); 
     srand(time(NULL)); 
     //helps in displaying name on top
-    std::string message1= ch->getName()+" (You)"; 
+    std::string message1= ch->getName()+" (You) "+"Level: "+ std::to_string(ch->getLevel()); 
     std::string message2=atk->getName(); 
     //getting the max for each to calculate ration
     //initialising variables
