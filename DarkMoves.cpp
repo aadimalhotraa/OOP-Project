@@ -64,10 +64,13 @@ bool NightClaw::use(Character& user, Character& target) {
         return false;
     }
     //redcues oppoentns damage by 10 percent and increases characterss damage by that ammount
-    double currentAtk = target.getAttack();
-    double atkReduction = currentAtk * 0.1;
-    target.setAttack(currentAtk - atkReduction);
-    user.setAttack(user.getAttack() + atkReduction);
+    double defReduction = target.getDefence() * 0.1;
+    if(defReduction<1.5)
+    target.setDefence(0);
+    else
+    target.setDefence(defReduction);
+
+    return true;
     return true;
 }
 
