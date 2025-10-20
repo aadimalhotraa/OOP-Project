@@ -32,7 +32,7 @@ bool HolyShield::use(Character &user, Character &target)
     // increase defence by 10%
     double newDef = user.getDefence()*1.1;
     if(newDef >= (15+ (2 * user.getLevel())))
-    return;
+    return false;
     else
     user.setDefence(newDef);
     return true;
@@ -41,14 +41,13 @@ bool HolyShield::use(Character &user, Character &target)
 // ---------------- Sun Ray ----------------
 //constructor implementation
 SunRay::SunRay()
-    : Ability("Sun Ray", Attribute::LIGHT, 30, 1.0, "A focused beam of sunlight.") {}
+    : Ability("Sun Ray", Attribute::LIGHT, 30, 0.8, "A focused beam of sunlight.") {}
 
 bool SunRay::use(Character &user, Character &target)
 {
     //check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
 //calculate damage using users attack and targets defence
@@ -56,7 +55,7 @@ bool SunRay::use(Character &user, Character &target)
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
     if (raw < 0)
-        raw = 0;
+        raw = 10;
 //apply type multiplier
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());
@@ -105,7 +104,10 @@ bool Purify::use(Character &user, Character &target)
 
     // damages target by 30% of their current health
     double maxHealth = target.getHealth();
-    target.setHealth(maxHealth*0.70);
+    if(maxHealth<20)
+    target.setHealth(0);
+    else
+    target.setHealth(0.70*maxHealth);
     return true;
 }
 // ---------------- ElectricWings ----------------
@@ -124,9 +126,8 @@ bool ElectricWings::use(Character &user, Character &target)
     double atk = user.getAttack();
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
-    //if raw damage is less than 0 set it to 0
     if (raw < 0)
-        raw = 0;
+        raw = 10;
         //point multiplier based on type effectiveness
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());

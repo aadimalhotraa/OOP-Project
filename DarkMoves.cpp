@@ -18,13 +18,16 @@ ShadowStrike::ShadowStrike()
 
 bool ShadowStrike::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
-    //shadow strike redces oponents defence by 50 percent
-    double currentDef = target.getDefence();
-    double defReduction = currentDef * 0.5;
-    target.setDefence(currentDef - defReduction);
+    //shadow strike reduces oponents defence by 50 percent
+   
+    double defReduction = target.getDefence() * 0.5;
+    if(defReduction<1.5)
+    target.setDefence(0);
+    else
+    target.setDefence(defReduction);
+
     return true;
 }
 
@@ -35,26 +38,20 @@ VoidPulse::VoidPulse()
 
 bool VoidPulse::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
-        return true;
+        return false;
     }
     //calculate damage
     double atk = user.getAttack();
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
-    if (raw < 0) raw = 0;
+    if (raw < 0) 
+    raw = 10;
 //apply type multiplier and critical hit
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());
     if (crit) raw *= CRIT_MULT;
     int dmg = static_cast<int>(std::round(raw));
     target.takeDamage(dmg);
-    //this attack redcues opponent health  by 15 percent 
-    double maxHealth = target.getHealth();
-    target.setHealth(0.85*maxHealth);
-     //this attack redcues opponent speed  by 15 percent 
-    double currentSpeed = target.getSpeed();
-    target.setSpeed(currentSpeed*0.85);
     return true;
 }
 
@@ -64,7 +61,6 @@ NightClaw::NightClaw()
 
 bool NightClaw::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
     //redcues oppoentns damage by 10 percent and increases characterss damage by that ammount
@@ -81,12 +77,11 @@ SneakAttack::SneakAttack()
 
 bool SneakAttack::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
 
-    //redcues oppoents damage to 0
-    target.setAttack(0);
+    //redcues opponents defence to 0
+    target.setDefence(0);
     return true;
 
 }
@@ -95,13 +90,22 @@ SuckerPunch::SuckerPunch()
     : Ability("Sucker Punch", Attribute::DARK, 19, 1.0, "A quick and unexpected punch.") {} 
 bool SuckerPunch::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
-    }       
+    }
+     //calculate damage
+     double atk = user.getAttack();
+     double def = target.getDefence();
+     double raw = atk + (getDamage() / 100.0) * atk - def;
+     if (raw < 0) 
+     raw = 10;
+ //apply type multiplier and critical hit
+     raw *= typeMultiplier(getType(), target.getType());
+     bool crit = doesHit(user.getCritChance());
+     if (crit) raw *= CRIT_MULT;
+     int dmg = static_cast<int>(std::round(raw));
+     target.takeDamage(dmg);       
    
-    // sucker punch increases users speed by 10%
-    user.setSpeed(user.getSpeed() + 10);
-    return true; 
+    
 }
 
 

@@ -21,7 +21,7 @@ const std::vector<Ability*>& Grass::getAbilities() const {
 bool Grass::useAbility(int index, Character& target) {
     if (index < 0 || index >= static_cast<int>(abilities.size())) {
         std::cout << getName() << " tried to use an invalid move index.\n";
-        return;
+        return false;
     }
     bool result=abilities[index]->use(*this, target);
     return result;

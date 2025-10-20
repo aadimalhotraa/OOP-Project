@@ -22,7 +22,7 @@ const std::vector<Ability*>& Water::getAbilities() const {
 bool Water::useAbility(int index, Character& target) {
     if (index < 0 || index >= static_cast<int>(abilities.size())) {
         std::cout << this->getName() << " tried to use an invalid move index.\n";
-        return;
+        return false;
     }
     bool result=abilities[index]->use(*this, target);
     return result;

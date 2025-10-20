@@ -20,21 +20,20 @@ VineWhip::VineWhip()
 
 bool VineWhip::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
     //calculate damage
     double atk = user.getAttack();
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
-    if (raw < 0) raw = 0;
+    if (raw < 0) 
+    raw = 10;
 //apply type multiplier
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());
     if (crit) raw *= CRIT_MULT;
 //apply damage to target
-    int dmg = static_cast<int>(std::round(raw));
-    target.takeDamage(dmg);
+    target.takeDamage(raw);
     return true;
 }
 
@@ -45,14 +44,14 @@ RootBind::RootBind()
 
 bool RootBind::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
     //calculate damage
     double atk = user.getAttack();
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
-    if (raw < 0) raw = 0;
+    if (raw < 0) 
+    raw = 10;
 //apply type multiplier
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());
@@ -75,35 +74,23 @@ LeafBlade::LeafBlade()
 
 bool LeafBlade::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
+        
         return false;
     }
-    //calculate damage
-    double atk = user.getAttack();
-    double def = target.getDefence();
-    //raw damage calculation
-    double raw = atk + (getDamage() / 100.0) * atk - def;
-    if (raw < 0) raw = 0;
-//apply type multiplier
-    raw *= typeMultiplier(getType(), target.getType());
-    bool crit = doesHit(user.getCritChance());
-    if (crit) raw *= CRIT_MULT;
-//apply damage to target
-    int dmg = static_cast<int>(std::round(raw));
-    target.takeDamage(dmg);
+   
     //this attack redcues opponent health  by 15 percent 
     double maxHealth = target.getHealth();
+    if(maxHealth<20)
+    target.setHealth(0);
+    else
     target.setHealth(0.85*maxHealth);
-     //this attack redcues opponent speed  by 15 percent 
-    double currentSpeed = target.getSpeed();
-    target.setSpeed(currentSpeed*0.85);
     return true;
 }
 
 // ---------------- Spore ----------------
 //constructor implementation of spore ability
 Spore::Spore()
-    : Ability("Spore", Attribute::GRASS, 0, 0.7, "Releases spores that could weaken the enemy.") {}
+    : Ability("Spore", Attribute::GRASS, 0, 0.5, "Releases spores that could weaken the enemy.") {}
 
 bool Spore::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -119,14 +106,17 @@ bool Spore::use(Character& user, Character& target) {
 // ---------------- SeedBullet ----------------
 //constructor implementation of seed bullet ability
 SeedBullet::SeedBullet()
-    : Ability("Seed Bullet", Attribute::GRASS, 20, 1.0, "A fast-moving seed attack.") {}
+    : Ability("Seed Bullet", Attribute::GRASS, 20, 0.6, "A fast-moving seed attack.") {}
 bool SeedBullet::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }       
     // redcues oppoenents health by 30%
-    double currHealth = target.getHealth();
-    target.setHealth(currHealth* 0.70);
+    double maxHealth = target.getHealth();
+    if(maxHealth<20)
+    target.setHealth(0);
+    else
+    target.setHealth(0.70*maxHealth);
     return true;
 }

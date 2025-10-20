@@ -17,15 +17,13 @@ static bool doesHit(double chance)
 
 // ---------------- Fire Ball ----------------
 FireBall::FireBall()
-    : Ability("Fire Ball", Attribute::FIRE, 40, 0.95, "A blazing fireball.") {}
+    : Ability("Fire Ball", Attribute::FIRE, 40, 0.60, "A blazing fireball.") {}
 
 bool FireBall::use(Character &user, Character &target)
 {
     //check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
-        //print miss message
-        std::cout << user.getName() << " missed " << getName() << "!" << std::endl;
         return false;
     }
 //calculate damage
@@ -34,7 +32,7 @@ bool FireBall::use(Character &user, Character &target)
     double raw = atk + (atk * getDamage() / 100.0) - def;
 //ensure damage is not negative
     if (raw < 0)
-        raw = 0;
+        raw = 10;
 //apply type multiplier
     raw *= typeMultiplier(getType(), target.getType());
 
@@ -65,10 +63,10 @@ bool FlameBurst::use(Character &user, Character &target)
 
 
     // flame burst reduces opopnents health by 20%
-    if(target.getHealth()<10)
+    if(target.getHealth()<17)
         target.setHealth(0);
     else{
-        double currHealth = target.getHealth() * 0.2;
+        double currHealth = target.getHealth();
         target.setHealth(currHealth*0.8);
     }
     return true;
@@ -83,12 +81,15 @@ bool EmberStorm::use(Character &user, Character &target)
     // check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
     // reduce oponents defence by 10%
-    double currentDef = target.getDefence();
-    target.setDefence( currentDef*0.90);
+    if(target.getDefence()<2)
+        target.setDefence(0);
+    else{
+        double currDefence = target.getDefence();
+        target.setHealth(currDefence*0.8);
+    }
     return true;
 
 }
@@ -102,7 +103,6 @@ bool InfernalSlash::use(Character &user, Character &target)
     //check if the ability hits based on hit chance
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
 //calculate damage
@@ -110,7 +110,7 @@ bool InfernalSlash::use(Character &user, Character &target)
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
     if (raw < 0)
-        raw = 0;
+        raw = 10;
 //apply type multiplier
     raw *= typeMultiplier(getType(), target.getType());
 //check for critical hit
@@ -143,6 +143,9 @@ bool BlazeKick::use(Character &user, Character &target)
 
     // blaze kick reduces opopnets damage by 25%
     double currentAtk = target.getAttack();
+    if(currentAtk<6)
+    target.setAttack(0);
+    else
     target.setAttack(currentAtk*0.75);
     return true;
 

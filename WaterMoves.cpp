@@ -17,14 +17,13 @@ static bool doesHit(double chance)
 // ---------------- Water Slide ----------------
 // Constructor
 WaterSlide::WaterSlide()
-    : Ability("Water Slide", Attribute::WATER, 40, 1.0, "A fast sliding water attack.") {}
+    : Ability("Water Slide", Attribute::WATER, 40, 0.8, "A fast sliding water attack.") {}
 
 bool WaterSlide::use(Character &user, Character &target)
 {
     // Check if the attack hits
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
 // Calculate damage
@@ -32,7 +31,7 @@ bool WaterSlide::use(Character &user, Character &target)
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
     if (raw < 0)
-        raw = 0;
+        raw = 10;
 // Apply type multiplier and check for critical hit
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());
@@ -54,12 +53,16 @@ bool Puddle::use(Character &user, Character &target)
     // Check if the attack hits
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
     // puddle reeduces opoents defence by 15%
     double currentDefence = target.getDefence();
-    target.setSpeed(currentDefence*0.85);
+    if(currentDefence<3)
+    target.setDefence(0);
+    else
+    target.setDefence(0.70*currentDefence);
+    
+
     return true;
 }
 
@@ -73,7 +76,6 @@ bool TiddleWave::use(Character &user, Character &target)
     // Check if the attack hits
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return false;
     }
 
@@ -90,14 +92,13 @@ bool TiddleWave::use(Character &user, Character &target)
 // ---------------- Aqua Whip ----------------
 // Constructor
 AquaWhip::AquaWhip()
-    : Ability("Aqua Whip", Attribute::WATER, 90, 1.0, "A furious lash of water.") {}
+    : Ability("Aqua Whip", Attribute::WATER, 90, 0.7, "A furious lash of water.") {}
 
 bool AquaWhip::use(Character &user, Character &target)
 {
     // Check if the attack hits
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return true;
     }
 // Calculate damage
@@ -105,7 +106,7 @@ bool AquaWhip::use(Character &user, Character &target)
     double def = target.getDefence();
     double raw = atk + (getDamage() / 100.0) * atk - def;
     if (raw < 0)
-        raw = 0;
+        raw =10;
 // Apply type multiplier and check for critical hit
     raw *= typeMultiplier(getType(), target.getType());
     bool crit = doesHit(user.getCritChance());
@@ -125,19 +126,18 @@ bool HydroCannon::use(Character &user, Character &target)
     // Check if the attack hits
     if (!doesHit(getHitChance()))
     {
-        std::cout << user.getName() << " missed " << getName() << "!\n";
         return true;
     }
     // hydrocannon  reduces oppoents health and defence by 10%
     double currHealth = target.getHealth();
-    if(currHealth<10)
+    if(currHealth<20)
     target.setHealth(0);
     else
     target.setHealth(currHealth*0.9);
 
     // reducing defence
     double currentDef = target.getDefence();
-    if(currentDef<2.5)
+    if(currentDef<3)
     target.setDefence(0);
     else
     target.setDefence(currentDef*0.9);

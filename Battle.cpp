@@ -123,7 +123,7 @@ bool Battle::executeEnemyMove(Character *ch, Character *atk){
     bool enemyResult=atk->useAbility(ranEnemy, *ch);
     return enemyResult;
 }
-//unction to show vicotruy interface
+//function to show victory interface
 void Battle::createSuccessInterface(Character* ch, Character* atk){
     const int screenWidth = 800; 
     const int screenHeight = 450; 
@@ -224,13 +224,13 @@ void Battle::executeBattle(Character* ch, Character* atk){
             if(ownResult){
                 ownMessage= ch->getName()+" attacked "+atk->getName();
             }
-            else{
-                 enemyMessage= ch->getName()+" missed";
+            if(!ownResult){
+                 ownMessage= ch->getName()+" missed";
             }
             if(enemyResult){
-                 ownMessage= atk->getName()+" attacked "+ ch->getName();
+                 enemyMessage= atk->getName()+" attacked "+ ch->getName();
             }
-            else{
+            if(!enemyResult){
                  enemyMessage= atk->getName()+" missed";
             }
         }
@@ -241,10 +241,10 @@ void Battle::executeBattle(Character* ch, Character* atk){
                  ownMessage= ch->getName()+" attacked "+atk->getName();
             }
             else{
-                enemyMessage= ch->getName()+" missed";
+                ownMessage= ch->getName()+" missed";
             }
             if(enemyResult){
-                 ownMessage= atk->getName()+" attacked "+ ch->getName();
+                 enemyMessage= atk->getName()+" attacked "+ ch->getName();
             }
             else{
                  enemyMessage= atk->getName()+" missed";
@@ -258,10 +258,10 @@ void Battle::executeBattle(Character* ch, Character* atk){
                  ownMessage= ch->getName()+" attacked "+atk->getName();
             }
             else{
-                 enemyMessage= ch->getName()+" missed";
+                 ownMessage= ch->getName()+" missed";
             }
             if(enemyResult){
-                 ownMessage= atk->getName()+" attacked "+ ch->getName();
+                 enemyMessage= atk->getName()+" attacked "+ ch->getName();
             }
             else{
                  enemyMessage= atk->getName()+" missed";
@@ -352,8 +352,11 @@ void Battle::executeBattle(Character* ch, Character* atk){
             DrawText(abiName.c_str(), 50, 320+(30*i), 25, BLUE);  
         }
         
+        //successful and unsuccessful attack messages
         if (!ownMessage.empty())
-        DrawText(ownMessage.c_str(), 50, 400, 25, YELLOW);
+        DrawText(ownMessage.c_str(), 450, 350, 15, YELLOW);
+        DrawText(enemyMessage.c_str(), 450, 400, 15, YELLOW);
+
         EndDrawing(); 
 //check for win/loss conditions
         if(ch->getHealth()<=0){
