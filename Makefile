@@ -23,6 +23,7 @@ LDFLAGS  += $(RAYLIB_LIBS)
 # List ALL your .cpp files here
 SRC := \
   Battle.cpp \
+  Scoreboard.cpp \
   Character.cpp Attribute.cpp Ability.cpp \
   Fire.cpp FireFox.cpp LavaLion.cpp FireMoves.cpp \
   Water.cpp Shark.cpp SeaSerpent.cpp WaterMoves.cpp \

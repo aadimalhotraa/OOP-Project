@@ -32,6 +32,8 @@ class Battle{
     void createFailureInterface(Character* ch, Character* atk);
     //function to start the battle
     void executeBattle(Character* ch, Character* atk);
+    //function for intial board
+    void showIntroAndInstructions();
     //setters for own and enemy characters
     void setOwn();
     void setEnemy();

@@ -386,12 +386,58 @@ void Battle::executeBattle(Character* ch, Character* atk){
     } 
      
        
-    } 
+} 
+    void Battle::showIntroAndInstructions() {
+        const int screenWidth = 800;
+        const int screenHeight = 450;
+        InitWindow(screenWidth, screenHeight, "OOPMON - Welcome");
+        SetTargetFPS(60);
+    
+        
+    
+        while (!WindowShouldClose()) {
+            // simple pulsing animation for the “Press ENTER” text
+           
+    
+            BeginDrawing();
+            ClearBackground(BLACK);
+    
+            // Game Title
+            DrawText("WELCOME TO OOPMON!", 120, 40, 50, GREEN);
+    
+            // Brief description
+            DrawText("OOPMON is a C++ and Raylib based battle game.", 100, 110, 24, LIGHTGRAY);
+            DrawText("Use your Object-Oriented Monsters (OOPMONs) to fight and level up!", 60, 140, 20, LIGHTGRAY);
+    
+            // How to play
+            DrawText("HOW TO PLAY:", 80, 190, 28, YELLOW);
+            DrawText("- Choose an attribute: Grass, Light, Dark, Fire, or Water", 100, 225, 20, RAYWHITE);
+            DrawText("- Each attribute has two unique monsters with special abilities", 100, 250, 20, RAYWHITE);
+            DrawText("- During battle, press 1, 2, or 3 to use your monster's abilities", 100, 275, 20, RAYWHITE);
+            DrawText("- Win battles to level up your monster", 100, 300, 20, RAYWHITE);
+            DrawText("- After winning or losing, choose Y to continue or N to quit", 100, 325, 20, RAYWHITE);
+    
+            // Controls & start prompt
+            DrawText("CONTROLS:", 80, 355, 25, ORANGE);
+            DrawText("1-5: Select Attribute | 1-3: Use Abilities | Y/N: Continue | S: Scoreboard", 100, 385, 18, RAYWHITE);
+    
+            DrawText("Press ENTER to Start the Game", 230, 420, 24, GREEN);
+    
+            EndDrawing();
+    
+            if (IsKeyPressed(KEY_ENTER)) {
+                CloseWindow();
+                break;
+            }
+        }
+    }
+    
 
 //main function to run the battle system
 int main(){
     //initialise battle object
     Battle battle;
+    battle.showIntroAndInstructions();
     //counters to starting values
     //wins,losses, and level
     battle.totalWins = 0;
