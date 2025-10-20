@@ -13,6 +13,7 @@
 #include "Shark.h"
 #include "ThunderBat.h" 
 #include "string.h"
+#include "Scoreboard.h"
 #include <thread>
 #include <chrono>
 //battle class which essentially manages the whole battle system and gui of the game
@@ -34,6 +35,12 @@ class Battle{
     //setters for own and enemy characters
     void setOwn();
     void setEnemy();
+    //scorebvoard members 
+    Scoreboard scoreboard;
+    //wins,losses and level of player
+    int totalWins;
+    int totalLosses;
+    int highestLevel;
     //pointer to own and enemy characters
     Character* own;
     Character* enemy;

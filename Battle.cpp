@@ -125,6 +125,12 @@ bool Battle::executeEnemyMove(Character *ch, Character *atk){
 }
 //function to show victory interface
 void Battle::createSuccessInterface(Character* ch, Character* atk){
+    //adds number of wins
+    totalWins++;
+    //update highest level if current level is higher
+    if(ch->getLevel() > highestLevel) highestLevel = ch -> getLevel();
+    //update scoreboard 
+    scoreboard.updateScore("Player", ch->getName(),totalWins,totalLosses,highestLevel);
     const int screenWidth = 800; 
     const int screenHeight = 450; 
     InitWindow(screenWidth, screenHeight,"OOPMON"); 
@@ -155,6 +161,10 @@ void Battle::createSuccessInterface(Character* ch, Character* atk){
 }
 //function to show defeat interface
 void Battle::createFailureInterface(Character* ch, Character* atk){
+    //adds number of losses
+    totalLosses++;
+    //update scoreboard 
+    scoreboard.updateScore("Player", ch->getName(),totalWins,totalLosses,highestLevel);
     const int screenWidth = 800; 
     const int screenHeight = 450; 
     InitWindow(screenWidth, screenHeight,"OOPMON"); 
@@ -382,6 +392,11 @@ void Battle::executeBattle(Character* ch, Character* atk){
 int main(){
     //initialise battle object
     Battle battle;
+    //counters to starting values
+    //wins,losses, and level
+    battle.totalWins = 0;
+    battle.totalLosses = 0;
+    battle.highestLevel = 1;
     //set own and enemy characters
     battle.setOwn();
     battle.setEnemy();
@@ -406,11 +421,17 @@ int main(){
         std::string message1="Your character is " + battle.own->getName();
         DrawText(message1.c_str(), 65, 130, 40, GREEN);
         DrawText("Press 1 to continue", 65, 280, 26, GREEN);
+        DrawText("Press s for scoreboard",65,320,26,GREEN);
         }
         //check for key press to continue
         if (IsKeyPressed(KEY_ONE)){
             CloseWindow();
             break;
+        }
+         //check for key press to continue to scoreboard
+        if (IsKeyPressed(KEY_S)){
+            //show the scoreboard
+           battle.scoreboard.displayScoreboard();
         }
         EndDrawing();
     }
