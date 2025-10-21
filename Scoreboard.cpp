@@ -72,10 +72,10 @@ void Scoreboard::displayScoreboard() const {
 
             EndDrawing();
             //exit if key is pressed
-            if (GetKeyPressed() != 0) break;
+        if(IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ONE) || IsKeyPressed(KEY_TWO)|| IsKeyPressed(KEY_THREE) || IsKeyPressed(KEY_FOUR) || IsKeyPressed(KEY_FIVE)){
+            break;
+        }
     }
-    //close 
     CloseWindow();
-
 }
 
