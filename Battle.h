@@ -27,24 +27,21 @@ class Battle{
     //function to choose enemy based on level
     Character* chooseEnemy(int level);
     bool executeEnemyMove(Character* ch, Character* atk);
-    void executeOwnMove(Character* ch, Character* atk);
-    void createSuccessInterface(Character* ch, Character* atk);
-    void createFailureInterface(Character* ch, Character* atk);
+    bool createSuccessInterface();
+    bool createFailureInterface();
     //function to start the battle
-    void executeBattle(Character* ch, Character* atk);
+    bool executeBattle(Character* ch, Character* atk);
     //function for intial board
     void showIntroAndInstructions();
     //setters for own and enemy characters
     void setOwn();
     void setEnemy();
-    //scorebvoard members 
-    Scoreboard scoreboard;
-    //wins,losses and level of player
-    int totalWins;
-    int totalLosses;
-    int highestLevel;
+    void displayOwn();
+    void displayEnemy();
     //pointer to own and enemy characters
     Character* own;
     Character* enemy;
+    //scoreboard
+    Scoreboard* scoreboard;
 };
 #endif

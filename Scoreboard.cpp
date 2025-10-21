@@ -1,81 +1,134 @@
 #include "Scoreboard.h"
 #include "raylib.h"
 #include <algorithm>
+#include "Battle.h"
 
 Scoreboard::Scoreboard(){
-    //function loads scores when the scoreboard is created
+    
 }
 
-void Scoreboard::updateScore(const std::string& playerName, const std::string& charName, int win, int loss, int Level) {
-    //these lines check if a player exsits or not
-    for(int i = 0; i < (int)playerNames.size();i++){
-        if(playerNames[i] == playerName) {
-            //updates attributes beklow to specific player
-            wins[i] = win;
-            losses[i] = loss;
-            Levels[i] = Level;
-            charNames[i] = charName;
-            //saves to file
-            //saveScores();
-            return;
-        }
-    }
-//adds new player if certin player doesnt exist
-playerNames.push_back(playerName);
-charNames.push_back(charName);
-wins.push_back(win);
-losses.push_back(loss);
-Levels.push_back(Level);
-//saveScores();
-}
-
-void Scoreboard::displayScoreboard() const {
-     //intialise the size of the window
+std::string Scoreboard::getName(){
     const int screenWidth = 800;
     const int screenHeight = 450;
-    //creating scoreboard window
-    InitWindow(screenWidth,screenHeight,"OOPMON - Scoreboard");
-    //set fram rate
-    SetTargetFPS(60);
-    //keep window unil key is pressed
-    while(! WindowShouldClose()){
-        BeginDrawing();
-        ClearBackground(BLACK);
-        // title of the scoreboard
-        DrawText("SCOREBOARD",280,30,40,YELLOW);
-        //headers foir column for data tbalke 
-        DrawText("Player", 50, 100, 25, BLUE); 
-        DrawText("Character", 200, 100, 25, BLUE); 
-        DrawText("Wins", 400, 100, 25, BLUE); 
-        DrawText("losses", 500, 100, 25, BLUE); 
-        DrawText("level", 600, 100, 25, BLUE); 
-        //player data rows
-        int y = 140;
-        for(int i = 0; i < (int)playerNames.size() && i < 5; i++) {
-            //show up to 5 players
-            //player names
-            DrawText(playerNames[i].c_str(),50,y,20,WHITE);
-            //charactyer names
-            DrawText(charNames[i].c_str(),250,y,20,WHITE);
-            //Wins
-            DrawText(TextFormat("%d",wins[i]),450,y,20,GREEN);
-            //losses
-            DrawText(TextFormat("%d",losses[i]),550,y,20,RED);
-            //level
-            DrawText(TextFormat("%d",Levels[i]),450,y,20,BLUE);
-            //move next row
-            y += 40;
-            
-        }
-        //Draw instructions to close score
-            DrawText("press any key to close",250,350,25,WHITE);
 
-            EndDrawing();
-            //exit if key is pressed
-        if(IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ONE) || IsKeyPressed(KEY_TWO)|| IsKeyPressed(KEY_THREE) || IsKeyPressed(KEY_FOUR) || IsKeyPressed(KEY_FIVE)){
-            break;
+    InitWindow(screenWidth, screenHeight, "Enter Your Name - OOPMON");
+    SetTargetFPS(60);
+
+    std::string playerName = "";
+    const int maxChars = 20;  // limit to prevent overly long names
+
+    while (!WindowShouldClose()) {
+        // --- Handle character input ---
+        int key = GetCharPressed();
+        while (key > 0) {
+            // Allow letters, digits, punctuation, and spaces
+            if (((key >= 32 && key <= 125)) && playerName.length() < maxChars) {
+                playerName += (char)key;
+            }
+            key = GetCharPressed();
+        }
+
+        // Handle backspace (delete last character)
+        if (IsKeyPressed(KEY_BACKSPACE) && !playerName.empty()) {
+            playerName.pop_back();
+        }
+
+        // Press ENTER to confirm name
+        if (IsKeyPressed(KEY_ENTER) && !playerName.empty()) {
+            break;  // exit input loop
+        }
+
+        // --- Drawing ---
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        DrawText("Enter your name:", 200, 150, 30, DARKGRAY);
+        DrawText(playerName.c_str(), 200, 200, 40, BLUE);
+        DrawText("(Press ENTER to confirm)", 200, 260, 20, GRAY);
+
+        EndDrawing();
+    }
+
+    CloseWindow();
+
+    return playerName;
+}
+
+void Scoreboard::writeInfo(std::string userName, int userLevel) {
+    std::ofstream file("Scoreboard.txt", std::ios::app);
+    if (file.is_open()) {
+        file << userName << ":" << userLevel << std::endl;
+        file.close();
+        std::cout << "Wrote to file: " << userName << ":" << userLevel << std::endl;
+    } else {
+        std::cout << "Could not open Scoreboard.txt\n";
+    }
+}
+
+
+
+void Scoreboard::displayScoreboard() {
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+    InitWindow(screenWidth, screenHeight, "OOPMON - Scoreboard");
+    SetTargetFPS(60);
+
+    //Read file
+    std::ifstream file("Scoreboard.txt");
+    std::vector<std::pair <std::string, int> > scores;
+    std::string line;
+
+    while (std::getline(file, line)) {
+        size_t pos = line.find(':');
+        if (pos != std::string::npos) {
+            std::string name = line.substr(0, pos);
+            try {
+                int level = std::stoi(line.substr(pos + 1));
+                scores.push_back({name, level});
+            } catch (...) {
+                std::cerr << "FAIL!!to parse level for line: " << line << std::endl;
+            }
         }
     }
+    
+
+    // Sort in descending order
+    std::sort(scores.begin(), scores.end(),
+          [](const auto &a, const auto &b) { return a.second > b.second; });
+
+    file.close();
+
+    // Draw scoreboard 
+    while (!WindowShouldClose()) {
+        if (IsKeyPressed(KEY_ENTER)){
+            fight->chooseCharacter();
+            break;
+        }
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawText("TOP SCORES", 300, 40, 30, DARKGRAY);
+        if (IsKeyPressed(KEY_ENTER)){
+            fight->executeBattle(fight->own,fight->enemy);
+        }
+
+        int y = 100;
+        int rank = 1;
+        for (auto &entry : scores) {
+            std::string line = std::to_string(rank) + ". " + entry.first + " - " + std::to_string(entry.second);
+            DrawText(line.c_str(), 250, y, 25, BLUE);
+            y += 30;
+            if (++rank > 10) break; // show top 10 only
+        }
+
+        DrawText("(Press ESC to return)", 280, 400, 20, GRAY);
+        EndDrawing();
+    }
+
     CloseWindow();
 }
 
+
+
+Scoreboard::~Scoreboard(){
+    file.close();
+}

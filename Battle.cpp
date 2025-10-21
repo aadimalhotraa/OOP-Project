@@ -54,12 +54,12 @@ Character* Battle::chooseCharacter(){
             characters.push_back(new SeaSerpent(1));
             CloseWindow(); 
             return characters[r];
-        }
+        }      
 
     //drawing the interfce    
         BeginDrawing();
     //set background colour
-        ClearBackground(LIGHTGRAY);
+        ClearBackground(BLACK);
     //display text options
         DrawText("Choose the attribute of your character:", 65, 60, 35, BLUE);
 
@@ -69,17 +69,24 @@ Character* Battle::chooseCharacter(){
         DrawText("4. Fire", 80, 245, 26, DARKPURPLE);
         DrawText("5. Water", 80, 280, 26, DARKPURPLE);
 
+    
+
         EndDrawing();
     }
 
    //close the window
     CloseWindow(); 
 }
+
+
 //setter for own character
 void Battle::setOwn(){
     //calls the choose character function and sets the own character pointer
     this->own=chooseCharacter();
+    
 }
+
+
 //function to choose enemy based on level
 Character* Battle::chooseEnemy(int level){
     //seed for random number generation
@@ -124,47 +131,35 @@ bool Battle::executeEnemyMove(Character *ch, Character *atk){
     return enemyResult;
 }
 //function to show victory interface
-void Battle::createSuccessInterface(Character* ch, Character* atk){
-    //adds number of wins
-    totalWins++;
-    //update highest level if current level is higher
-    if(ch->getLevel() > highestLevel) highestLevel = ch -> getLevel();
-    //update scoreboard 
-    scoreboard.updateScore("Player", ch->getName(),totalWins,totalLosses,highestLevel);
-    const int screenWidth = 800; 
-    const int screenHeight = 450; 
-    InitWindow(screenWidth, screenHeight,"OOPMON"); 
-    SetTargetFPS(60); 
-    srand(time(NULL));
-    //while loop to keep the window open until a key is pressed
-    while (!WindowShouldClose()) 
-    { 
-        //check for key presses to continue the game or exit
-        if(IsKeyPressed(KEY_Y)){
-            //level up own character and set new enemy
-            ch->levelUp();
-            setEnemy();
-            //start a new battle
-            executeBattle(ch,enemy);
-        }
-        if(IsKeyPressed(KEY_N)){
-            CloseWindow();
-            return;
-        }
-//drawing the interface
+bool Battle::createSuccessInterface() {
+    // Only draw, do not InitWindow again
+    bool waitingForInput = true;
+    while (waitingForInput && !WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawText("Congratulations! You won that round ", 65, 60, 35, GREEN);
-        DrawText("Do you want to Continue the Game?(Y/N) ", 65, 130, 35, GREEN);
+        DrawText("Congratulations! You won that round", 65, 60, 35, GREEN);
+        DrawText("Do you want to continue the game? (Y/N)", 65, 130, 35, GREEN);
         EndDrawing();
+
+        if (IsKeyPressed(KEY_Y)) {
+            // Reset battle state
+            own->levelUp();
+            setEnemy();
+            own->setStats(own->getLevel());
+            waitingForInput = false;
+            return true;
+        }
+
+        if (IsKeyPressed(KEY_N)) {
+            waitingForInput = false;
+            return false;
+        }
     }
+    
 }
+
 //function to show defeat interface
-void Battle::createFailureInterface(Character* ch, Character* atk){
-    //adds number of losses
-    totalLosses++;
-    //update scoreboard 
-    scoreboard.updateScore("Player", ch->getName(),totalWins,totalLosses,highestLevel);
+bool Battle::createFailureInterface(){
     const int screenWidth = 800; 
     const int screenHeight = 450; 
     InitWindow(screenWidth, screenHeight,"OOPMON"); 
@@ -177,11 +172,11 @@ void Battle::createFailureInterface(Character* ch, Character* atk){
         if(IsKeyPressed(KEY_Y)){
             setOwn();
             setEnemy();
-            executeBattle(own,enemy);
+            return true;
         }
         if(IsKeyPressed(KEY_N)){
             CloseWindow();
-            return;
+            return false;
         }
         //drawing the interface for the defeat
         BeginDrawing();
@@ -193,7 +188,7 @@ void Battle::createFailureInterface(Character* ch, Character* atk){
     }
 }
 //function to execute the battle
-void Battle::executeBattle(Character* ch, Character* atk){ 
+bool Battle::executeBattle(Character* ch, Character* atk){
     const int screenWidth = 800; 
     const int screenHeight = 450; 
     InitWindow(screenWidth, screenHeight,"OOPMON"); 
@@ -370,23 +365,20 @@ void Battle::executeBattle(Character* ch, Character* atk){
         EndDrawing(); 
 //check for win/loss conditions
         if(ch->getHealth()<=0){
-            CloseWindow();
-            createFailureInterface(ch, atk);
-            break;
-
+            return false;
+            
         }
 //enemy defeated
         if(atk->getHealth()<=0){
-            CloseWindow();
-            createSuccessInterface(ch, atk);
-            break;
+            return true;
 
         } 
 
     } 
+}
      
        
-} 
+
     void Battle::showIntroAndInstructions() {
         const int screenWidth = 800;
         const int screenHeight = 450;
@@ -432,29 +424,14 @@ void Battle::executeBattle(Character* ch, Character* atk){
         }
     }
     
-
-//main function to run the battle system
-int main(){
-    //initialise battle object
-    Battle battle;
-    battle.showIntroAndInstructions();
-    //counters to starting values
-    //wins,losses, and level
-    battle.totalWins = 0;
-    battle.totalLosses = 0;
-    battle.highestLevel = 1;
-    //set own and enemy characters
-    battle.setOwn();
-    battle.setEnemy();
-    
-//initialise window parameters
+void Battle::displayOwn(){
+    //initialise window parameters
     const int screenWidth = 800;
     const int screenHeight = 450;
 //display own character name
     InitWindow(screenWidth, screenHeight,"OOPMON");
 //set frame rate
     SetTargetFPS(60); 
-    bool text=true;
     //Displays the character name
     //while loop to keep the window open until a key is pressed
     while (!WindowShouldClose()) 
@@ -462,28 +439,26 @@ int main(){
         BeginDrawing();
         ClearBackground(BLACK);
         //display text
-        if(text){
+       
         //the message to be displayed
-        std::string message1="Your character is " + battle.own->getName();
+        std::string message1="Your character is " + own->getName();
         DrawText(message1.c_str(), 65, 130, 40, GREEN);
         DrawText("Press 1 to continue", 65, 280, 26, GREEN);
-        DrawText("Press s for scoreboard",65,320,26,GREEN);
-        }
+
         //check for key press to continue
         if (IsKeyPressed(KEY_ONE)){
             CloseWindow();
             break;
         }
-         //check for key press to continue to scoreboard
-        if (IsKeyPressed(KEY_S)){
-            //show the scoreboard
-           battle.scoreboard.displayScoreboard();
-        }
         EndDrawing();
     }
+}
 
-
-    //Displays the enemy name
+void Battle::displayEnemy(){
+    //initialise window parameters
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+    //display own character name
     InitWindow(screenWidth, screenHeight,"OOPMON");
     SetTargetFPS(60); 
     while (!WindowShouldClose()) 
@@ -491,17 +466,44 @@ int main(){
         BeginDrawing();
         ClearBackground(BLACK);
         //display text
-        if(text){
-        std::string message1="Your enemy is " + battle.enemy->getName();
+        std::string message1="Your enemy is " + enemy->getName();
         DrawText(message1.c_str(), 65, 130, 40, RED);
         DrawText("Press 1 to continue", 65, 280, 26, RED);
-        }
+        
         if (IsKeyPressed(KEY_ONE)){
             CloseWindow();
             break;
         }
         EndDrawing(); 
     }
-    battle.executeBattle(battle.own,battle.enemy);
+}
+//main function to run the battle system
+int main(){
+    //initialise battle object
+    Battle battle;
+    Scoreboard score;
+    battle.showIntroAndInstructions();
+    std::string namePlayer=score.getName();
+    
+    //set own and enemy characters
+    battle.setOwn();
+    battle.setEnemy();
+    bool playGame=true;
+    while(playGame){
+        battle.displayOwn();
+        battle.displayEnemy();
+        bool success=battle.executeBattle(battle.own,battle.enemy);
+
+        if(success){
+            playGame= battle.createSuccessInterface();
+        }
+        if(!success){
+            playGame= battle.createFailureInterface();
+        }
+
+}
+
+    score.writeInfo(namePlayer, battle.own->getLevel());
+    score.displayScoreboard();
 }
 
