@@ -63,12 +63,11 @@ Character* Battle::chooseCharacter(){
     //display text options
         DrawText("Choose the attribute of your character:", 65, 60, 35, BLUE);
 
-        DrawText("1. Grass", 80, 140, 26, DARKPURPLE);
-        DrawText("2. Light", 80, 175, 26, DARKPURPLE);
-        DrawText("3. Dark", 80, 210, 26, DARKPURPLE);
-        DrawText("4. Fire", 80, 245, 26, DARKPURPLE);
-        DrawText("5. Water", 80, 280, 26, DARKPURPLE);
-
+        DrawText("1. Grass", 80, 140, 26, WHITE);
+        DrawText("2. Light", 80, 175, 26, WHITE);
+        DrawText("3. Dark", 80, 210, 26, WHITE);
+        DrawText("4. Fire", 80, 245, 26, WHITE);
+        DrawText("5. Water", 80, 280, 26, WHITE);
     
 
         EndDrawing();
@@ -193,7 +192,7 @@ bool Battle::createFailureInterface(){
 //function to execute the battle
 bool Battle::executeBattle(Character* ch, Character* atk){
     const int screenWidth = 800; 
-    const int screenHeight = 450; 
+    const int screenHeight = 600; 
     InitWindow(screenWidth, screenHeight,"OOPMON"); 
     SetTargetFPS(60); 
     srand(time(NULL)); 
@@ -329,8 +328,8 @@ bool Battle::executeBattle(Character* ch, Character* atk){
         BeginDrawing(); 
         ClearBackground(BLACK); 
         //drawing text
-        DrawText(message1.c_str(), 50, 50, 25, BLUE); 
-        DrawText(message2.c_str(), 450, 50, 25, BLUE); 
+        DrawText(message1.c_str(), 50, 50, 20, BLUE); 
+        DrawText(message2.c_str(), 450, 50, 20, BLUE); 
         //drawing labels
         DrawText("Damage", 50, 120, 25, BLUE); 
         DrawText("Damage", 450, 120, 25, BLUE); 
@@ -346,24 +345,24 @@ bool Battle::executeBattle(Character* ch, Character* atk){
         DrawRectangleRec(ownDefenceBar, GRAY);
         DrawRectangleRec(enemyDefenceBar, GRAY);
         //colouring the rectangles dynamically
-        DrawRectangleRec(enemyDefenceBarFilledPart, GREEN);
+        DrawRectangleRec(enemyDefenceBarFilledPart, RED);
         DrawRectangleRec(ownDefenceBarFilledPart, GREEN);
-        DrawRectangleRec(enemyHealthBarFilledPart, GREEN);
+        DrawRectangleRec(enemyHealthBarFilledPart, RED);
         DrawRectangleRec(ownHealthBarFilledPart, GREEN);
-        DrawRectangleRec(enemyDamageBarFilledPart, GREEN);
+        DrawRectangleRec(enemyDamageBarFilledPart, RED);
         DrawRectangleRec(ownDamageBarFilledPart, GREEN);
 
         //listing abilities
         DrawText("Abilities", 50, 290, 25, BLUE);
         for(int i=0; i<ownAbi; i++){
-            std::string abiName=std::to_string(i + 1) + ". " +own[i]->getName();
+            std::string abiName=std::to_string(i + 1) + ". " +own[i]->getName()+"("+own[i]->getDescription()+")";
             DrawText(abiName.c_str(), 50, 320+(30*i), 25, BLUE);  
         }
         
         //successful and unsuccessful attack messages
         if (!ownMessage.empty())
-        DrawText(ownMessage.c_str(), 450, 350, 15, YELLOW);
-        DrawText(enemyMessage.c_str(), 450, 400, 15, YELLOW);
+        DrawText(ownMessage.c_str(), 50, 500, 15, YELLOW);
+        DrawText(enemyMessage.c_str(), 50, 550, 15, YELLOW);
 
         EndDrawing(); 
 //check for win/loss conditions
@@ -447,7 +446,7 @@ void Battle::displayOwn(){
        
         //the message to be displayed
         std::string message1="Your character is " + own->getName();
-        DrawText(message1.c_str(), 65, 130, 40, GREEN);
+        DrawText(message1.c_str(), 65, 130, 35, GREEN);
         DrawText("Press 1 to continue", 65, 280, 26, GREEN);
 
         //check for key press to continue
@@ -472,7 +471,7 @@ void Battle::displayEnemy(){
         ClearBackground(BLACK);
         //display text
         std::string message1="Your enemy is " + enemy->getName();
-        DrawText(message1.c_str(), 65, 130, 40, RED);
+        DrawText(message1.c_str(), 65, 130, 35, RED);
         DrawText("Press 1 to continue", 65, 280, 26, RED);
         
         if (IsKeyPressed(KEY_ONE)){

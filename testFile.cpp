@@ -1,6 +1,12 @@
 #include <iostream>
 #include <cassert>
 #include "Character.h"
+#include "Ability.h"
+#include "FireMoves.h"
+#include "WaterMoves.h"
+#include "LightMoves.h"
+#include "DarkMoves.h"
+#include "GrassMoves.h"
 #include "Attribute.h"
 #include "FireFox.h" 
 #include "LavaLion.h" 
