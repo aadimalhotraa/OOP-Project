@@ -17,7 +17,7 @@ static bool doesHit(double chance)
 // ---------------- Water Slide ----------------
 // Constructor
 WaterSlide::WaterSlide()
-    : Ability("Water Slide", Attribute::WATER, 40, 0.8, "A fast sliding water attack.") {}
+    : Ability("Water Slide", Attribute::WATER, 40, 0.8, "Deals 40 damage.") {}
 
 bool WaterSlide::use(Character &user, Character &target)
 {
@@ -46,7 +46,7 @@ bool WaterSlide::use(Character &user, Character &target)
 // ---------------- Puddle ----------------
 // Constructor
 Puddle::Puddle()
-    : Ability("Puddle", Attribute::WATER, 30, 0.7, "A sloppy splash of water.") {}
+    : Ability("Puddle", Attribute::WATER, 30, 0.7, "Deals 30 damage.") {}
 
 bool Puddle::use(Character &user, Character &target)
 {
@@ -69,7 +69,7 @@ bool Puddle::use(Character &user, Character &target)
 // ---------------- Tiddle Wave ----------------
 // Constructor
 TiddleWave::TiddleWave()
-    : Ability("Tiddle Wave", Attribute::WATER, 40, 0.6, "A small but strong tidal wave.") {}
+    : Ability("Tiddle Wave", Attribute::WATER, 40, 0.6, "Deals 40 damage.") {}
 
 bool TiddleWave::use(Character &user, Character &target)
 {
@@ -93,7 +93,7 @@ bool TiddleWave::use(Character &user, Character &target)
 // ---------------- Aqua Whip ----------------
 // Constructor
 AquaWhip::AquaWhip()
-    : Ability("Aqua Whip", Attribute::WATER, 90, 0.7, "A furious lash of water.") {}
+    : Ability("Aqua Whip", Attribute::WATER, 90, 0.7, "Deals 90 damage.") {}
 
 bool AquaWhip::use(Character &user, Character &target)
 {
@@ -121,7 +121,7 @@ bool AquaWhip::use(Character &user, Character &target)
 // ---------------- Hydrocanon ----------------
 // Constructor
 HydroCannon::HydroCannon()
-    : Ability("Hydrocannon", Attribute::WATER, 25, 1.0, "A massive cannon of water.") {}
+    : Ability("Hydrocannon", Attribute::WATER, 25, 1.0, "Deals 25 damage.") {}
 bool HydroCannon::use(Character &user, Character &target)
 {
     // Check if the attack hits

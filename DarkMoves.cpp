@@ -14,7 +14,7 @@ static bool doesHit(double chance) {
 
 // ---------------- Shadow Strike ----------------
 ShadowStrike::ShadowStrike()
-    : Ability("Shadow strike", Attribute::DARK, 40, 1.0, "A precise strike from the shadows.") {}
+    : Ability("Shadow strike", Attribute::DARK, 40, 1.0, "Deals 40 damage.") {}
 
 bool ShadowStrike::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -34,7 +34,7 @@ bool ShadowStrike::use(Character& user, Character& target) {
 // ---------------- Void Pulse ----------------
 //constructor implementation
 VoidPulse::VoidPulse()
-    : Ability("Void pulse", Attribute::DARK, 80, 0.7, "A heavy pulse of void energy.") {}
+    : Ability("Void pulse", Attribute::DARK, 80, 0.7, "Deals 80 damage.") {}
 
 bool VoidPulse::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -57,7 +57,7 @@ bool VoidPulse::use(Character& user, Character& target) {
 
 // ---------------- Night Claw ----------------
 NightClaw::NightClaw()
-    : Ability("Night claw", Attribute::DARK, 30, 0.8, "A swift tearing slash.") {}
+    : Ability("Night claw", Attribute::DARK, 30, 0.8, "Deals 30 damage.") {}
 
 bool NightClaw::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -76,7 +76,7 @@ bool NightClaw::use(Character& user, Character& target) {
 
 // ---------------- Sneak Attack ----------------
 SneakAttack::SneakAttack()
-    : Ability("Sneak attack", Attribute::DARK, 40, 1.0, "A well-timed ambush.") {}
+    : Ability("Sneak attack", Attribute::DARK, 40, 1.0, "Deals 40 damage.") {}
 
 bool SneakAttack::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -91,7 +91,7 @@ bool SneakAttack::use(Character& user, Character& target) {
 }
 // ---------------- Sucker Punch ----------------
 SuckerPunch::SuckerPunch()
-    : Ability("Sucker Punch", Attribute::DARK, 19, 1.0, "A quick and unexpected punch.") {} 
+    : Ability("Sucker Punch", Attribute::DARK, 19, 1.0, "Deals 19 damage.") {} 
 bool SuckerPunch::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         return false;

@@ -71,7 +71,7 @@ bool SunRay::use(Character &user, Character &target)
 
 // ---------------- Radiant Beam ----------------
 RadiantBeam::RadiantBeam()
-    : Ability("Radiant Beam", Attribute::LIGHT, 50, 0.8, "A powerful blast of radiant energy.") {}
+    : Ability("Radiant Beam", Attribute::LIGHT, 50, 0.8, "Deals 50 damage.") {}
 
 bool RadiantBeam::use(Character &user, Character &target)
 {
@@ -93,7 +93,7 @@ bool RadiantBeam::use(Character &user, Character &target)
 
 // ---------------- Purify ----------------
 Purify::Purify()
-    : Ability("Purify", Attribute::LIGHT, 0, 1.0, "A cleansing light that purifies evil.") {}
+    : Ability("Purify", Attribute::LIGHT, 0, 1.0, "Deals 30 damage.") {}
 
 bool Purify::use(Character &user, Character &target)
 {
@@ -115,7 +115,7 @@ bool Purify::use(Character &user, Character &target)
 // ---------------- ElectricWings ----------------
 //constructor implementation
 ElectricWings::ElectricWings()
-    : Ability("Electric Wings", Attribute::LIGHT, 15, 1.0, "Strikes with electrified wings.") {}
+    : Ability("Electric Wings", Attribute::LIGHT, 15, 1.0, "Deals 15 damage.") {}
 bool ElectricWings::use(Character &user, Character &target)
 {
     //check if the ability hits based on hit chance

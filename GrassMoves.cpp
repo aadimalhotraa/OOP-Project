@@ -16,7 +16,7 @@ static bool doesHit(double chance) {
 // ---------------- Vine Whip ----------------
 //constructor implementation
 VineWhip::VineWhip()
-    : Ability("Vine Whip", Attribute::GRASS, 40, 1.0, "A quick lash with vines.") {}
+    : Ability("Vine Whip", Attribute::GRASS, 40, 1.0, "Deals 40 damage.") {}
 
 bool VineWhip::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -40,7 +40,7 @@ bool VineWhip::use(Character& user, Character& target) {
 // ---------------- Root Bind ----------------
 //constructor implementation
 RootBind::RootBind()
-    : Ability("Root Bind", Attribute::GRASS, 70, 0.5, "Strong vines wrap around the foe.") {}
+    : Ability("Root Bind", Attribute::GRASS, 70, 0.5, "Deals 70 damage.") {}
 
 bool RootBind::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -70,7 +70,7 @@ bool RootBind::use(Character& user, Character& target) {
 // ---------------- Leaf Blade ----------------
 //constructor implementation
 LeafBlade::LeafBlade()
-    : Ability("Leaf Blade", Attribute::GRASS, 30, 1.0, "A swift slash of leaves.") {}
+    : Ability("Leaf Blade", Attribute::GRASS, 30, 1.0, "Deals 30 damage.") {}
 
 bool LeafBlade::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -91,7 +91,7 @@ bool LeafBlade::use(Character& user, Character& target) {
 // ---------------- Spore ----------------
 //constructor implementation of spore ability
 Spore::Spore()
-    : Ability("Spore", Attribute::GRASS, 0, 0.5, "Releases spores that could weaken the enemy.") {}
+    : Ability("Spore", Attribute::GRASS, 0, 0.5, "Reduces enemy defence to 0.") {}
 
 bool Spore::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -107,7 +107,7 @@ bool Spore::use(Character& user, Character& target) {
 // ---------------- SeedBullet ----------------
 //constructor implementation of seed bullet ability
 SeedBullet::SeedBullet()
-    : Ability("Seed Bullet", Attribute::GRASS, 20, 0.6, "A fast-moving seed attack.") {}
+    : Ability("Seed Bullet", Attribute::GRASS, 20, 0.6, "Deals 20 damage.") {}
 bool SeedBullet::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";
