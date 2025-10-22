@@ -2,21 +2,21 @@
 #include "raylib.h"
 #include <algorithm>
 #include "Battle.h"
-
+//constructor for scoreboard
 Scoreboard::Scoreboard(){
     
 }
-
+//gets raylib window that allows the player to type their name and character
 std::string Scoreboard::getName(){
     const int screenWidth = 800;
     const int screenHeight = 450;
-
+//creates the winddow in raylib for name input
     InitWindow(screenWidth, screenHeight, "Enter Your Name - OOPMON");
     SetTargetFPS(60);
 
     std::string playerName = "";
     const int maxChars = 20;  // limit to prevent overly long names
-
+//loops until user closes the window 
     while (!WindowShouldClose()) {
         // --- Handle character input ---
         int key = GetCharPressed();
@@ -53,7 +53,7 @@ std::string Scoreboard::getName(){
 
     return playerName;
 }
-
+//sends player name and level to a text file 
 void Scoreboard::writeInfo(std::string userName, int userLevel) {
     std::ofstream file("Scoreboard.txt", std::ios::app);
     if (file.is_open()) {
@@ -66,7 +66,7 @@ void Scoreboard::writeInfo(std::string userName, int userLevel) {
 }
 
 
-
+//function to display the scoreboard
 void Scoreboard::displayScoreboard() {
     const int screenWidth = 800;
     const int screenHeight = 450;
@@ -77,7 +77,7 @@ void Scoreboard::displayScoreboard() {
     std::ifstream file("Scoreboard.txt");
     std::vector<std::pair <std::string, int> > scores;
     std::string line;
-
+//each line is name:level
     while (std::getline(file, line)) {
         size_t pos = line.find(':');
         if (pos != std::string::npos) {
@@ -110,7 +110,7 @@ void Scoreboard::displayScoreboard() {
         if (IsKeyPressed(KEY_ENTER)){
             fight->executeBattle(fight->own,fight->enemy);
         }
-
+//display top 10 scores
         int y = 100;
         int rank = 1;
         for (auto &entry : scores) {
@@ -123,12 +123,12 @@ void Scoreboard::displayScoreboard() {
         DrawText("(Press ESC to return)", 280, 400, 20, GRAY);
         EndDrawing();
     }
-
+//exits the window
     CloseWindow();
 }
 
 
-
+//destructor
 Scoreboard::~Scoreboard(){
     file.close();
 }
