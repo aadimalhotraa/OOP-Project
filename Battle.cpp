@@ -75,7 +75,7 @@ Character* Battle::chooseCharacter(){
 
    //close the window
     CloseWindow(); 
-    return new RockTurtle(1); // Replace with a valid subclass of Character
+    return nullptr; // Replace with a valid subclass of Character
 }
 
 
@@ -114,7 +114,7 @@ Character* Battle::chooseEnemy(int level){
         //gives a different enemy
         return enemies[r];
     }
-    
+    return nullptr;
 }
 //setter for enemy character
 void Battle::setEnemy(){
@@ -143,6 +143,7 @@ bool Battle::createSuccessInterface() {
 
         if (IsKeyPressed(KEY_Y)) {
             // Reset battle state
+            CloseWindow();
             own->levelUp();
             setEnemy();
             own->setStats(own->getLevel());
@@ -151,6 +152,7 @@ bool Battle::createSuccessInterface() {
         }
 
         if (IsKeyPressed(KEY_N)) {
+            CloseWindow();
             waitingForInput = false;
             return false;
         }
@@ -171,6 +173,7 @@ bool Battle::createFailureInterface(){
     { 
         //check for key presses to retry or exit
         if(IsKeyPressed(KEY_Y)){
+            CloseWindow();
             setOwn();
             setEnemy();
             return true;
@@ -224,7 +227,11 @@ bool Battle::executeBattle(Character* ch, Character* atk){
     std::string ownMessage, enemyMessage;
     while (!WindowShouldClose()) 
     { 
-        //check for key presses to choose ability
+        //check for key presses to choose ability and exit
+        if (IsKeyPressed(KEY_ENTER)) {
+            CloseWindow();
+            break;
+        }
         if (IsKeyPressed(KEY_ONE)){
             ownResult=ch->useAbility(0,*atk);
             enemyResult=executeEnemyMove(ch, atk);
@@ -355,7 +362,7 @@ bool Battle::executeBattle(Character* ch, Character* atk){
         //listing abilities
         DrawText("Abilities", 50, 290, 25, BLUE);
         for(int i=0; i<ownAbi; i++){
-            std::string abiName=std::to_string(i + 1) + ". " +own[i]->getName()+"("+own[i]->getDescription()+")";
+            std::string abiName=std::to_string(i + 1) + ". " +own[i]->getName()+" ("+own[i]->getDescription()+")";
             DrawText(abiName.c_str(), 50, 320+(30*i), 25, BLUE);  
         }
         
@@ -363,6 +370,7 @@ bool Battle::executeBattle(Character* ch, Character* atk){
         if (!ownMessage.empty())
         DrawText(ownMessage.c_str(), 50, 500, 15, YELLOW);
         DrawText(enemyMessage.c_str(), 50, 550, 15, YELLOW);
+        DrawText("Press Enter to Exit",50,580,15,GREEN);
 
         EndDrawing(); 
 //check for win/loss conditions
@@ -414,7 +422,7 @@ bool Battle::executeBattle(Character* ch, Character* atk){
     
             // Controls & start prompt
             DrawText("CONTROLS:", 80, 355, 25, ORANGE);
-            DrawText("1-5: Select Attribute | 1-3: Use Abilities | Y/N: Continue | S: Scoreboard", 100, 385, 18, RAYWHITE);
+            DrawText("1-5: Select Attribute | 1-3: Use Abilities | Y/N: Continue", 100, 385, 18, RAYWHITE);
     
             DrawText("Press ENTER to Start the Game", 230, 420, 24, GREEN);
     

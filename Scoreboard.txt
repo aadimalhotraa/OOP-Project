@@ -1,12 +1,6 @@
 aadi:1
-
 god:2
 aditya:1
 player xyz:3
-:1
-aa:1
-12:1
-xyx:1
-aa:1
-:1
 LUCAS:2
+michael:2
