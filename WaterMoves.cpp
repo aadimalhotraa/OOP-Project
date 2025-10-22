@@ -61,7 +61,7 @@ bool Puddle::use(Character &user, Character &target)
     target.setDefence(0);
     else
     target.setDefence(0.70*currentDefence);
-    
+    user.setHealth(user.getHealth()+0);
 
     return true;
 }
@@ -85,6 +85,7 @@ bool TiddleWave::use(Character &user, Character &target)
         return false;
     else{
     user.setHealth(newHealth);
+    target.setHealth(target.getHealth()+0);
     return true;
     }
 }
@@ -141,5 +142,6 @@ bool HydroCannon::use(Character &user, Character &target)
     target.setDefence(0);
     else
     target.setDefence(currentDef*0.9);
+    user.setHealth(user.getHealth()+0);
     return true;
 };

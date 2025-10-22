@@ -35,6 +35,7 @@ bool HolyShield::use(Character &user, Character &target)
     return false;
     else
     user.setDefence(newDef);
+    target.setHealth(target.getHealth()+0);
     return true;
 }
 
@@ -86,6 +87,7 @@ bool RadiantBeam::use(Character &user, Character &target)
         return false;
     else
     user.setHealth(newHealth);
+    target.setHealth(target.getHealth()+0);
     return true;
 }
 

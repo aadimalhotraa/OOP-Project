@@ -27,7 +27,7 @@ bool ShadowStrike::use(Character& user, Character& target) {
     target.setDefence(0);
     else
     target.setDefence(defReduction);
-
+    user.setHealth(user.getHealth()+0);
     return true;
 }
 
@@ -69,7 +69,7 @@ bool NightClaw::use(Character& user, Character& target) {
     target.setDefence(0);
     else
     target.setDefence(defReduction);
-
+    user.setHealth(user.getHealth()+0);
     return true;
     return true;
 }
@@ -85,6 +85,7 @@ bool SneakAttack::use(Character& user, Character& target) {
 
     //redcues opponents defence to 0
     target.setDefence(0);
+    user.setHealth(user.getHealth()+0);
     return true;
 
 }
@@ -107,7 +108,7 @@ bool SuckerPunch::use(Character& user, Character& target) {
      if (crit) raw *= CRIT_MULT;
      int dmg = static_cast<int>(std::round(raw));
      target.takeDamage(dmg);       
-   
+    return true;
     
 }
 

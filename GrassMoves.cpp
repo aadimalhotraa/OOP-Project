@@ -84,6 +84,7 @@ bool LeafBlade::use(Character& user, Character& target) {
     target.setHealth(0);
     else
     target.setHealth(0.85*maxHealth);
+    user.setHealth(user.getHealth()+0);
     return true;
 }
 

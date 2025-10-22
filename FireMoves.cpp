@@ -90,6 +90,7 @@ bool EmberStorm::use(Character &user, Character &target)
         double currDefence = target.getDefence();
         target.setHealth(currDefence*0.8);
     }
+    user.setHealth(user.getHealth()+0);
     return true;
 
 }
