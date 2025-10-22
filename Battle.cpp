@@ -76,6 +76,7 @@ Character* Battle::chooseCharacter(){
 
    //close the window
     CloseWindow(); 
+    return new RockTurtle(1); // Replace with a valid subclass of Character
 }
 
 
@@ -155,6 +156,7 @@ bool Battle::createSuccessInterface() {
             return false;
         }
     }
+    return false;
     
 }
 
@@ -186,6 +188,7 @@ bool Battle::createFailureInterface(){
         EndDrawing();
         
     }
+    return false;
 }
 //function to execute the battle
 bool Battle::executeBattle(Character* ch, Character* atk){
@@ -375,6 +378,7 @@ bool Battle::executeBattle(Character* ch, Character* atk){
         } 
 
     } 
+    return false;
 }
      
        
@@ -422,6 +426,7 @@ bool Battle::executeBattle(Character* ch, Character* atk){
                 break;
             }
         }
+      
     }
     
 void Battle::displayOwn(){
