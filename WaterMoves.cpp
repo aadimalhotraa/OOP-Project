@@ -46,7 +46,7 @@ bool WaterSlide::use(Character &user, Character &target)
 // ---------------- Puddle ----------------
 // Constructor
 Puddle::Puddle()
-    : Ability("Puddle", Attribute::WATER, 30, 0.7, "Deals 30 damage.") {}
+    : Ability("Puddle", Attribute::WATER, 30, 0.7, "Reduces defence by 15 percent.") {}
 
 bool Puddle::use(Character &user, Character &target)
 {
@@ -69,7 +69,7 @@ bool Puddle::use(Character &user, Character &target)
 // ---------------- Tiddle Wave ----------------
 // Constructor
 TiddleWave::TiddleWave()
-    : Ability("Tiddle Wave", Attribute::WATER, 40, 0.6, "Deals 40 damage.") {}
+    : Ability("Tiddle Wave", Attribute::WATER, 40, 0.6, "Self heals by 25 percent.") {}
 
 bool TiddleWave::use(Character &user, Character &target)
 {
@@ -121,7 +121,7 @@ bool AquaWhip::use(Character &user, Character &target)
 // ---------------- Hydrocanon ----------------
 // Constructor
 HydroCannon::HydroCannon()
-    : Ability("Hydrocannon", Attribute::WATER, 25, 1.0, "Deals 25 damage.") {}
+    : Ability("Hydrocannon", Attribute::WATER, 25, 1.0, "Reduces health and defence by 10 percent.") {}
 bool HydroCannon::use(Character &user, Character &target)
 {
     // Check if the attack hits

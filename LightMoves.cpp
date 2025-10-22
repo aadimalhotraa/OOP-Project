@@ -19,7 +19,7 @@ static bool doesHit(double chance)
 //constructor implementation
 //creates holy shield ability
 HolyShield::HolyShield()
-    : Ability("Holy Shield", Attribute::LIGHT, 20, 0.8, "A bash with consecrated light.") {}
+    : Ability("Holy Shield", Attribute::LIGHT, 20, 0.8, "Increases defence by 10 percent.") {}
 
 bool HolyShield::use(Character &user, Character &target)
 {
@@ -42,7 +42,7 @@ bool HolyShield::use(Character &user, Character &target)
 // ---------------- Sun Ray ----------------
 //constructor implementation
 SunRay::SunRay()
-    : Ability("Sun Ray", Attribute::LIGHT, 30, 0.8, "A focused beam of sunlight.") {}
+    : Ability("Sun Ray", Attribute::LIGHT, 30, 0.8, "Deals 30 damage.") {}
 
 bool SunRay::use(Character &user, Character &target)
 {
@@ -71,7 +71,7 @@ bool SunRay::use(Character &user, Character &target)
 
 // ---------------- Radiant Beam ----------------
 RadiantBeam::RadiantBeam()
-    : Ability("Radiant Beam", Attribute::LIGHT, 50, 0.8, "Deals 50 damage.") {}
+    : Ability("Radiant Beam", Attribute::LIGHT, 50, 0.8, "Increases health by 25 percent.") {}
 
 bool RadiantBeam::use(Character &user, Character &target)
 {
@@ -93,7 +93,7 @@ bool RadiantBeam::use(Character &user, Character &target)
 
 // ---------------- Purify ----------------
 Purify::Purify()
-    : Ability("Purify", Attribute::LIGHT, 0, 1.0, "Deals 30 damage.") {}
+    : Ability("Purify", Attribute::LIGHT, 0, 1.0, "Deals 30 percent of damage.") {}
 
 bool Purify::use(Character &user, Character &target)
 {

@@ -14,7 +14,7 @@ static bool doesHit(double chance) {
 
 // ---------------- Shadow Strike ----------------
 ShadowStrike::ShadowStrike()
-    : Ability("Shadow strike", Attribute::DARK, 40, 1.0, "Deals 40 damage.") {}
+    : Ability("Shadow strike", Attribute::DARK, 40, 1.0, "Reduces defence by 50 percent.") {}
 
 bool ShadowStrike::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -57,7 +57,7 @@ bool VoidPulse::use(Character& user, Character& target) {
 
 // ---------------- Night Claw ----------------
 NightClaw::NightClaw()
-    : Ability("Night claw", Attribute::DARK, 30, 0.8, "Deals 30 damage.") {}
+    : Ability("Night claw", Attribute::DARK, 30, 0.8, "Reduces damage by 10 percent.") {}
 
 bool NightClaw::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -76,7 +76,7 @@ bool NightClaw::use(Character& user, Character& target) {
 
 // ---------------- Sneak Attack ----------------
 SneakAttack::SneakAttack()
-    : Ability("Sneak attack", Attribute::DARK, 40, 1.0, "Deals 40 damage.") {}
+    : Ability("Sneak attack", Attribute::DARK, 40, 1.0, "Reduces defence to 0.") {}
 
 bool SneakAttack::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {

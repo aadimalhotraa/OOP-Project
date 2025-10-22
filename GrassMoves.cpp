@@ -40,7 +40,7 @@ bool VineWhip::use(Character& user, Character& target) {
 // ---------------- Root Bind ----------------
 //constructor implementation
 RootBind::RootBind()
-    : Ability("Root Bind", Attribute::GRASS, 70, 0.5, "Deals 70 damage.") {}
+    : Ability("Root Bind", Attribute::GRASS, 70, 0.5, "Traps enemy and deals 1.5x damage.") {}
 
 bool RootBind::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -70,7 +70,7 @@ bool RootBind::use(Character& user, Character& target) {
 // ---------------- Leaf Blade ----------------
 //constructor implementation
 LeafBlade::LeafBlade()
-    : Ability("Leaf Blade", Attribute::GRASS, 30, 1.0, "Deals 30 damage.") {}
+    : Ability("Leaf Blade", Attribute::GRASS, 30, 1.0, "Reduces health by 15 percent.") {}
 
 bool LeafBlade::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
@@ -107,7 +107,7 @@ bool Spore::use(Character& user, Character& target) {
 // ---------------- SeedBullet ----------------
 //constructor implementation of seed bullet ability
 SeedBullet::SeedBullet()
-    : Ability("Seed Bullet", Attribute::GRASS, 20, 0.6, "Deals 20 damage.") {}
+    : Ability("Seed Bullet", Attribute::GRASS, 20, 0.6, "Reduces health by 30 percent.") {}
 bool SeedBullet::use(Character& user, Character& target) {
     if (!doesHit(getHitChance())) {
         std::cout << user.getName() << " missed " << getName() << "!\n";

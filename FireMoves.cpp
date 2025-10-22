@@ -17,7 +17,7 @@ static bool doesHit(double chance)
 
 // ---------------- Fire Ball ----------------
 FireBall::FireBall()
-    : Ability("Fire Ball", Attribute::FIRE, 40, 0.60, "Deals 40 damage.") {}
+    : Ability("Fire Ball", Attribute::FIRE, 40, 0.60, "Deals 1.5x damage.") {}
 
 bool FireBall::use(Character &user, Character &target)
 {
@@ -50,7 +50,7 @@ bool FireBall::use(Character &user, Character &target)
 }
 // ---------------- Flame Burst ----------------
 FlameBurst::FlameBurst()
-    : Ability("Flame Burst", Attribute::FIRE, 80, 0.9, "Deals 80 damage.") {}
+    : Ability("Flame Burst", Attribute::FIRE, 80, 0.9, "Reduces health by 20 percent.") {}
 
 bool FlameBurst::use(Character &user, Character &target)
 {
@@ -74,7 +74,7 @@ bool FlameBurst::use(Character &user, Character &target)
 
 // ---------------- Ember Storm ----------------
 EmberStorm::EmberStorm()
-    : Ability("Ember Storm", Attribute::FIRE, 70, 0.8, "Deals 70 damage.") {}
+    : Ability("Ember Storm", Attribute::FIRE, 70, 0.8, "Reduces defence by 10 percent.") {}
 
 bool EmberStorm::use(Character &user, Character &target)
 {
@@ -97,7 +97,7 @@ bool EmberStorm::use(Character &user, Character &target)
 
 // ---------------- Infernal Slash ----------------
 InfernalSlash::InfernalSlash()
-    : Ability("Infernal Slash", Attribute::FIRE, 40, 0.95, "Deals 40 damage.") {}
+    : Ability("Infernal Slash", Attribute::FIRE, 40, 0.95, "Increases crit damage by 15 percent.") {}
 
 bool InfernalSlash::use(Character &user, Character &target)
 {
@@ -131,7 +131,7 @@ bool InfernalSlash::use(Character &user, Character &target)
 // ---------------- Blaze kick----------------
 
 BlazeKick::BlazeKick()
-    : Ability("Blaze Kick", Attribute::FIRE, 20, 1, "Deals 20 damage.") {}
+    : Ability("Blaze Kick", Attribute::FIRE, 20, 1, "Reduces damage by 25 percent.") {}
 
 bool BlazeKick::use(Character &user, Character &target)
 {
