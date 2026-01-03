@@ -3,6 +3,7 @@
 #include <iostream>
 //function to choose character based on attribute
 Character* Battle::chooseCharacter(){
+    
     //intialise the size of the window
     const int screenWidth = 800;
     const int screenHeight = 450;
