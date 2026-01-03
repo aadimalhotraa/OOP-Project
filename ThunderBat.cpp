@@ -17,7 +17,7 @@ ThunderBat::ThunderBat(int level): Light("Thunder Bat", level){
     abilities.push_back(new Purify()); 
     abilities.push_back(new ElectricWings()); 
 }
-//levels up thunder bat increasing stats
+//levels up thunder bat increasing stat
 void ThunderBat::levelUp(){
     this->level++;
     this->health = 150+(10*level);    
